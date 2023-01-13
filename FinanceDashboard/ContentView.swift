@@ -43,8 +43,7 @@ struct ContentView: View {
                     .tabItem {
                         VStack {
                             Image(systemName: "number")
-                                .font(.system(size: 22))
-                            Text("Profile")
+                            Text("Chart")
                         }
                 }.tag(3)
 
