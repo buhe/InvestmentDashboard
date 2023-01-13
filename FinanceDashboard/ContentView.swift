@@ -7,72 +7,119 @@
 
 import SwiftUI
 import CoreData
+import Combine
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
+//    @Environment(\.managedObjectContext) private var viewContext
+//
+//    @FetchRequest(
+//        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+//        animation: .default)
+//    private var items: FetchedResults<Item>
+    @ObservedObject private var tabData = MainTabBarData(initialIndex: 1, customItemIndex: 2)
 
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
 
-    var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
-                }
-                .onDelete(perform: deleteItems)
+        var body: some View {
+
+            TabView(selection: $tabData.itemSelected) {
+                OverView()
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "globe")
+                            Text("Overview")
+                        }
+
+                    }.tag(1)
+
+                Text("Add")
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "plus.circle")
+//                            Text("Profile")
+                        }
+                }.tag(2)
+
+                ChartView()
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "number")
+                                .font(.system(size: 22))
+                            Text("Profile")
+                        }
+                }.tag(3)
+
+            }.sheet(isPresented: $tabData.isCustomItemSelected) {
+                Text("Add")
             }
-            .toolbar {
-#if os(iOS)
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-#endif
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
+
+
+
+        }
+
+//    private func addItem() {
+//        withAnimation {
+//            let newItem = Item(context: viewContext)
+//            newItem.timestamp = Date()
+//
+//            do {
+//                try viewContext.save()
+//            } catch {
+//                // Replace this implementation with code to handle the error appropriately.
+//                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//                let nsError = error as NSError
+//                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+//            }
+//        }
+//    }
+//
+//    private func deleteItems(offsets: IndexSet) {
+//        withAnimation {
+//            offsets.map { items[$0] }.forEach(viewContext.delete)
+//
+//            do {
+//                try viewContext.save()
+//            } catch {
+//                // Replace this implementation with code to handle the error appropriately.
+//                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//                let nsError = error as NSError
+//                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+//            }
+//        }
+//    }
+}
+
+final class MainTabBarData: ObservableObject {
+
+    /// This is the index of the item that fires a custom action
+    let customActiontemindex: Int
+
+    let objectWillChange = PassthroughSubject<MainTabBarData, Never>()
+
+    var previousItem: Int
+
+    var itemSelected: Int {
+        didSet {
+            if itemSelected == customActiontemindex {
+                previousItem = oldValue
+                itemSelected = oldValue
+                isCustomItemSelected = true
             }
-            Text("Select an item")
+            objectWillChange.send(self)
         }
     }
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
+    func reset() {
+        itemSelected = previousItem
+        objectWillChange.send(self)
     }
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
+    /// This is true when the user has selected the Item with the custom action
+    var isCustomItemSelected: Bool = false
 
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
+    init(initialIndex: Int = 1, customItemIndex: Int) {
+        self.customActiontemindex = customItemIndex
+        self.itemSelected = initialIndex
+        self.previousItem = initialIndex
     }
 }
 
