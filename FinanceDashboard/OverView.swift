@@ -15,13 +15,24 @@ struct OverView: View {
             animation: .default)
         private var items: FetchedResults<Item>
     var body: some View {
-        List {
-            ForEach(items) { item in
-                
-                Text(item.timestamp!.debugDescription)
-                
+        NavigationStack {
+            Form {
+                List {
+                    ForEach(items) { item in
+                        
+                        Text(item.timestamp!.debugDescription)
+                        
+                    }
+                }
+            }.toolbar {
+                NavigationLink {
+                    SettingView()
+                } label: {
+                    Image(systemName: "gear")
+                }
             }
         }
+        
     }
 }
 
