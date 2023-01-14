@@ -10,7 +10,7 @@ import CoreData
 import Combine
 
 struct ContentView: View {
-//    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.managedObjectContext) private var viewContext
 //
 //    @FetchRequest(
 //        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
@@ -23,6 +23,7 @@ struct ContentView: View {
 
             TabView(selection: $tabData.itemSelected) {
                 OverView()
+                    .environment(\.managedObjectContext, viewContext)
                     .tabItem {
                         VStack {
                             Image(systemName: "globe")
@@ -40,6 +41,7 @@ struct ContentView: View {
                 }.tag(2)
 
                 ChartView()
+                    .environment(\.managedObjectContext, viewContext)
                     .tabItem {
                         VStack {
                             Image(systemName: "number")
@@ -48,7 +50,8 @@ struct ContentView: View {
                 }.tag(3)
 
             }.sheet(isPresented: $tabData.isCustomItemSelected) {
-                Text("Add")
+                AddItemView()
+                    .environment(\.managedObjectContext, viewContext)
             }
 
 
