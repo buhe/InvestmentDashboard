@@ -34,11 +34,9 @@ struct ContentView: View {
 
                 Text("Add")
                     .tabItem {
-                        VStack {
-                            Image(systemName: "plus.circle")
-//                            Text("Profile")
-                        }
-                }.tag(2)
+                        Image("plus.circle", tintColor: .systemBlue)
+                    }
+                    .tag(2)
 
                 ChartView()
                     .environment(\.managedObjectContext, viewContext)
