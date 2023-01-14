@@ -26,7 +26,7 @@ struct ContentView: View {
                     .environment(\.managedObjectContext, viewContext)
                     .tabItem {
                         VStack {
-                            Image(systemName: "globe")
+                            Image(systemName: "note.text")
                             Text("Overview")
                         }
 
@@ -42,7 +42,7 @@ struct ContentView: View {
                     .environment(\.managedObjectContext, viewContext)
                     .tabItem {
                         VStack {
-                            Image(systemName: "number")
+                            Image(systemName: "chart.pie")
                             Text("Chart")
                         }
                 }.tag(3)
