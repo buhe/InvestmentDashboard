@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ChartView: View {
+    @ObservedObject var viewModel: ChartViewModel
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -26,6 +28,6 @@ struct ChartView: View {
 
 struct ChartView_Previews: PreviewProvider {
     static var previews: some View {
-        ChartView()
+        ChartView(viewModel: ChartViewModel())
     }
 }

@@ -16,13 +16,15 @@ struct ContentView: View {
 //        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
 //        animation: .default)
 //    private var items: FetchedResults<Item>
+    @ObservedObject var overViewModel: OverViewModel
+    @ObservedObject var chartViewModel: ChartViewModel
     @ObservedObject private var tabData = MainTabBarData(initialIndex: 1, customItemIndex: 2)
 
 
         var body: some View {
 
             TabView(selection: $tabData.itemSelected) {
-                OverView()
+                OverView(viewModel: overViewModel)
                     .environment(\.managedObjectContext, viewContext)
                     .tabItem {
                         VStack {
@@ -38,7 +40,7 @@ struct ContentView: View {
                     }
                     .tag(2)
 
-                ChartView()
+                ChartView(viewModel: chartViewModel)
                     .environment(\.managedObjectContext, viewContext)
                     .tabItem {
                         VStack {
@@ -132,6 +134,6 @@ private let itemFormatter: DateFormatter = {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ContentView(overViewModel: OverViewModel(), chartViewModel: ChartViewModel()).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

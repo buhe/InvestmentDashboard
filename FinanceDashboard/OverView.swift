@@ -9,9 +9,9 @@ import SwiftUI
 
 struct OverView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    
+    @ObservedObject var viewModel: OverViewModel
     @FetchRequest(
-            sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Item.createdDate, ascending: true)],
             animation: .default)
         private var items: FetchedResults<Item>
     var body: some View {
@@ -20,7 +20,7 @@ struct OverView: View {
                 List {
                     ForEach(items) { item in
                         
-                        Text(item.timestamp!.debugDescription)
+                        Text(item.createdDate.debugDescription)
                         
                     }
                 }
@@ -38,6 +38,6 @@ struct OverView: View {
 
 struct OverView_Previews: PreviewProvider {
     static var previews: some View {
-        OverView()
+        OverView(viewModel: OverViewModel())
     }
 }

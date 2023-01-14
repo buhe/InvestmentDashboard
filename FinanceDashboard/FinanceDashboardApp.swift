@@ -13,7 +13,7 @@ struct FinanceDashboardApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(overViewModel: OverViewModel(), chartViewModel: ChartViewModel())
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

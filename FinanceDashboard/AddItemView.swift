@@ -22,7 +22,7 @@ struct AddItemView: View {
     private func addItem() {
         withAnimation {
             let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+            newItem.createdDate = Date()
 
             do {
                 try viewContext.save()
