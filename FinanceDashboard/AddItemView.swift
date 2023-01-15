@@ -19,11 +19,32 @@ struct AddItemView: View {
         NavigationStack {
             Form {
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]){
-                    ForEach(0 ..< 6){ index in
-                        RoundedRectangle(cornerRadius: 5)
-                            .foregroundColor(Color(hue: 0.03 * Double(index) , saturation: 1, brightness: 1))
-                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50)
-                            .overlay(Text("\(index)"))
+                    ForEach(ICategroy.all){ c in
+                        VStack {
+                            switch c {
+                            case .Cash:
+                                BigImage(system: "dollarsign.circle", categroy: .Cash)
+                            case .Bond:
+                                BigImage(system: "b.circle", categroy: .Bond)
+                            case .Debt:
+                                BigImage(system: "creditcard", categroy: .Debt)
+                            case .Estate:
+                                BigImage(system: "house", categroy: .Estate)
+                            case .Fund:
+                                BigImage(system: "gauge.high", categroy: .Fund)
+                            case .Futures:
+                                BigImage(system: "carrot", categroy: .Futures)
+                            case .Option:
+                                BigImage(system: "target", categroy: .Option)
+                            case .Stock:
+                                BigImage(system: "waveform.path.ecg", categroy: .Stock)
+                                
+                            default:
+                                Image(systemName: "dollarsign.circle")
+                            }
+                        }
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50)
+                     
                     }
                 }
                 .padding()
