@@ -6,12 +6,39 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 struct AddItemView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
+    @State private var name = ""
+    @State private var value = ""
+    
     var body: some View {
         NavigationStack {
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]){
+                  ForEach(0 ..< 6){ index in
+                      RoundedRectangle(cornerRadius: 5)
+                          .foregroundColor(Color(hue: 0.03 * Double(index) , saturation: 1, brightness: 1))
+                          .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50)
+                          .overlay(Text("\(index)"))
+                  }
+              }
+              .padding()
+            TextField("Enter your name", text: $name)
+                        .textFieldStyle(.roundedBorder)
+                        .toolbar {
+                            ToolbarItemGroup(placement: .keyboard) {
+                                HStack {
+//                                    Spacer()
+                                    Text("Value: ")
+                                    
+                                    TextField("Value:", text: $value).keyboardType(.numberPad)
+                                }
+                                
+                            }
+                        }
+//            Keyboard()
             Button(action: addItem) {
                 Label("Add Item", systemImage: "plus")
             }
