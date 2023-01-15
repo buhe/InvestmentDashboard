@@ -16,32 +16,32 @@ struct AddItemView: View {
     
     var body: some View {
         NavigationStack {
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]){
-                  ForEach(0 ..< 6){ index in
-                      RoundedRectangle(cornerRadius: 5)
-                          .foregroundColor(Color(hue: 0.03 * Double(index) , saturation: 1, brightness: 1))
-                          .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50)
-                          .overlay(Text("\(index)"))
-                  }
-              }
-              .padding()
-            TextField("Enter your name", text: $name)
-                        .textFieldStyle(.roundedBorder)
-                        .toolbar {
-                            ToolbarItemGroup(placement: .keyboard) {
-                                HStack {
-//                                    Spacer()
-                                    Text("Value: ")
-                                    
-                                    TextField("Value:", text: $value).keyboardType(.numberPad)
-                                }
+            Form {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]){
+                    ForEach(0 ..< 6){ index in
+                        RoundedRectangle(cornerRadius: 5)
+                            .foregroundColor(Color(hue: 0.03 * Double(index) , saturation: 1, brightness: 1))
+                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50)
+                            .overlay(Text("\(index)"))
+                    }
+                }
+                .padding()
+                TextField("Enter name", text: $name)
+                    .toolbar {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            HStack {
+                                Text("Value: ")
                                 
+                                TextField("Value:", text: $value).keyboardType(.numberPad)
+                                Button(action: addItem) {
+                                    Text("Done")
+                                }
                             }
+                            
                         }
-//            Keyboard()
-            Button(action: addItem) {
-                Label("Add Item", systemImage: "plus")
+                    }
             }
+            
         }
         
     }
