@@ -28,6 +28,7 @@
 		3F8EE1C62973DD1D0013C74E /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8EE1C52973DD1D0013C74E /* CardView.swift */; };
 		3F8EE1C82973E2980013C74E /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8EE1C72973E2970013C74E /* TabBarButton.swift */; };
 		3F8EE1CB2973E3F70013C74E /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 3F8EE1CA2973E3F70013C74E /* SwiftUIX */; };
+		3F8EE1D42973E9D80013C74E /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 3F8EE1D32973E9D80013C74E /* SwiftUICharts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F8EE1CB2973E3F70013C74E /* SwiftUIX in Frameworks */,
+				3F8EE1D42973E9D80013C74E /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +110,7 @@
 				3F25F1D5296192AA00F4DA02 /* FinanceDashboardTests */,
 				3F25F1DF296192AA00F4DA02 /* FinanceDashboardUITests */,
 				3F25F1BD296192A900F4DA02 /* Products */,
+				3F8EE1CF2973E8B00013C74E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -172,6 +175,13 @@
 			path = FinanceDashboardUITests;
 			sourceTree = "<group>";
 		};
+		3F8EE1CF2973E8B00013C74E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -190,6 +200,7 @@
 			name = FinanceDashboard;
 			packageProductDependencies = (
 				3F8EE1CA2973E3F70013C74E /* SwiftUIX */,
+				3F8EE1D32973E9D80013C74E /* SwiftUICharts */,
 			);
 			productName = FinanceDashboard;
 			productReference = 3F25F1BC296192A900F4DA02 /* FinanceDashboard.app */;
@@ -265,6 +276,7 @@
 			mainGroup = 3F25F1B3296192A900F4DA02;
 			packageReferences = (
 				3F8EE1C92973E3F70013C74E /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+				3F8EE1D22973E9D80013C74E /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = 3F25F1BD296192A900F4DA02 /* Products */;
 			projectDirPath = "";
@@ -690,6 +702,14 @@
 				kind = branch;
 			};
 		};
+		3F8EE1D22973E9D80013C74E /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = exactVersion;
+				version = "2.0.0-beta.8";
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -697,6 +717,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3F8EE1C92973E3F70013C74E /* XCRemoteSwiftPackageReference "SwiftUIX" */;
 			productName = SwiftUIX;
+		};
+		3F8EE1D32973E9D80013C74E /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F8EE1D22973E9D80013C74E /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 

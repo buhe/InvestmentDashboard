@@ -6,14 +6,25 @@
 //
 
 import SwiftUI
+import SwiftUICharts
 
 struct ChartView: View {
     @ObservedObject var viewModel: ChartViewModel
+    var demoData: [Double] = [8, 2, 4, 6, 12, 9, 2]
     
     var body: some View {
         NavigationStack {
-            Form {
-                
+            VStack {
+                LineChart()
+                    .data(demoData)
+                    .chartStyle(ChartStyle(backgroundColor: .white,
+                                                foregroundColor: ColorGradient(.blue, .purple)))
+                    .padding()
+                PieChart()
+                    .data(demoData)
+                    .chartStyle(ChartStyle(backgroundColor: .white,
+                                                foregroundColor: ColorGradient(.blue, .purple)))
+                    .padding()
             }.toolbar {
                 NavigationLink {
                     SettingView()
