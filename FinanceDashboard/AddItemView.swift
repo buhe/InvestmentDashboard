@@ -13,6 +13,7 @@ struct AddItemView: View {
     
     @State private var name = ""
     @State private var value = ""
+    let close: () -> Void
     
     var body: some View {
         NavigationStack {
@@ -30,8 +31,7 @@ struct AddItemView: View {
                     .toolbar {
                         ToolbarItemGroup(placement: .keyboard) {
                             HStack {
-                                Text("Value: ")
-                                
+                              
                                 TextField("Value:", text: $value).keyboardType(.numberPad)
                                 Button(action: addItem) {
                                     Text("Done")
@@ -61,12 +61,13 @@ struct AddItemView: View {
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
+            close()
         }
     }
 }
 
 struct AddItemView_Previews: PreviewProvider {
     static var previews: some View {
-        AddItemView()
+        AddItemView{}
     }
 }

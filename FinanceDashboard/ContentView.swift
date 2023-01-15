@@ -50,8 +50,11 @@ struct ContentView: View {
                 }.tag(3)
 
             }.sheet(isPresented: $tabData.isCustomItemSelected) {
-                AddItemView()
-                    .environment(\.managedObjectContext, viewContext)
+                AddItemView {
+                    tabData.reset()
+                    tabData.isCustomItemSelected = false
+                }
+                .environment(\.managedObjectContext, viewContext)
             }
 
 
