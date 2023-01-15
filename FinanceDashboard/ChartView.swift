@@ -15,11 +15,19 @@ struct ChartView: View {
     var body: some View {
         NavigationStack {
             VStack {
+                Text("Date")
+                    .font(.custom("Avenir", size: 16))
+                    .padding(.vertical, 10)
+                    .border(width: 1, edges: [.bottom], color: .systemGray)
                 LineChart()
                     .data(demoData)
                     .chartStyle(ChartStyle(backgroundColor: .white,
                                                 foregroundColor: ColorGradient(.blue, .purple)))
                     .padding()
+                Text("Categroy")
+                    .font(.custom("Avenir", size: 16))
+                    .padding(.vertical, 10)
+                    .border(width: 1, edges: [.bottom], color: .systemGray)
                 PieChart()
                     .data(demoData)
                     .chartStyle(ChartStyle(backgroundColor: .white,
