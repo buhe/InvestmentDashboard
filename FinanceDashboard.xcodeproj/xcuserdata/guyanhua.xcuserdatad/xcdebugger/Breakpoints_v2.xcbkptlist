@@ -20,5 +20,69 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "024F8A25-F14E-4B8E-9CB2-CC83C3736689"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinanceDashboard/OverViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "byCategory(items:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "024F8A25-F14E-4B8E-9CB2-CC83C3736689 - da96e7a2367eee9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FinanceDashboard.OverViewModel.byCategory(items: SwiftUI.FetchedResults&lt;FinanceDashboard.Item&gt;) -&gt; Swift.Array&lt;FinanceDashboard.Overviews&gt;"
+                  moduleName = "FinanceDashboard"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/guyanhua/code/github/FinanceDashboard/FinanceDashboard/OverViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "2268">
+               </Location>
+               <Location
+                  uuid = "024F8A25-F14E-4B8E-9CB2-CC83C3736689 - 67cd5cfb674aeeba"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.String, Swift.Array&lt;FinanceDashboard.Overview&gt;) -&gt; FinanceDashboard.Overviews in FinanceDashboard.OverViewModel.byCategory(items: SwiftUI.FetchedResults&lt;FinanceDashboard.Item&gt;) -&gt; Swift.Array&lt;FinanceDashboard.Overviews&gt;"
+                  moduleName = "FinanceDashboard"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/guyanhua/code/github/FinanceDashboard/FinanceDashboard/OverViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "492F6BEF-AC8C-4B32-96EA-B44C1FA5C574"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinanceDashboard/OverView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

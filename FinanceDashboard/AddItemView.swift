@@ -23,6 +23,8 @@ struct AddItemView: View {
         withAnimation {
             let newItem = Item(context: viewContext)
             newItem.createdDate = Date()
+            newItem.name = "123"
+            newItem.updatedDate = Date.now
 
             do {
                 try viewContext.save()

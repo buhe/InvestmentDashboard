@@ -16,15 +16,14 @@ struct OverView: View {
         private var items: FetchedResults<Item>
     var body: some View {
         NavigationStack {
-            Form {
-                List {
-                    ForEach(items) { item in
-                        
-                        Text(item.createdDate.debugDescription)
-                        
-                    }
+            List {
+                ForEach(viewModel.byCategory(items: items)) { overviews in 
+                    CardView(item: overviews)
                 }
-            }.toolbar {
+                .listRowSeparator(.hidden)
+            }
+            .listStyle(PlainListStyle())
+            .toolbar {
                 NavigationLink {
                     SettingView()
                 } label: {
