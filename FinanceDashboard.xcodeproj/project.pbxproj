@@ -26,6 +26,8 @@
 		3F8EE1C22972BE470013C74E /* Exportor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8EE1C12972BE470013C74E /* Exportor.swift */; };
 		3F8EE1C42973A4B40013C74E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8EE1C32973A4B40013C74E /* Model.swift */; };
 		3F8EE1C62973DD1D0013C74E /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8EE1C52973DD1D0013C74E /* CardView.swift */; };
+		3F8EE1C82973E2980013C74E /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8EE1C72973E2970013C74E /* TabBarButton.swift */; };
+		3F8EE1CB2973E3F70013C74E /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 3F8EE1CA2973E3F70013C74E /* SwiftUIX */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,7 @@
 		3F8EE1C12972BE470013C74E /* Exportor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exportor.swift; sourceTree = "<group>"; };
 		3F8EE1C32973A4B40013C74E /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		3F8EE1C52973DD1D0013C74E /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		3F8EE1C72973E2970013C74E /* TabBarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F8EE1CB2973E3F70013C74E /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +140,7 @@
 				3F8EE1BD2972BE010013C74E /* OverViewModel.swift */,
 				3F8EE1BF2972BE230013C74E /* ChartViewModel.swift */,
 				3F8EE1C12972BE470013C74E /* Exportor.swift */,
+				3F8EE1C72973E2970013C74E /* TabBarButton.swift */,
 				3F8EE1C32973A4B40013C74E /* Model.swift */,
 				3F8EE1C52973DD1D0013C74E /* CardView.swift */,
 			);
@@ -183,6 +188,9 @@
 			dependencies = (
 			);
 			name = FinanceDashboard;
+			packageProductDependencies = (
+				3F8EE1CA2973E3F70013C74E /* SwiftUIX */,
+			);
 			productName = FinanceDashboard;
 			productReference = 3F25F1BC296192A900F4DA02 /* FinanceDashboard.app */;
 			productType = "com.apple.product-type.application";
@@ -255,6 +263,9 @@
 				Base,
 			);
 			mainGroup = 3F25F1B3296192A900F4DA02;
+			packageReferences = (
+				3F8EE1C92973E3F70013C74E /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+			);
 			productRefGroup = 3F25F1BD296192A900F4DA02 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -305,6 +316,7 @@
 				3F25F1C2296192A900F4DA02 /* Persistence.swift in Sources */,
 				3F8EE1BC2972A47F0013C74E /* SettingView.swift in Sources */,
 				3F8EE1C42973A4B40013C74E /* Model.swift in Sources */,
+				3F8EE1C82973E2980013C74E /* TabBarButton.swift in Sources */,
 				3F8EE1BE2972BE010013C74E /* OverViewModel.swift in Sources */,
 				3F8EE1B729718E020013C74E /* AddItemView.swift in Sources */,
 				3F8EE1B1297161BA0013C74E /* OverView.swift in Sources */,
@@ -668,6 +680,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3F8EE1C92973E3F70013C74E /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3F8EE1CA2973E3F70013C74E /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F8EE1C92973E3F70013C74E /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			productName = SwiftUIX;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		3F25F1C3296192A900F4DA02 /* FinanceDashboard.xcdatamodeld */ = {

@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 struct OverView: View {
+    @State var search = ""
+    @State var tabIndex = 0
+    
     @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var viewModel: OverViewModel
     @FetchRequest(
@@ -15,23 +19,46 @@ struct OverView: View {
             animation: .default)
         private var items: FetchedResults<Item>
     var body: some View {
-        NavigationStack {
-            List {
-                ForEach(viewModel.byCategory(items: items)) { overviews in 
-                    CardView(item: overviews)
+        VStack {
+            NavigationStack {
+                SearchBar(text: $search).padding(.horizontal)
+                OverviewTabBar(tabIndex: $tabIndex).padding(.horizontal, 26)
+                switch tabIndex {
+                case 0:
+                    List {
+                        ForEach(viewModel.byCategory(items: items)) { overviews in
+                            CardView(item: overviews)
+                        }
+                        .listRowSeparator(.hidden)
+                    }
+                    .listStyle(PlainListStyle())
+                    .toolbar {
+                        NavigationLink {
+                            SettingView()
+                        } label: {
+                            Image(systemName: "gear")
+                        }
+                    }
+                case 1:
+                    List {
+                        ForEach(viewModel.byCategory(items: items)) { overviews in
+                            CardView(item: overviews)
+                        }
+                        .listRowSeparator(.hidden)
+                    }
+                    .listStyle(PlainListStyle())
+                    .toolbar {
+                        NavigationLink {
+                            SettingView()
+                        } label: {
+                            Image(systemName: "gear")
+                        }
+                    }
+                default: EmptyView()
                 }
-                .listRowSeparator(.hidden)
-            }
-            .listStyle(PlainListStyle())
-            .toolbar {
-                NavigationLink {
-                    SettingView()
-                } label: {
-                    Image(systemName: "gear")
-                }
+                
             }
         }
-        
     }
 }
 
