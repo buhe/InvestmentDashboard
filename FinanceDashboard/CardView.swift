@@ -48,7 +48,9 @@ struct CardView: View {
                                 Image(systemName: "envelope")
                             case .Stock:
                                 Image(systemName:  "waveform.path.ecg.rectangle")
-                                    
+                            case .Savings:
+                                Image(systemName:  "banknote")
+                                
                                 
                             default:
                                 Image(systemName: "dollarsign.circle")

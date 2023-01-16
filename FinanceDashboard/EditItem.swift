@@ -70,7 +70,12 @@ struct EditItem: View {
                                     .onTapGesture {
                                         selectCategroy = .Stock
                                     }
-                                
+                            case .Savings:
+                                BigImage(systemName: selectCategroy == .Savings ? "banknote.fill" :  "banknote", categroy: .Savings)
+                                    .onTapGesture {
+                                        selectCategroy = .Savings
+                                    }
+                               
                             default:
                                 Image(systemName: "dollarsign.circle")
                             }

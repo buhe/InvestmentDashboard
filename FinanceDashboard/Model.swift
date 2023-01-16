@@ -20,6 +20,7 @@ enum ICategroy: String, CaseIterable, Identifiable {
     case Fund
     case Futures
     case Debt // -
+    case Savings
     case UnKnow
     
     static var all: [ICategroy] {
