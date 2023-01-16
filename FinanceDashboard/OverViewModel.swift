@@ -12,6 +12,18 @@ class OverViewModel: ObservableObject {
     func byCategory(items: FetchedResults<Item>) -> [Overviews] {
         var result: [String: [Overview]] = [:]
         for item in items {
+            let categroy = item.categroy ?? ""
+            if result[categroy] == nil {
+                result[categroy] = []
+            }
+            result[categroy]?.append(Overview(id: item.name ?? "", name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, value: item.value, raw: item))
+        }
+        return result.map{k,v in Overviews(id: k, key: k, overviews: v)}
+    }
+    
+    func byDate(items: FetchedResults<Item>) -> [Overviews] {
+        var result: [String: [Overview]] = [:]
+        for item in items {
             let time = itemFormatter.string(from: item.updatedDate ?? Date.now)
             if result[time] == nil {
                 result[time] = []
@@ -19,10 +31,6 @@ class OverViewModel: ObservableObject {
             result[time]?.append(Overview(id: item.name ?? "", name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, value: item.value, raw: item))
         }
         return result.map{k,v in Overviews(id: k, key: k, overviews: v)}
-    }
-    
-    func byDate(items: FetchedResults<Item>) {
-        
     }
 }
 
