@@ -30,6 +30,7 @@
 		3F8EE1CB2973E3F70013C74E /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 3F8EE1CA2973E3F70013C74E /* SwiftUIX */; };
 		3F8EE1D42973E9D80013C74E /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 3F8EE1D32973E9D80013C74E /* SwiftUICharts */; };
 		3F8EE1D6297422610013C74E /* CustemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8EE1D5297422610013C74E /* CustemView.swift */; };
+		3F8EE1D82974EE4F0013C74E /* EditItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8EE1D72974EE4F0013C74E /* EditItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		3F8EE1C52973DD1D0013C74E /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		3F8EE1C72973E2970013C74E /* TabBarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
 		3F8EE1D5297422610013C74E /* CustemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustemView.swift; sourceTree = "<group>"; };
+		3F8EE1D72974EE4F0013C74E /* EditItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				3F8EE1C32973A4B40013C74E /* Model.swift */,
 				3F8EE1C52973DD1D0013C74E /* CardView.swift */,
 				3F8EE1D5297422610013C74E /* CustemView.swift */,
+				3F8EE1D72974EE4F0013C74E /* EditItem.swift */,
 			);
 			path = FinanceDashboard;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				3F8EE1D6297422610013C74E /* CustemView.swift in Sources */,
 				3F8EE1C42973A4B40013C74E /* Model.swift in Sources */,
 				3F8EE1C82973E2980013C74E /* TabBarButton.swift in Sources */,
+				3F8EE1D82974EE4F0013C74E /* EditItem.swift in Sources */,
 				3F8EE1BE2972BE010013C74E /* OverViewModel.swift in Sources */,
 				3F8EE1B729718E020013C74E /* AddItemView.swift in Sources */,
 				3F8EE1B1297161BA0013C74E /* OverView.swift in Sources */,

@@ -5,7 +5,10 @@ See LICENSE folder for this sample’s licensing information.
 import SwiftUI
 
 struct CardView: View {
+    @Environment(\.colorScheme) private var colorScheme
+    
     let item: Overviews
+    @State var selected: Overview?
     
     var body: some View {
         ZStack {
@@ -19,17 +22,34 @@ struct CardView: View {
                 Spacer()
                 ForEach(item.overviews) {
                     overview in
-                    HStack {
-                        Image(systemName: "dollarsign.circle")
-                        Text(overview.name)
-                        Spacer()
-                        Text(overview.categroy.rawValue)
+                    ZStack {
+                        Rectangle().fill(.white)
+                        HStack {
+                            Image(systemName: "dollarsign.circle")
+                                .foregroundColor(colorScheme == .light ? .white : .black)
+                            Text(overview.name)
+                                .foregroundColor(colorScheme == .light ? .white : .black)
+                            Spacer()
+                            Text(overview.categroy.rawValue)
+                                .foregroundColor(colorScheme == .light ? .white : .black)
+                        }
+                    }
+                    .sheet(item: $selected) {
+                        overview in
+                        EditItem(overview: overview)
+                    }
+                    .onTapGesture {
+                        print("click \(overview.name)")
+                        self.selected = overview
                     }
                     .padding(.top)
                 }
                 
+                
             }
             .padding()
+            
+            
         }
     }
 }
