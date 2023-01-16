@@ -15,6 +15,8 @@ struct AddItemView: View {
     @State private var value = ""
     let close: () -> Void
     
+    @FocusState private var keyFocused: Bool
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -44,11 +46,15 @@ struct AddItemView: View {
                             }
                         }
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50)
+                        .onTapGesture {
+                            keyFocused = true
+                        }
                      
                     }
                 }
                 .padding()
                 TextField("Enter name", text: $name)
+                    .focused($keyFocused)
                     .toolbar {
                         ToolbarItemGroup(placement: .keyboard) {
                             HStack {
