@@ -5,7 +5,7 @@ See LICENSE folder for this sample’s licensing information.
 import SwiftUI
 
 struct CardView: View {
-    @Environment(\.colorScheme) private var colorScheme
+//    @Environment(\.colorScheme) private var colorScheme
     
     let item: Overviews
     @State var selected: Overview?
@@ -26,12 +26,12 @@ struct CardView: View {
                         Rectangle().fill(.white)
                         HStack {
                             Image(systemName: "dollarsign.circle")
-                                .foregroundColor(colorScheme == .light ? .white : .black)
+                                .foregroundColor(.black)
                             Text(overview.name)
-                                .foregroundColor(colorScheme == .light ? .white : .black)
+                                .foregroundColor(.black)
                             Spacer()
                             Text(overview.categroy.rawValue)
-                                .foregroundColor(colorScheme == .light ? .white : .black)
+                                .foregroundColor(.black)
                         }
                     }
                     .sheet(item: $selected) {
