@@ -51,7 +51,7 @@ struct ContentView: View {
 
             }.sheet(isPresented: $tabData.isCustomItemSelected) {
                 EditItem(overview: nil) {
-                    tabData.itemSelected = 0
+                    tabData.itemSelected = tabData.previousItem
                     tabData.isCustomItemSelected = false
                 }
                 .environment(\.managedObjectContext, viewContext)
