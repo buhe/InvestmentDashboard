@@ -21,8 +21,10 @@ struct OverView: View {
     var body: some View {
         VStack {
             NavigationStack {
-                SearchBar(text: $search).padding(.horizontal)
+//                SearchBar(text: $search).padding(.horizontal)
+                    
                 OverviewTabBar(tabIndex: $tabIndex).padding(.horizontal, 26)
+                    .navigationTitle("Total: " + String(format: "%.f", viewModel.total(items: items)))
                 switch tabIndex {
                 case 0:
                     List {

@@ -32,6 +32,12 @@ class OverViewModel: ObservableObject {
         }
         return result.map{k,v in Overviews(id: k, key: k, overviews: v)}
     }
+    
+    func total(items: FetchedResults<Item>) -> Double {
+        var total: Double = 0
+        items.forEach {i in total = total + i.value}
+        return total
+    }
 }
 
 private let itemFormatter: DateFormatter = {
