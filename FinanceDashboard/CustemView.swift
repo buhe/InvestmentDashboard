@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct BigImage: View {
-    let system: String
+    let systemName: String
     let categroy: ICategroy
     var body: some View {
         VStack {
-            Image(systemName: system)
+            Image(systemName: systemName)
                 .resizable()
                 .frame(width: 50, height: 50)
             Text(categroy.rawValue)

@@ -16,7 +16,7 @@ class OverViewModel: ObservableObject {
             if result[time] == nil {
                 result[time] = []
             }
-            result[time]?.append(Overview(id: item.name ?? "", name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow))
+            result[time]?.append(Overview(id: item.name ?? "", name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, value: item.value, raw: item))
         }
         return result.map{k,v in Overviews(id: k, key: k, overviews: v)}
     }
@@ -37,6 +37,8 @@ struct Overview: Identifiable {
     var id: String
     let name: String
     let categroy: ICategroy
+    let value: Double
+    let raw: Item
     
     
 }

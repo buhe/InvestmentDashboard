@@ -25,14 +25,41 @@ struct CardView: View {
                     ZStack {
                         Rectangle().fill(.white)
                         HStack {
-                            Image(systemName: "dollarsign.circle")
-                                .foregroundColor(.black)
+                            switch overview.categroy {
+                            case .Cash:
+                                Image(systemName: "dollarsign.circle")
+                                  
+                            case .Bond:
+                                Image(systemName: "b.circle")
+                                   
+                            case .Debt:
+                                Image(systemName: "creditcard")
+                                    
+                            case .Estate:
+                                Image(systemName: "house")
+                               
+                            case .Fund:
+                                Image(systemName: "dial.high")
+                                  
+                            case .Futures:
+                                Image(systemName:  "carrot")
+                                
+                            case .Option:
+                                Image(systemName: "envelope")
+                            case .Stock:
+                                Image(systemName:  "waveform.path.ecg.rectangle")
+                                    
+                                
+                            default:
+                                Image(systemName: "dollarsign.circle")
+                            }
+                                
                             Text(overview.name)
-                                .foregroundColor(.black)
+                                
                             Spacer()
                             Text(overview.categroy.rawValue)
-                                .foregroundColor(.black)
-                        }
+                                
+                        }.foregroundColor(.black)
                     }
                     .sheet(item: $selected) {
                         overview in

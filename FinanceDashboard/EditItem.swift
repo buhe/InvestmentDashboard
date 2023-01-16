@@ -31,42 +31,42 @@ struct EditItem: View {
                         VStack {
                             switch c {
                             case .Cash:
-                                BigImage(system: selectCategroy == .Cash ? "dollarsign.circle.fill" : "dollarsign.circle", categroy: .Cash)
+                                BigImage(systemName: selectCategroy == .Cash ? "dollarsign.circle.fill" : "dollarsign.circle", categroy: .Cash)
                                     .onTapGesture {
                                         selectCategroy = .Cash
                                     }
                             case .Bond:
-                                BigImage(system: selectCategroy == .Bond ? "b.circle.fill" : "b.circle", categroy: .Bond)
+                                BigImage(systemName: selectCategroy == .Bond ? "b.circle.fill" : "b.circle", categroy: .Bond)
                                     .onTapGesture {
                                         selectCategroy = .Bond
                                     }
                             case .Debt:
-                                BigImage(system: selectCategroy == .Debt ? "creditcard.fill" : "creditcard", categroy: .Debt)
+                                BigImage(systemName: selectCategroy == .Debt ? "creditcard.fill" : "creditcard", categroy: .Debt)
                                     .onTapGesture {
                                         selectCategroy = .Debt
                                     }
                             case .Estate:
-                                BigImage(system: selectCategroy == .Estate ? "house.fill" : "house", categroy: .Estate)
+                                BigImage(systemName: selectCategroy == .Estate ? "house.fill" : "house", categroy: .Estate)
                                     .onTapGesture {
                                         selectCategroy = .Estate
                                     }
                             case .Fund:
-                                BigImage(system: selectCategroy == .Fund ? "dial.high.fill" : "dial.high", categroy: .Fund)
+                                BigImage(systemName: selectCategroy == .Fund ? "dial.high.fill" : "dial.high", categroy: .Fund)
                                     .onTapGesture {
                                         selectCategroy = .Fund
                                     }
                             case .Futures:
-                                BigImage(system: selectCategroy == .Futures ? "carrot.fill" : "carrot", categroy: .Futures)
+                                BigImage(systemName: selectCategroy == .Futures ? "carrot.fill" : "carrot", categroy: .Futures)
                                     .onTapGesture {
                                         selectCategroy = .Futures
                                     }
                             case .Option:
-                                BigImage(system: selectCategroy == .Option ? "envelope.fill" : "envelope", categroy: .Option)
+                                BigImage(systemName: selectCategroy == .Option ? "envelope.fill" : "envelope", categroy: .Option)
                                     .onTapGesture {
                                         selectCategroy = .Option
                                     }
                             case .Stock:
-                                BigImage(system: selectCategroy == .Stock ? "waveform.path.ecg.rectangle.fill" :  "waveform.path.ecg.rectangle", categroy: .Stock)
+                                BigImage(systemName: selectCategroy == .Stock ? "waveform.path.ecg.rectangle.fill" :  "waveform.path.ecg.rectangle", categroy: .Stock)
                                     .onTapGesture {
                                         selectCategroy = .Stock
                                     }
@@ -104,6 +104,7 @@ struct EditItem: View {
                     name = overview!.name
                     
                     selectCategroy = overview!.categroy
+                    value = String(format: "%f", overview!.value)
                 }
 //                value = overview.
             }
@@ -112,22 +113,39 @@ struct EditItem: View {
     }
     
     private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.createdDate = Date()
-            newItem.name = "123"
-            newItem.updatedDate = Date.now
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        if let v = Double(value) {
+            withAnimation {
+                if edit() {
+                    let newItem = overview!.raw
+                    newItem.updatedDate = Date.now
+                    newItem.name = name
+                    newItem.categroy = selectCategroy.rawValue
+                    newItem.value = v
+                } else {
+                    let newItem = Item(context: viewContext)
+                    let now = Date.now
+                    newItem.createdDate = now
+                    newItem.name = name
+                    newItem.categroy = selectCategroy.rawValue
+                    newItem.updatedDate = now
+                    newItem.value = v
+                }
+                
             }
-            close()
+        } else {
+            // show err
+            return
         }
+        do {
+            try viewContext.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+        close()
+        
     }
     
 }
