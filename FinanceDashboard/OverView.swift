@@ -26,7 +26,7 @@ struct OverView: View {
                 switch tabIndex {
                 case 0:
                     List {
-                        ForEach(viewModel.byDate(items: items)) { overviews in
+                        ForEach(viewModel.byCategory(items: items)) { overviews in
                             CardView(item: overviews)
                         }
                         .listRowSeparator(.hidden)
@@ -41,7 +41,7 @@ struct OverView: View {
                     }
                 case 1:
                     List {
-                        ForEach(viewModel.byCategory(items: items)) { overviews2 in
+                        ForEach(viewModel.byDate(items: items)) { overviews2 in
                             CardView(item: overviews2)
                         }
                         .listRowSeparator(.hidden)

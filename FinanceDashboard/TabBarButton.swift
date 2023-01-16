@@ -26,10 +26,10 @@ struct OverviewTabBar: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 20) {
-                TabBarButton(text: "Date", isSelected: .constant(tabIndex == 0))
-                    .onTapGesture { onButtonTapped(index: 0) }
+//                TabBarButton(text: "Date", isSelected: .constant(tabIndex == 0))
+//                    .onTapGesture { onButtonTapped(index: 0) }
                 TabBarButton(text: "Categroy", isSelected: .constant(tabIndex == 1))
-                    .onTapGesture { onButtonTapped(index: 1) }
+                    .onTapGesture { onButtonTapped(index: 0) }
             }
         }
         .border(width: 1, edges: [.bottom], color: .black)
