@@ -12,6 +12,7 @@ struct EditItem: View {
     
     @State private var name = ""
     @State private var value = ""
+    @State private var selectCategroy: ICategroy = .Cash
      let close: () -> Void
     
     @Environment(\.managedObjectContext) private var viewContext
@@ -30,21 +31,45 @@ struct EditItem: View {
                         VStack {
                             switch c {
                             case .Cash:
-                                BigImage(system: "dollarsign.circle", categroy: .Cash)
+                                BigImage(system: selectCategroy == .Cash ? "dollarsign.circle.fill" : "dollarsign.circle", categroy: .Cash)
+                                    .onTapGesture {
+                                        selectCategroy = .Cash
+                                    }
                             case .Bond:
-                                BigImage(system: "b.circle", categroy: .Bond)
+                                BigImage(system: selectCategroy == .Bond ? "b.circle.fill" : "b.circle", categroy: .Bond)
+                                    .onTapGesture {
+                                        selectCategroy = .Bond
+                                    }
                             case .Debt:
-                                BigImage(system: "creditcard", categroy: .Debt)
+                                BigImage(system: selectCategroy == .Debt ? "creditcard.fill" : "creditcard", categroy: .Debt)
+                                    .onTapGesture {
+                                        selectCategroy = .Debt
+                                    }
                             case .Estate:
-                                BigImage(system: "house", categroy: .Estate)
+                                BigImage(system: selectCategroy == .Estate ? "house.fill" : "house", categroy: .Estate)
+                                    .onTapGesture {
+                                        selectCategroy = .Estate
+                                    }
                             case .Fund:
-                                BigImage(system: "gauge.high", categroy: .Fund)
+                                BigImage(system: selectCategroy == .Fund ? "dial.high.fill" : "dial.high", categroy: .Fund)
+                                    .onTapGesture {
+                                        selectCategroy = .Fund
+                                    }
                             case .Futures:
-                                BigImage(system: "carrot", categroy: .Futures)
+                                BigImage(system: selectCategroy == .Futures ? "carrot.fill" : "carrot", categroy: .Futures)
+                                    .onTapGesture {
+                                        selectCategroy = .Futures
+                                    }
                             case .Option:
-                                BigImage(system: "target", categroy: .Option)
+                                BigImage(system: selectCategroy == .Option ? "envelope.fill" : "envelope", categroy: .Option)
+                                    .onTapGesture {
+                                        selectCategroy = .Option
+                                    }
                             case .Stock:
-                                BigImage(system: "waveform.path.ecg", categroy: .Stock)
+                                BigImage(system: selectCategroy == .Stock ? "waveform.path.ecg.rectangle.fill" :  "waveform.path.ecg.rectangle", categroy: .Stock)
+                                    .onTapGesture {
+                                        selectCategroy = .Stock
+                                    }
                                 
                             default:
                                 Image(systemName: "dollarsign.circle")
@@ -77,6 +102,8 @@ struct EditItem: View {
                 keyFocused = true
                 if edit() {
                     name = overview!.name
+                    
+                    selectCategroy = overview!.categroy
                 }
 //                value = overview.
             }
