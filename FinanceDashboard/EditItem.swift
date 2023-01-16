@@ -98,6 +98,15 @@ struct EditItem: View {
                         }
                     }
             }
+            .toolbar{
+                if edit() {
+                    Button{
+                        
+                    } label: {
+                        Image(systemName: "trash")
+                    }
+                }
+            }
             .onAppear {
                 keyFocused = true
                 if edit() {
