@@ -50,7 +50,7 @@ struct ContentView: View {
                 }.tag(3)
 
             }.sheet(isPresented: $tabData.isCustomItemSelected) {
-                AddItemView {
+                EditItem(overview: nil) {
                     tabData.reset()
                     tabData.isCustomItemSelected = false
                 }

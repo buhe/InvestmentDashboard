@@ -36,7 +36,9 @@ struct CardView: View {
                     }
                     .sheet(item: $selected) {
                         overview in
-                        EditItem(overview: overview)
+                        EditItem(overview: overview) {
+                            selected = nil
+                        }
                     }
                     .onTapGesture {
                         print("click \(overview.name)")

@@ -8,13 +8,19 @@
 import SwiftUI
 
 struct EditItem: View {
-    let overview: Overview
+    let overview: Overview?
     
     @State private var name = ""
     @State private var value = ""
-    // let close: () -> Void
+     let close: () -> Void
+    
+    @Environment(\.managedObjectContext) private var viewContext
     
     @FocusState private var keyFocused: Bool
+    
+    fileprivate func edit() -> Bool {
+        return overview != nil
+    }
     
     var body: some View {
         NavigationStack {
@@ -59,7 +65,7 @@ struct EditItem: View {
                             HStack {
                               
                                 TextField("Value:", text: $value).keyboardType(.numberPad)
-                                Button{} label: {
+                                Button(action: addItem) {
                                     Text("Done")
                                 }
                             }
@@ -69,12 +75,34 @@ struct EditItem: View {
             }
             .onAppear {
                 keyFocused = true
-                name = overview.name
+                if edit() {
+                    name = overview!.name
+                }
 //                value = overview.
             }
             
         }
     }
+    
+    private func addItem() {
+        withAnimation {
+            let newItem = Item(context: viewContext)
+            newItem.createdDate = Date()
+            newItem.name = "123"
+            newItem.updatedDate = Date.now
+
+            do {
+                try viewContext.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+            close()
+        }
+    }
+    
 }
 //
 //struct EditItem_Previews: PreviewProvider {
