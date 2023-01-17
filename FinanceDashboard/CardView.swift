@@ -59,7 +59,7 @@ struct CardView: View {
                             Text(overview.name)
                                 
                             Spacer()
-                            Text(overview.categroy.rawValue)
+                            Text("\(overview.value)")
                                 
                         }.foregroundColor(.black)
                     }

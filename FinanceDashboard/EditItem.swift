@@ -89,12 +89,17 @@ struct EditItem: View {
                 }
                 .padding()
                 TextField("Enter name", text: $name)
+                    .disableAutocorrection(true)
+                    .textInputAutocapitalization(.never)
                     .focused($keyFocused)
                     .toolbar {
                         ToolbarItemGroup(placement: .keyboard) {
                             HStack {
                               
-                                TextField("Value:", text: $value).keyboardType(.numberPad)
+                                TextField("Value:", text: $value)
+                                    .disableAutocorrection(true)
+                                    .textInputAutocapitalization(.never)
+                                    .keyboardType(.numberPad)
                                 Button(action: addItem) {
                                     Text("Done")
                                 }
