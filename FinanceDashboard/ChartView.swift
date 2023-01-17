@@ -12,6 +12,13 @@ struct ChartView: View {
     @ObservedObject var viewModel: ChartViewModel
     var demoData: [Double] = [8, 2, 4, 6, 12, 9, 2]
     
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Item.createdDate, ascending: true)],
+            animation: .default)
+        private var items: FetchedResults<Item>
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -29,7 +36,7 @@ struct ChartView: View {
                     .padding(.vertical, 10)
                     .border(width: 1, edges: [.bottom], color: .systemGray)
                 PieChart()
-                    .data(demoData)
+                    .data(viewModel.byCategoryValue(items: items))
                     .chartStyle(ChartStyle(backgroundColor: .white,
                                                 foregroundColor: ColorGradient(.blue, .purple)))
                     .padding()
