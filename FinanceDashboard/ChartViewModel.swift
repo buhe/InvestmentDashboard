@@ -19,7 +19,18 @@ class ChartViewModel: ObservableObject {
             if result[categroy] == nil {
                 result[categroy] = []
             }
-            result[categroy]?.append(Chart(name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, value: item.value ))
+            let sameName = result[categroy]!.filter{$0.name == (item.name ?? "")}
+            
+            if sameName.isEmpty {
+                // not found
+                result[categroy]!.append(Chart(name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, value: item.value,updateDate: item.updatedDate!))
+            } else {
+                if sameName.first!.updateDate < item.updatedDate! {
+                    // when newer value update
+                    result[categroy]!.removeAll{$0.name == (item.name ?? "")}
+                    result[categroy]!.append(Chart(name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, value: item.value,updateDate: item.updatedDate!))
+                }
+            }
         }
         return result
     }
@@ -53,14 +64,25 @@ class ChartViewModel: ObservableObject {
             if result[time] == nil {
                 result[time] = []
             }
-            result[time]?.append(Chart(name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, value: item.value ))
+            let sameName = result[time]!.filter{$0.name == (item.name ?? "")}
+            
+            if sameName.isEmpty {
+                // not found
+                result[time]!.append(Chart(name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, value: item.value,updateDate: item.updatedDate!))
+            } else {
+                if sameName.first!.updateDate < item.updatedDate! {
+                    // when newer value update
+                    result[time]!.removeAll{$0.name == (item.name ?? "")}
+                    result[time]!.append(Chart(name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, value: item.value,updateDate: item.updatedDate!))
+                }
+            }
         }
         if result.count < 10 {
 //            let now = Date.now
             for i in 1...(10 - result.count) {
                 let previousMonth = Calendar.current.date(byAdding: .month, value: -i, to: minTime)!
                 let time = itemFormatter.string(from: previousMonth)
-                result[time] = [Chart(name: "Empty", categroy: .UnKnow, value: 0)]
+                result[time] = [Chart(name: "Empty", categroy: .UnKnow, value: 0, updateDate: Date.now )]
             }
             
         }
@@ -94,4 +116,5 @@ struct Chart {
     let name: String
     let categroy: ICategroy
     let value: Double
+    let updateDate: Date
 }
