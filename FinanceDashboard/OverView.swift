@@ -25,8 +25,8 @@ struct OverView: View {
                     
                 OverviewTabBar(tabIndex: $tabIndex).padding(.horizontal, 26)
                     .navigationTitle(viewModel.model.unit.rawValue + ": " + String(format: "%.f", viewModel.total(items: items)))
-                switch tabIndex {
-                case 0:
+//                switch tabIndex {
+//                case 0:
                     List {
                         ForEach(viewModel.byCategory(items: items)) { overviews in
                             CardView(item: overviews)
@@ -41,23 +41,23 @@ struct OverView: View {
                             Image(systemName: "gear")
                         }
                     }
-                case 1:
-                    List {
-                        ForEach(viewModel.byDate(items: items)) { overviews2 in
-                            CardView(item: overviews2)
-                        }
-                        .listRowSeparator(.hidden)
-                    }
-                    .listStyle(PlainListStyle())
-                    .toolbar {
-                        NavigationLink {
-                            SettingView(model: viewModel.model)
-                        } label: {
-                            Image(systemName: "gear")
-                        }
-                    }
-                default: EmptyView()
-                }
+//                case 1:
+//                    List {
+//                        ForEach(viewModel.byDate(items: items)) { overviews2 in
+//                            CardView(item: overviews2)
+//                        }
+//                        .listRowSeparator(.hidden)
+//                    }
+//                    .listStyle(PlainListStyle())
+//                    .toolbar {
+//                        NavigationLink {
+//                            SettingView(model: viewModel.model)
+//                        } label: {
+//                            Image(systemName: "gear")
+//                        }
+//                    }
+//                default: EmptyView()
+//                }
                 
             }
         }

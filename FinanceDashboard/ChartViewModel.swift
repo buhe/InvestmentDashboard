@@ -12,6 +12,7 @@ class ChartViewModel: ObservableObject {
     @Published var model: Model = Model.shared
     
     func byCategory(items: FetchedResults<Item>) -> [String: [Chart]] {
+        // todo when name same remove dup, updateDate newer win
         var result: [String: [Chart]] = [:]
         for item in items {
             let categroy = item.categroy ?? ""
@@ -41,6 +42,7 @@ class ChartViewModel: ObservableObject {
             }
     }
     func byDate(items: FetchedResults<Item>) -> Array<(key: String, value: Array<Chart>)> {
+        // todo when name same and mouth same remove dup, updateDate newer win
         var result: [String: [Chart]] = [:]
         var minTime: Date = Date.now
         for item in items {

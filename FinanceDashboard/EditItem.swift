@@ -129,15 +129,30 @@ struct EditItem: View {
         }
     }
     
+    fileprivate func changeNameOrCategroy(oldItem: Item) -> Bool {
+        oldItem.name! != name || oldItem.categroy! != selectCategroy.rawValue
+    }
+    
     private func addItem() {
         if let v = Double(value) {
             withAnimation {
                 if edit() {
-                    let newItem = overview!.raw
-                    newItem.updatedDate = Date.now
-                    newItem.name = name
-                    newItem.categroy = selectCategroy.rawValue
-                    newItem.value = v
+                    let oldItem = overview!.raw
+                    if changeNameOrCategroy(oldItem: oldItem) {
+                        oldItem.updatedDate = Date.now
+                        oldItem.name = name
+                        oldItem.categroy = selectCategroy.rawValue
+                        oldItem.value = v
+                    } else {
+                        let newItem = Item(context: viewContext)
+                        let now = Date.now
+                        newItem.createdDate = oldItem.createdDate
+                        newItem.name = oldItem.name
+                        newItem.categroy = oldItem.categroy
+                        newItem.updatedDate = now
+                        newItem.value = v
+                    }
+                    
                 } else {
                     let newItem = Item(context: viewContext)
                     let now = Date.now
