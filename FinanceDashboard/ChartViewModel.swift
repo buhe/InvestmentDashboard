@@ -38,10 +38,14 @@ class ChartViewModel: ObservableObject {
                 
             }
     }
-    func byDate(items: FetchedResults<Item>) -> [String: [Chart]] {
+    func byDate(items: FetchedResults<Item>) -> Array<(key: String, value: Array<Chart>)> {
         var result: [String: [Chart]] = [:]
+        var minTime: Date = Date.now
         for item in items {
             let time = itemFormatter.string(from: item.updatedDate!)
+            if item.updatedDate! < minTime {
+                minTime = item.updatedDate!
+            }
             if result[time] == nil {
                 result[time] = []
             }
@@ -49,13 +53,14 @@ class ChartViewModel: ObservableObject {
         }
         if result.count < 10 {
             let now = Date.now
-            for i in 0...(10 - result.count) {
-                let time = itemFormatter.string(from: now) + "\(i)"
+            for i in 1...(10 - result.count) {
+                let previousMonth = Calendar.current.date(byAdding: .month, value: -i, to: minTime)!
+                let time = itemFormatter.string(from: previousMonth)
                 result[time] = [Chart(name: "Empty", categroy: .UnKnow, value: 0)]
             }
             
         }
-        return result
+        return result.sorted(by: {a,b in (a.key.compare(b.key)).rawValue < 0})
     }
     
     func byDateValue(items: FetchedResults<Item>) -> [Double] {
