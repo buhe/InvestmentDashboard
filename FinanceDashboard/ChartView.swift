@@ -26,7 +26,7 @@ struct ChartView: View {
                     .font(.custom("Avenir", size: 16))
                     .padding(.vertical, 10)
                     .border(width: 1, edges: [.bottom], color: .systemGray)
-                LineChartView(data: viewModel.byDateValue(items: items), title: "Date", form: ChartForm.extraLarge, rateValue: 0) // legend is optional
+                LineChartView(data: viewModel.byDateValue(items: items), title: "Mouth Trend", form: ChartForm.extraLarge, rateValue: 0) // legend is optional
                 Text("Categroy")
                     .font(.custom("Avenir", size: 16))
                     .padding(.vertical, 10)
