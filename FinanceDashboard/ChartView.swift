@@ -26,12 +26,12 @@ struct ChartView: View {
                     .font(.custom("Avenir", size: 16))
                     .padding(.vertical, 10)
                     .border(width: 1, edges: [.bottom], color: .systemGray)
-                LineChartView(data: [8,23,54,32,12,37,7,23,43], title: "Date", legend: "Legendary", form: ChartForm.large) // legend is optional
+                LineChartView(data: viewModel.byDateValue(items: items), title: "Date", form: ChartForm.extraLarge, rateValue: 0) // legend is optional
                 Text("Categroy")
                     .font(.custom("Avenir", size: 16))
                     .padding(.vertical, 10)
                     .border(width: 1, edges: [.bottom], color: .systemGray)
-                PieChartView(data: viewModel.byCategoryValue(items: items), title: "Categroy", form: ChartForm.large) // legend is optional
+                PieChartView(data: viewModel.byCategoryValue(items: items), title: "Categroy", form: ChartForm.extraLarge) // legend is optional
             }.toolbar {
                 NavigationLink {
                     SettingView()
