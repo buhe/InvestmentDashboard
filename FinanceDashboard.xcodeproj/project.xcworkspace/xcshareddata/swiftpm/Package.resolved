@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/AppPear/ChartView",
       "state" : {
-        "revision" : "7140b8b6fd7413ccbcf31b748b32233f08314dab",
-        "version" : "2.0.0-beta.8"
+        "revision" : "9115a992c91fa19cbb4f2241084240d38654a1fc",
+        "version" : "1.5.5"
       }
     },
     {

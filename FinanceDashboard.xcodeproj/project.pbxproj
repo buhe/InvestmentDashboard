@@ -27,11 +27,11 @@
 		3F8EE1C62973DD1D0013C74E /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8EE1C52973DD1D0013C74E /* CardView.swift */; };
 		3F8EE1C82973E2980013C74E /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8EE1C72973E2970013C74E /* TabBarButton.swift */; };
 		3F8EE1CB2973E3F70013C74E /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 3F8EE1CA2973E3F70013C74E /* SwiftUIX */; };
-		3F8EE1D42973E9D80013C74E /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 3F8EE1D32973E9D80013C74E /* SwiftUICharts */; };
 		3F8EE1D6297422610013C74E /* CustemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8EE1D5297422610013C74E /* CustemView.swift */; };
 		3F8EE1D82974EE4F0013C74E /* EditItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8EE1D72974EE4F0013C74E /* EditItem.swift */; };
 		3FCDDA4F2975703200DB2BB5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FCDDA4E2975703200DB2BB5 /* StoreKit.framework */; };
 		3FCDDA512976401100DB2BB5 /* IAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCDDA502976401100DB2BB5 /* IAP.swift */; };
+		3FEB41CE2976571600A5118D /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 3FEB41CD2976571600A5118D /* SwiftUICharts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,9 +87,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FEB41CE2976571600A5118D /* SwiftUICharts in Frameworks */,
 				3FCDDA4F2975703200DB2BB5 /* StoreKit.framework in Frameworks */,
 				3F8EE1CB2973E3F70013C74E /* SwiftUIX in Frameworks */,
-				3F8EE1D42973E9D80013C74E /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,7 +210,7 @@
 			name = FinanceDashboard;
 			packageProductDependencies = (
 				3F8EE1CA2973E3F70013C74E /* SwiftUIX */,
-				3F8EE1D32973E9D80013C74E /* SwiftUICharts */,
+				3FEB41CD2976571600A5118D /* SwiftUICharts */,
 			);
 			productName = FinanceDashboard;
 			productReference = 3F25F1BC296192A900F4DA02 /* FinanceDashboard.app */;
@@ -286,7 +286,7 @@
 			mainGroup = 3F25F1B3296192A900F4DA02;
 			packageReferences = (
 				3F8EE1C92973E3F70013C74E /* XCRemoteSwiftPackageReference "SwiftUIX" */,
-				3F8EE1D22973E9D80013C74E /* XCRemoteSwiftPackageReference "ChartView" */,
+				3FEB41CC2976571600A5118D /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = 3F25F1BD296192A900F4DA02 /* Products */;
 			projectDirPath = "";
@@ -714,12 +714,12 @@
 				kind = branch;
 			};
 		};
-		3F8EE1D22973E9D80013C74E /* XCRemoteSwiftPackageReference "ChartView" */ = {
+		3FEB41CC2976571600A5118D /* XCRemoteSwiftPackageReference "ChartView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AppPear/ChartView";
 			requirement = {
 				kind = exactVersion;
-				version = "2.0.0-beta.8";
+				version = 1.5.5;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -730,9 +730,9 @@
 			package = 3F8EE1C92973E3F70013C74E /* XCRemoteSwiftPackageReference "SwiftUIX" */;
 			productName = SwiftUIX;
 		};
-		3F8EE1D32973E9D80013C74E /* SwiftUICharts */ = {
+		3FEB41CD2976571600A5118D /* SwiftUICharts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3F8EE1D22973E9D80013C74E /* XCRemoteSwiftPackageReference "ChartView" */;
+			package = 3FEB41CC2976571600A5118D /* XCRemoteSwiftPackageReference "ChartView" */;
 			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
