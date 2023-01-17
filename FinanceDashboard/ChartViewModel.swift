@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 class ChartViewModel: ObservableObject {
+    @Published var model: Model = Model.shared
+    
     func byCategory(items: FetchedResults<Item>) -> [String: [Chart]] {
         var result: [String: [Chart]] = [:]
         for item in items {
@@ -52,7 +54,7 @@ class ChartViewModel: ObservableObject {
             result[time]?.append(Chart(name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, value: item.value ))
         }
         if result.count < 10 {
-            let now = Date.now
+//            let now = Date.now
             for i in 1...(10 - result.count) {
                 let previousMonth = Calendar.current.date(byAdding: .month, value: -i, to: minTime)!
                 let time = itemFormatter.string(from: previousMonth)

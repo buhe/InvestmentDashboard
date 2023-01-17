@@ -9,7 +9,9 @@ import SwiftUI
 import Combine
 
 struct SettingView: View {
+    let model: Model
     @AppStorage(wrappedValue: false, "faceID") var showFaceID: Bool
+    
     var body: some View {
         NavigationStack {
             Form{
@@ -29,6 +31,11 @@ struct SettingView: View {
                         EmptyView()
                     } label: {
                         Text("Export")
+                    }
+                    NavigationLink {
+                        CurrencyView(model: model)
+                    } label: {
+                        Text("Currency")
                     }
 //                    HStack{
 //                        Text("Face ID")
@@ -58,6 +65,6 @@ struct SettingView: View {
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView()
+        SettingView(model: Model(unit: .CNY))
     }
 }

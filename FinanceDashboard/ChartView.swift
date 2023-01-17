@@ -34,11 +34,12 @@ struct ChartView: View {
                 PieChartView(data: viewModel.byCategoryValue(items: items), title: "Categroy", form: ChartForm.extraLarge) // legend is optional
             }.toolbar {
                 NavigationLink {
-                    SettingView()
+                    SettingView(model: viewModel.model)
                 } label: {
                     Image(systemName: "gear")
                 }
             }
+            .navigationTitle("Trend")
         }
         
     }

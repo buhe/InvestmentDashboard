@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 class OverViewModel: ObservableObject {
+    @Published var model: Model = Model.shared
+    
     func byCategory(items: FetchedResults<Item>) -> [Overviews] {
         var result: [String: [Overview]] = [:]
         for item in items {

@@ -27,3 +27,13 @@ enum ICategroy: String, CaseIterable, Identifiable {
         ICategroy.allCases.filter {$0 != .UnKnow}
     }
 }
+
+struct Model {
+    var unit: Unit
+    
+    static let shared: Model = Model(unit: .CNY)
+}
+
+enum Unit: String {
+    case CNY
+}

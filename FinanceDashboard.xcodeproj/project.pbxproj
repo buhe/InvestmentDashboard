@@ -32,6 +32,7 @@
 		3FCDDA4F2975703200DB2BB5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FCDDA4E2975703200DB2BB5 /* StoreKit.framework */; };
 		3FCDDA512976401100DB2BB5 /* IAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCDDA502976401100DB2BB5 /* IAP.swift */; };
 		3FEB41CE2976571600A5118D /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 3FEB41CD2976571600A5118D /* SwiftUICharts */; };
+		3FEB41D02976854F00A5118D /* CurrencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEB41CF2976854F00A5118D /* CurrencyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		3F8EE1D72974EE4F0013C74E /* EditItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItem.swift; sourceTree = "<group>"; };
 		3FCDDA4E2975703200DB2BB5 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		3FCDDA502976401100DB2BB5 /* IAP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAP.swift; sourceTree = "<group>"; };
+		3FEB41CF2976854F00A5118D /* CurrencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				3F8EE1D5297422610013C74E /* CustemView.swift */,
 				3F8EE1D72974EE4F0013C74E /* EditItem.swift */,
 				3FCDDA502976401100DB2BB5 /* IAP.swift */,
+				3FEB41CF2976854F00A5118D /* CurrencyView.swift */,
 			);
 			path = FinanceDashboard;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				3F8EE1C02972BE230013C74E /* ChartViewModel.swift in Sources */,
 				3FCDDA512976401100DB2BB5 /* IAP.swift in Sources */,
 				3F25F1C2296192A900F4DA02 /* Persistence.swift in Sources */,
+				3FEB41D02976854F00A5118D /* CurrencyView.swift in Sources */,
 				3F8EE1BC2972A47F0013C74E /* SettingView.swift in Sources */,
 				3F8EE1D6297422610013C74E /* CustemView.swift in Sources */,
 				3F8EE1C42973A4B40013C74E /* Model.swift in Sources */,

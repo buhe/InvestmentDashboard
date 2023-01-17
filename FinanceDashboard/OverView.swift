@@ -24,7 +24,7 @@ struct OverView: View {
 //                SearchBar(text: $search).padding(.horizontal)
                     
                 OverviewTabBar(tabIndex: $tabIndex).padding(.horizontal, 26)
-                    .navigationTitle("Total: " + String(format: "%.f", viewModel.total(items: items)))
+                    .navigationTitle(viewModel.model.unit.rawValue + ": " + String(format: "%.f", viewModel.total(items: items)))
                 switch tabIndex {
                 case 0:
                     List {
@@ -36,7 +36,7 @@ struct OverView: View {
                     .listStyle(PlainListStyle())
                     .toolbar {
                         NavigationLink {
-                            SettingView()
+                            SettingView(model: viewModel.model)
                         } label: {
                             Image(systemName: "gear")
                         }
@@ -51,7 +51,7 @@ struct OverView: View {
                     .listStyle(PlainListStyle())
                     .toolbar {
                         NavigationLink {
-                            SettingView()
+                            SettingView(model: viewModel.model)
                         } label: {
                             Image(systemName: "gear")
                         }
