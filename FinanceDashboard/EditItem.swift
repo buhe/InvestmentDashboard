@@ -161,6 +161,17 @@ struct EditItem: View {
                     newItem.categroy = selectCategroy.rawValue
                     newItem.updatedDate = now
                     newItem.value = v
+                    // for test
+                    for i in 1...8 {
+                        let newItem2 = Item(context: viewContext)
+                    
+                        newItem2.createdDate = Calendar.current.date(byAdding: .month, value: -i, to: now)!
+                        newItem2.name = name
+                        newItem2.categroy = selectCategroy.rawValue
+                        newItem2.updatedDate = Calendar.current.date(byAdding: .month, value: -i, to: now)!
+                        newItem2.value = v - Double(i) * 100
+                    }
+                    
                 }
                 
             }
