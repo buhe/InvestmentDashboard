@@ -27,9 +27,3 @@ struct CurrencyView_Previews: PreviewProvider {
         CurrencyView(model: Model(unit: .CNY))
     }
 }
-
-struct CurrencySDK {
-    func transfer(origion: (Double, Unit) ) -> (Double ,Unit) {
-        (origion.0, origion.1)
-    }
-}

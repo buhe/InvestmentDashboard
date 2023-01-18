@@ -141,8 +141,8 @@ struct EditItem: View {
         }
     }
     
-    fileprivate func changeNameOrCategroy(oldItem: Item) -> Bool {
-        oldItem.name! != name || oldItem.categroy! != selectCategroy.rawValue
+    fileprivate func changeNameOrCategroyOrCurrency(oldItem: Item) -> Bool {
+        oldItem.name! != name || oldItem.categroy! != selectCategroy.rawValue || oldItem.unit! != currency.rawValue
     }
     
     private func addItem() {
@@ -150,11 +150,12 @@ struct EditItem: View {
             withAnimation {
                 if edit() {
                     let oldItem = overview!.raw
-                    if changeNameOrCategroy(oldItem: oldItem) {
+                    if changeNameOrCategroyOrCurrency(oldItem: oldItem) {
                         oldItem.updatedDate = Date.now
                         oldItem.name = name
                         oldItem.categroy = selectCategroy.rawValue
                         oldItem.value = v
+                        oldItem.unit = currency.rawValue
                     } else {
                         let newItem = Item(context: viewContext)
                         let now = Date.now
@@ -163,6 +164,7 @@ struct EditItem: View {
                         newItem.categroy = oldItem.categroy
                         newItem.updatedDate = now
                         newItem.value = v
+                        newItem.unit = oldItem.unit
                     }
                     
                 } else {
@@ -176,16 +178,17 @@ struct EditItem: View {
                     newItem.categroy = selectCategroy.rawValue
                     newItem.updatedDate = now
                     newItem.value = v
+                    newItem.unit = currency.rawValue
                     // for test
-                    for i in 1...8 {
-                        let newItem2 = Item(context: viewContext)
-                    
-                        newItem2.createdDate = Calendar.current.date(byAdding: .month, value: -i, to: now)!
-                        newItem2.name = name
-                        newItem2.categroy = selectCategroy.rawValue
-                        newItem2.updatedDate = Calendar.current.date(byAdding: .month, value: -i, to: now)!
-                        newItem2.value = v - Double(i) * 100
-                    }
+//                    for i in 1...8 {
+//                        let newItem2 = Item(context: viewContext)
+//                    
+//                        newItem2.createdDate = Calendar.current.date(byAdding: .month, value: -i, to: now)!
+//                        newItem2.name = name
+//                        newItem2.categroy = selectCategroy.rawValue
+//                        newItem2.updatedDate = Calendar.current.date(byAdding: .month, value: -i, to: now)!
+//                        newItem2.value = v - Double(i) * 100
+//                    }
                     
                 }
                 

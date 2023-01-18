@@ -18,13 +18,20 @@ struct OverView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.createdDate, ascending: true)],
             animation: .default)
         private var items: FetchedResults<Item>
+    
+    @State var total: Double = 0
     var body: some View {
         VStack {
             NavigationStack {
 //                SearchBar(text: $search).padding(.horizontal)
                     
                 OverviewTabBar(tabIndex: $tabIndex).padding(.horizontal, 26)
-                    .navigationTitle(viewModel.model.unit.rawValue + ": " + String(format: "%.f", viewModel.total(items: items)))
+                    .navigationTitle(viewModel.model.unit.rawValue + ": " + String(format: "%.f", total))
+                    .onAppear{
+                        Task{
+                            self.total = await viewModel.total(items: items)
+                        }
+                    }
 //                switch tabIndex {
 //                case 0:
                     List {

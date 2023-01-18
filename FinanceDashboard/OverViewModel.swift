@@ -48,11 +48,11 @@ class OverViewModel: ObservableObject {
 //        return result.map{k,v in Overviews(id: k, key: k, overviews: v)}
 //    }
     
-    func total(items: FetchedResults<Item>) -> Double {
+    func total(items: FetchedResults<Item>) async -> Double {
         var total: Double = 0
         var map: [String: Item] = [:]
         
-        items.forEach {i in
+        await items.asyncForEach {i in
             if map[i.name!] == nil {
                 // first
                 map[i.name!] = i
@@ -60,9 +60,17 @@ class OverViewModel: ObservableObject {
             }
             if i.updatedDate! > map[i.name!]!.updatedDate! {
                 // newer
+                // todo transfer
                 total = total - map[i.name!]!.value
                 map[i.name!] = i
-                total = total + i.value
+//                if Unit(rawValue: i.unit!)! == model.unit {
+                    total = total + i.value
+//                } else {
+//                    print("transfer currency")
+//                    let new = await CurrencySDK.transfer(origion: (i.value, Unit(rawValue: i.unit!)!))
+//                    total = total + new.0
+//                }
+                
             }
             
             
