@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CurrencyView: View {
     let model: Model
-    @State var currency: String = Unit.CNY.rawValue
+    @State var currency: String = Unit.USD.rawValue
     var body: some View {
         NavigationStack {
             Picker("Currency", selection: $currency){

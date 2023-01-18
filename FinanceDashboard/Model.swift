@@ -31,9 +31,10 @@ enum ICategroy: String, CaseIterable, Identifiable {
 struct Model {
     var unit: Unit
     
-    static let shared: Model = Model(unit: .CNY)
+    static let shared: Model = Model(unit: .USD)
 }
 
 enum Unit: String, CaseIterable {
     case CNY
+    case USD
 }

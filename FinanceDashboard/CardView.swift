@@ -65,7 +65,7 @@ struct CardView: View {
                     }
                     .sheet(item: $selected) {
                         overview in
-                        EditItem(overview: overview, currency: Model.shared.unit.rawValue) {
+                        EditItem(overview: overview, currency: Model.shared.unit) {
                             selected = nil
                         }
                     }

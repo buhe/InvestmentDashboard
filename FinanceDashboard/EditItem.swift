@@ -15,7 +15,7 @@ struct EditItem: View {
     @State private var name = ""
     @State private var value = ""
     @State private var selectCategroy: ICategroy = .Cash
-    @State var currency: String
+    @State var currency: Unit
     
     
      let close: () -> Void
@@ -100,20 +100,21 @@ struct EditItem: View {
                     .toolbar {
                         ToolbarItemGroup(placement: .keyboard) {
                             HStack {
-                              
-                                TextField("Value:", text: $value)
-                                    .disableAutocorrection(true)
-                                    .textInputAutocapitalization(.never)
-                                    .keyboardType(.numberPad)
-                                Picker("Currency", selection: $currency){
-                                    ForEach(Unit.allCases, id: \.self){
-                                        Text($0.rawValue)
+//                                NavigationStack{
+                                    TextField("Value:", text: $value)
+                                        .disableAutocorrection(true)
+                                        .textInputAutocapitalization(.never)
+                                        .keyboardType(.numberPad)
+                                    Picker("Currency", selection: $currency){
+                                        ForEach(Unit.allCases, id: \.self){
+                                            Text($0.rawValue)
+                                        }
+                                        
                                     }
-                                    
-                                }
-                                Button(action: addItem) {
-                                    Text("Done")
-                                }
+                                    Button(action: addItem) {
+                                        Text("Done")
+                                    }
+//                                }
                             }
                             
                         }
@@ -165,6 +166,9 @@ struct EditItem: View {
                     }
                     
                 } else {
+                    if name.isEmpty {
+                        return
+                    }
                     let newItem = Item(context: viewContext)
                     let now = Date.now
                     newItem.createdDate = now
