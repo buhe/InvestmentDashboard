@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct EditItem: View {
     
@@ -212,10 +213,20 @@ struct EditItem: View {
     
     private func deleteItems() {
             withAnimation {
-                viewContext.delete(overview!.raw)
+                let name = overview!.name
+                let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Item")
+
+                    fetch.predicate = NSPredicate(format: "name = %@", name)
+
+                    let req = NSBatchDeleteRequest(fetchRequest: fetch)
+
+                    req.resultType = .resultTypeCount
     
                 do {
-                    try viewContext.save()
+                    let result = try viewContext.execute(req)
+                                                as? NSBatchDeleteResult
+
+                    print("delete: \(result?.result as! Int)")   // number of objects deleted
                 } catch {
                     // Replace this implementation with code to handle the error appropriately.
                     // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
