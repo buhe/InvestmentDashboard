@@ -218,15 +218,15 @@ struct EditItem: View {
 
                     fetch.predicate = NSPredicate(format: "name = %@", name)
 
-                    let req = NSBatchDeleteRequest(fetchRequest: fetch)
-
-                    req.resultType = .resultTypeCount
+//                    let req = NSBatchDeleteRequest(fetchRequest: fetch)
+//
+//                    req.resultType = .resultTypeCount
     
                 do {
-                    let result = try viewContext.execute(req)
-                                                as? NSBatchDeleteResult
-
-                    print("delete: \(result?.result as! Int)")   // number of objects deleted
+                    let o = try viewContext.fetch(fetch) as! [Item]
+                    o.forEach {viewContext.delete($0)}
+                    
+//                    print("delete: \(result?.result as! Int)")   // number of objects deleted
                 } catch {
                     // Replace this implementation with code to handle the error appropriately.
                     // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
