@@ -56,17 +56,30 @@ class OverViewModel: ObservableObject {
             if map[i.name!] == nil {
                 // first
                 map[i.name!] = i
-                total = total + i.value
+                if Unit(rawValue: i.unit!)! == model.unit {
+                    total = total + i.value
+                } else {
+                    print("transfer currency+")
+                    let new = await CurrencySDK.transfer(origion: (i.value, Unit(rawValue: i.unit!)!))
+                    total = total + new.0
+                }
             }
             if i.updatedDate! > map[i.name!]!.updatedDate! {
                 // newer
                 // todo transfer
-                total = total - map[i.name!]!.value
+                if Unit(rawValue: map[i.name!]!.unit!)! == model.unit {
+                    total = total - map[i.name!]!.value
+                } else {
+                    print("transfer currency-")
+                    let new = await CurrencySDK.transfer(origion: (map[i.name!]!.value, Unit(rawValue: map[i.name!]!.unit!)!))
+                    total = total - new.0
+                }
+                
                 map[i.name!] = i
                 if Unit(rawValue: i.unit!)! == model.unit {
                     total = total + i.value
                 } else {
-                    print("transfer currency")
+                    print("transfer currency+")
                     let new = await CurrencySDK.transfer(origion: (i.value, Unit(rawValue: i.unit!)!))
                     total = total + new.0
                 }
