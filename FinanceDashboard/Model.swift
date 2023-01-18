@@ -34,6 +34,6 @@ struct Model {
     static let shared: Model = Model(unit: .CNY)
 }
 
-enum Unit: String {
+enum Unit: String, CaseIterable {
     case CNY
 }

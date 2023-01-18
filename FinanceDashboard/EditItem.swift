@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct EditItem: View {
+    
+    
     let overview: Overview?
     
     @State private var name = ""
     @State private var value = ""
     @State private var selectCategroy: ICategroy = .Cash
+    @State var currency: String
+    
+    
      let close: () -> Void
     
     @Environment(\.managedObjectContext) private var viewContext
@@ -100,6 +105,12 @@ struct EditItem: View {
                                     .disableAutocorrection(true)
                                     .textInputAutocapitalization(.never)
                                     .keyboardType(.numberPad)
+                                Picker("Currency", selection: $currency){
+                                    ForEach(Unit.allCases, id: \.self){
+                                        Text($0.rawValue)
+                                    }
+                                    
+                                }
                                 Button(action: addItem) {
                                     Text("Done")
                                 }

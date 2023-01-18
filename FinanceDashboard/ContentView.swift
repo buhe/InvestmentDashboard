@@ -50,7 +50,7 @@ struct ContentView: View {
                 }.tag(3)
 
             }.sheet(isPresented: $tabData.isCustomItemSelected) {
-                EditItem(overview: nil) {
+                EditItem(overview: nil, currency: Model.shared.unit.rawValue) {
                     tabData.itemSelected = tabData.previousItem
                     tabData.isCustomItemSelected = false
                 }
