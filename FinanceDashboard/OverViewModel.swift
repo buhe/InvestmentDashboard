@@ -50,7 +50,24 @@ class OverViewModel: ObservableObject {
     
     func total(items: FetchedResults<Item>) -> Double {
         var total: Double = 0
-        items.forEach {i in total = total + i.value}
+        var map: [String: Item] = [:]
+        
+        items.forEach {i in
+            if map[i.name!] == nil {
+                // first
+                map[i.name!] = i
+                total = total + i.value
+            }
+            if i.updatedDate! > map[i.name!]!.updatedDate! {
+                // newer
+                total = total - map[i.name!]!.value
+                map[i.name!] = i
+                total = total + i.value
+            }
+            
+            
+        }
+        
         return total
     }
 }
