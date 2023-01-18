@@ -23,12 +23,12 @@ class OverViewModel: ObservableObject {
             
             if sameName.isEmpty {
                 // not found
-                result[categroy]!.append(Overview(id: item.name ?? "", name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, value: item.value,updateDate: item.updatedDate!, raw: item))
+                result[categroy]!.append(Overview(id: item.name ?? "", name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, unit: Unit(rawValue: item.unit ?? "") ?? .UnKnow, value: item.value,updateDate: item.updatedDate!, raw: item))
             } else {
                 if sameName.first!.updateDate < item.updatedDate! {
                     // when newer value update
                     result[categroy]!.removeAll{$0.name == (item.name ?? "")}
-                    result[categroy]!.append(Overview(id: item.name ?? "", name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, value: item.value,updateDate: item.updatedDate!, raw: item))
+                    result[categroy]!.append(Overview(id: item.name ?? "", name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, unit: Unit(rawValue: item.unit ?? "") ?? .UnKnow, value: item.value,updateDate: item.updatedDate!, raw: item))
                 }
             }
             
@@ -91,6 +91,7 @@ struct Overview: Identifiable {
     var id: String
     let name: String
     let categroy: ICategroy
+    let unit: Unit
     let value: Double
     let updateDate: Date
     let raw: Item

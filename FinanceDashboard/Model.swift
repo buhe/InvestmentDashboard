@@ -37,4 +37,5 @@ struct Model {
 enum Unit: String, CaseIterable {
     case CNY
     case USD
+    case UnKnow
 }

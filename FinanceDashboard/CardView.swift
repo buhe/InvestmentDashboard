@@ -60,6 +60,8 @@ struct CardView: View {
                                 
                             Spacer()
                             Text("\(overview.value)")
+//                                .padding(.trailing)
+                            Text("\(overview.unit.rawValue)")
                                 
                         }.foregroundColor(.black)
                     }
