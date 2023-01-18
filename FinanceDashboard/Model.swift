@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum ICategroy: String, CaseIterable, Identifiable {
     var id: Self {
@@ -29,9 +30,9 @@ enum ICategroy: String, CaseIterable, Identifiable {
 }
 
 struct Model {
-    var unit: Unit
+    @AppStorage(wrappedValue: Unit.USD, "unit") var unit: Unit
     
-    static let shared: Model = Model(unit: .USD)
+    static let shared: Model = Model()
 }
 
 enum Unit: String, CaseIterable {

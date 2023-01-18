@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct CurrencyView: View {
-    let model: Model
-    @State var currency: String = Unit.USD.rawValue
+    var model: Model
+    @State var currency = Unit.USD
     var body: some View {
         NavigationStack {
             Picker("Currency", selection: $currency){
@@ -17,6 +17,11 @@ struct CurrencyView: View {
                     Text($0.rawValue)
                 }
                 
+            }.onChange(of: currency){
+                c in
+                model.unit = c
+            }.onAppear{
+                currency = model.unit
             }
         }
     }
@@ -24,6 +29,6 @@ struct CurrencyView: View {
 
 struct CurrencyView_Previews: PreviewProvider {
     static var previews: some View {
-        CurrencyView(model: Model(unit: .CNY))
+        CurrencyView(model: Model())
     }
 }
