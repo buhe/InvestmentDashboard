@@ -134,6 +134,7 @@ struct EditItem: View {
                     
                     selectCategroy = overview!.categroy
                     value = String(format: "%f", overview!.value)
+                    currency = overview!.unit
                 }
 //                value = overview.
             }

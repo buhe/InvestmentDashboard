@@ -9,8 +9,9 @@ import SwiftUI
 import SwiftUIX
 
 struct OverView: View {
-    @State var search = ""
+//    @State var search = ""
     @State var tabIndex = 0
+    var tabData: MainTabBarData
     
     @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var viewModel: OverViewModel
@@ -28,6 +29,12 @@ struct OverView: View {
                 OverviewTabBar(tabIndex: $tabIndex).padding(.horizontal, 26)
                     .navigationTitle(viewModel.model.unit.rawValue + ": " + String(format: "%.f", total))
                     .onAppear{
+                        Task{
+                            self.total = await viewModel.total(items: items)
+                        }
+                    }
+                    .onChange(of: try! JSONEncoder().encode(viewModel.byChange(items: items))){
+                        i in
                         Task{
                             self.total = await viewModel.total(items: items)
                         }
@@ -71,8 +78,8 @@ struct OverView: View {
     }
 }
 
-struct OverView_Previews: PreviewProvider {
-    static var previews: some View {
-        OverView(viewModel: OverViewModel())
-    }
-}
+//struct OverView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        OverView(viewModel: OverViewModel())
+//    }
+//}

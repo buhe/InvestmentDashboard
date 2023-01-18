@@ -24,7 +24,7 @@ struct ContentView: View {
         var body: some View {
 
             TabView(selection: $tabData.itemSelected) {
-                OverView(viewModel: overViewModel)
+                OverView(tabData: tabData, viewModel: overViewModel)
                     .environment(\.managedObjectContext, viewContext)
                     .tabItem {
                         VStack {

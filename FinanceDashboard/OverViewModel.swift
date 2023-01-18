@@ -10,7 +10,9 @@ import SwiftUI
 
 class OverViewModel: ObservableObject {
     @Published var model: Model = Model.shared
-    
+    func byChange(items: FetchedResults<Item>) -> [OverviewWithoutRaw] {
+        items.map{OverviewWithoutRaw(id: $0.name!, name: $0.name!, categroy:$0.categroy!, unit: $0.unit!, value: $0.value, updateDate: $0.updatedDate!)}
+    }
     func byCategory(items: FetchedResults<Item>) -> [Overviews] {
         // todo when name same remove dup, updateDate newer win
         var result: [String: [Overview]] = [:]
@@ -108,6 +110,18 @@ struct Overview: Identifiable {
     let value: Double
     let updateDate: Date
     let raw: Item
+    
+    
+    
+}
+
+struct OverviewWithoutRaw: Identifiable, Encodable {
+    var id: String
+    let name: String
+    let categroy: String
+    let unit: String
+    let value: Double
+    let updateDate: Date
     
     
     
