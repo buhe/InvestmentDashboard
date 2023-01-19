@@ -41,6 +41,26 @@ class ChartViewModel: ObservableObject {
 //                k
 //            }
 //    }
+    func byCategroySync(items: FetchedResults<Item>) -> [Double] {
+        return self.byCategory(items: items)
+            .map{
+                k,v in
+                var total: Double = 0
+                v.forEach{
+                    i in
+//                    if i.unit == model.unit {
+                        total = total + i.value
+//                    } else {
+//                        print("chart categroy transfer currency")
+//                        let new = await CurrencySDK.transfer(origion: (i.value, i.unit), to: model.unit)
+//                        total = total + new.0
+//                    }
+                    
+                }
+                return total
+                
+            }
+    }
     func byCategoryValue(items: FetchedResults<Item>) async -> [Double] {
         return await self.byCategory(items: items)
             .asyncMap{

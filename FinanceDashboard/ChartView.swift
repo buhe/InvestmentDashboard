@@ -38,7 +38,7 @@ struct ChartView: View {
                     .font(.custom("Avenir", size: 16))
                     .padding(.vertical, 10)
                     .border(width: 1, edges: [.bottom], color: .systemGray)
-                PieChartView(data: pieData, title: "Categroy", form: ChartForm.extraLarge)
+                PieChartView(data: pieData.isEmpty ? viewModel.byCategroySync(items: items) : pieData, title: "Categroy", form: ChartForm.extraLarge)
                     .onAppear{
                         Task {
                             self.pieData = await viewModel.byCategoryValue(items: items)
