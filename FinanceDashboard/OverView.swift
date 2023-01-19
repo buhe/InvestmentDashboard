@@ -33,7 +33,7 @@ struct OverView: View {
                             self.total = await viewModel.total(items: items)
                         }
                     }
-                    .onChange(of: try! JSONEncoder().encode(viewModel.byChange(items: items))){
+                    .onChange(of: try! JSONEncoder().encode(viewModel.byChangeMonitor(items: items))){
                         i in
                         Task{
                             self.total = await viewModel.total(items: items)

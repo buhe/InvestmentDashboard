@@ -10,8 +10,8 @@ import SwiftUI
 
 class OverViewModel: ObservableObject {
     @Published var model: Model = Model.shared
-    func byChange(items: FetchedResults<Item>) -> [OverviewWithoutRaw] {
-        items.map{OverviewWithoutRaw(id: $0.name!, name: $0.name!, categroy:$0.categroy!, unit: $0.unit!, value: $0.value, updateDate: $0.updatedDate!)}
+    func byChangeMonitor(items: FetchedResults<Item>) -> [OverviewWithoutRaw] {
+        items.map{OverviewWithoutRaw(id: $0.name!, name: $0.name!, categroy:$0.categroy!, unit: $0.unit ?? "", value: $0.value, updateDate: $0.updatedDate!)}
     }
     func byCategory(items: FetchedResults<Item>) -> [Overviews] {
         // todo when name same remove dup, updateDate newer win
@@ -60,11 +60,11 @@ class OverViewModel: ObservableObject {
             if map[i.name!] == nil {
                 // first
                 map[i.name!] = i
-                if Unit(rawValue: i.unit!)! == model.unit {
+                if Unit(rawValue: i.unit ?? "") == model.unit {
                     total = total + i.value
                 } else {
                     print("transfer currency+")
-                    let new = await CurrencySDK.transfer(origion: (i.value, Unit(rawValue: i.unit!)!), to: model.unit)
+                    let new = await CurrencySDK.transfer(origion: (i.value, Unit(rawValue: i.unit ?? "") ?? .UnKnow), to: model.unit)
                     total = total + new.0
                 }
             }
