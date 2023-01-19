@@ -10,7 +10,8 @@ import SwiftUICharts
 
 struct ChartView: View {
     @ObservedObject var viewModel: ChartViewModel
-    var demoData: [Double] = [8, 2, 4, 6, 12, 9, 2]
+    @State var lineData: [Double] = []
+    @State var pieData: [Double] = []
     
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -26,12 +27,23 @@ struct ChartView: View {
                     .font(.custom("Avenir", size: 16))
                     .padding(.vertical, 10)
                     .border(width: 1, edges: [.bottom], color: .systemGray)
-                LineChartView(data: viewModel.byDateValue(items: items), title: "Mouth Trend", form: ChartForm.extraLarge, rateValue: 0) // legend is optional
+                LineChartView(data: lineData, title: "Mouth Trend", form: ChartForm.extraLarge, rateValue: 0)
+                    .onAppear{
+                        Task{
+                            self.lineData = await viewModel.byDateValue(items: items)
+                        }
+                    }
+                // legend is optional
                 Text("Categroy")
                     .font(.custom("Avenir", size: 16))
                     .padding(.vertical, 10)
                     .border(width: 1, edges: [.bottom], color: .systemGray)
-                PieChartView(data: viewModel.byCategoryValue(items: items), title: "Categroy", form: ChartForm.extraLarge) // legend is optional
+                PieChartView(data: pieData, title: "Categroy", form: ChartForm.extraLarge)
+                    .onAppear{
+                        Task {
+                            self.pieData = await viewModel.byCategoryValue(items: items)
+                        }
+                    }// legend is optional
             }.toolbar {
                 NavigationLink {
                     SettingView(model: viewModel.model)

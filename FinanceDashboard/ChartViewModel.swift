@@ -23,36 +23,45 @@ class ChartViewModel: ObservableObject {
             
             if sameName.isEmpty {
                 // not found
-                result[categroy]!.append(Chart(name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, value: item.value,updateDate: item.updatedDate!))
+                result[categroy]!.append(Chart(name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, unit:  Unit(rawValue: item.unit ?? "") ?? .UnKnow, value: item.value,updateDate: item.updatedDate!))
             } else {
                 if sameName.first!.updateDate < item.updatedDate! {
                     // when newer value update
                     result[categroy]!.removeAll{$0.name == (item.name ?? "")}
-                    result[categroy]!.append(Chart(name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, value: item.value,updateDate: item.updatedDate!))
+                    result[categroy]!.append(Chart(name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, unit:  Unit(rawValue: item.unit ?? "") ?? .UnKnow, value: item.value,updateDate: item.updatedDate!))
                 }
             }
         }
         return result
     }
-    func byCategoryLabel(items: FetchedResults<Item>) -> [String] {
-        self.byCategory(items: items)
-            .map{
-                k,v in
-                k
-            }
-    }
-    func byCategoryValue(items: FetchedResults<Item>) -> [Double] {
-        self.byCategory(items: items)
-            .map{
+//    func byCategoryLabel(items: FetchedResults<Item>) -> [String] {
+//        self.byCategory(items: items)
+//            .map{
+//                k,v in
+//                k
+//            }
+//    }
+    func byCategoryValue(items: FetchedResults<Item>) async -> [Double] {
+        return await self.byCategory(items: items)
+            .asyncMap{
                 k,v in
                 var total: Double = 0
-                v.forEach{total = total + $0.value}
-                print(total)
+                await v.asyncForEach{
+                    i in
+                    if i.unit == model.unit {
+                        total = total + i.value
+                    } else {
+                        print("chart categroy transfer currency")
+                        let new = await CurrencySDK.transfer(origion: (i.value, i.unit), to: model.unit)
+                        total = total + new.0
+                    }
+                    
+                }
                 return total
                 
             }
     }
-    func byDate(items: FetchedResults<Item>) -> Array<(key: String, value: Array<Chart>)> {
+    func byDate(items: FetchedResults<Item>) async -> Array<(key: String, value: Array<Chart>)> {
         // todo when name same and mouth same remove dup, updateDate newer win
         var result: [String: [Chart]] = [:]
         var minTime: Date = Date.now
@@ -68,12 +77,12 @@ class ChartViewModel: ObservableObject {
             
             if sameName.isEmpty {
                 // not found
-                result[time]!.append(Chart(name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, value: item.value,updateDate: item.updatedDate!))
+                result[time]!.append(Chart(name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, unit:  Unit(rawValue: item.unit ?? "") ?? .UnKnow, value: item.value,updateDate: item.updatedDate!))
             } else {
                 if sameName.first!.updateDate < item.updatedDate! {
                     // when newer value update
                     result[time]!.removeAll{$0.name == (item.name ?? "")}
-                    result[time]!.append(Chart(name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, value: item.value,updateDate: item.updatedDate!))
+                    result[time]!.append(Chart(name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, unit:  Unit(rawValue: item.unit ?? "") ?? .UnKnow, value: item.value,updateDate: item.updatedDate!))
                 }
             }
         }
@@ -82,19 +91,30 @@ class ChartViewModel: ObservableObject {
             for i in 1...(10 - result.count) {
                 let previousMonth = Calendar.current.date(byAdding: .month, value: -i, to: minTime)!
                 let time = itemFormatter.string(from: previousMonth)
-                result[time] = [Chart(name: "Empty", categroy: .UnKnow, value: 0, updateDate: Date.now )]
+                result[time] = [Chart(name: "Empty", categroy: .UnKnow,unit: .UnKnow, value: 0, updateDate: Date.now )]
             }
             
         }
         return result.sorted(by: {a,b in (a.key.compare(b.key)).rawValue < 0})
     }
     
-    func byDateValue(items: FetchedResults<Item>) -> [Double] {
-        let dates = self.byDate(items: items).map {
+    func byDateValue(items: FetchedResults<Item>) async -> [Double] {
+        let dates = await self.byDate(items: items).asyncMap {
             k,v in
             var total: Double = 0
-            v.forEach{total = total + $0.value}
-            print("Date: \(k) \(total)")
+            await v.asyncForEach{
+                i in
+                if i.unit == model.unit {
+                    total = total + i.value
+                } else {
+                    print("chart date transfer currency")
+                    let new = await CurrencySDK.transfer(origion: (i.value, i.unit), to: model.unit)
+                    total = total + new.0
+                }
+                
+                
+            }
+//            print("Date: \(k) \(total)")
             return total
         }
         // todo
@@ -110,6 +130,7 @@ class ChartViewModel: ObservableObject {
 struct Chart {
     let name: String
     let categroy: ICategroy
+    let unit: Unit
     let value: Double
     let updateDate: Date
 }
