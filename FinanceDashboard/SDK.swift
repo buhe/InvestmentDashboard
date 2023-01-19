@@ -16,7 +16,7 @@ struct CurrencySDK {
         let mouth = itemFormatter.string(from: Date.now)
         let base = origion.1.rawValue
         var currency: Double = 1
-        if cache[mouth]?[base] != nil {
+        if cache[mouth] != nil && cache[mouth]![base] != nil {
             currency = cache[mouth]![base]!["conversion_rates"][to.rawValue].doubleValue
             
         } else {
