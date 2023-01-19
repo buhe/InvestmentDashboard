@@ -30,6 +30,9 @@ struct CurrencySDK {
                 cache[mouth]![base] = json
                 if let json = json {
                     currency = json["conversion_rates"][to.rawValue].doubleValue
+                    
+                    checkCache()
+                    saveToDB()
                 }
             }
         }
@@ -54,6 +57,14 @@ struct CurrencySDK {
 //        default: break
 //        }
         return result
+    }
+    
+    static func saveToDB() {
+        
+    }
+    
+    static func checkCache() {
+        
     }
 }
 
