@@ -225,6 +225,7 @@ struct EditItem: View {
                 do {
                     let o = try viewContext.fetch(fetch) as! [Item]
                     o.forEach {viewContext.delete($0)}
+                    try viewContext.save()
                     
 //                    print("delete: \(result?.result as! Int)")   // number of objects deleted
                 } catch {

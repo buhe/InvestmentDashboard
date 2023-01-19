@@ -14,6 +14,7 @@ struct CurrencySDK {
     static func transfer(origion: (Double, Unit), to: Unit ) async -> (Double ,Unit) {
         // cache by per unit and mouthly
         var currency: Double = 1
+//        print("\(URL)\(origion.1.rawValue)")
         let reps = try? await AF.request("\(URL)\(origion.1.rawValue)").serializingString().value
         if let reps = reps {
             let json = try? JSON(data: Data(reps.utf8))

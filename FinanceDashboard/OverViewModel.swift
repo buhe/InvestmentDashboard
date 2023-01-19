@@ -51,8 +51,8 @@ class OverViewModel: ObservableObject {
 //    }
     
     func total(items: FetchedResults<Item>) async -> Double {
-        let n = await CurrencySDK.transfer(origion: (1, Unit.USD), to: .CNY)
-        print("v: \(n.0), c: \(n.1)")
+//        let n = await CurrencySDK.transfer(origion: (1, Unit.USD), to: .CNY)
+//        print("v: \(n.0), c: \(n.1)")
         var total: Double = 0
         var map: [String: Item] = [:]
         
