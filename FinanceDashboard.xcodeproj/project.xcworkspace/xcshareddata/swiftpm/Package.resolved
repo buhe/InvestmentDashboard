@@ -44,6 +44,15 @@
         "branch" : "master",
         "revision" : "af1f7a2007d607fbe735c445f19080df4260fe8e"
       }
+    },
+    {
+      "identity" : "tppdf",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/techprimate/TPPDF",
+      "state" : {
+        "revision" : "f9876a1bf56d93c6d78aed9cbb1753cd47030b99",
+        "version" : "2.4.0"
+      }
     }
   ],
   "version" : 2

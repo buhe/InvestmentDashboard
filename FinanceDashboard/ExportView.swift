@@ -18,7 +18,13 @@ struct ExportView: View {
             Button{
                 CSV().export(items: items)
             }label: {
-                Text("CSV")
+                Text("Export CSV")
+            }
+            
+            Button{
+                Pdf().export(items: items)
+            }label: {
+                Text("Export Pdf")
             }
         }
     }

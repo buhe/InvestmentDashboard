@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import CodableCSV
+import TPPDF
 
 protocol Exportor {
     func export(items: FetchedResults<Item>)
@@ -21,6 +22,20 @@ struct CSV: Exportor {
         let encoder = CSVEncoder { $0.headers = ["name", "categroy", "value", "time", "unit"] }
         let newData = try? encoder.encode(datas)
         print(String(data: newData!, encoding: .utf8)!)
+    }
+    
+    
+}
+
+struct Pdf: Exportor {
+    func export(items: FetchedResults<Item>) {
+        let document = PDFDocument(format: .a4)
+      
+        document.add(.contentCenter, text: "Create PDF documents easily.")
+
+        let generator = PDFGenerator(document: document)
+        let url  = try? generator.generateURL(filename: "Example.pdf")
+        print(url!)
     }
     
     
