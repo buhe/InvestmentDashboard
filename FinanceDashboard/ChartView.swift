@@ -30,7 +30,7 @@ struct ChartView: View {
                 LineChartView(data: lineData, title: "Mouth Trend", form: ChartForm.extraLarge, rateValue: 0)
                     .onAppear{
                         Task{
-                            self.lineData = await viewModel.byDateValue(items: items)
+                            self.lineData = await viewModel.byDateValue(items: items, viewContext: viewContext)
                         }
                     }
                 // legend is optional
@@ -41,7 +41,7 @@ struct ChartView: View {
                 PieChartView(data: pieData.isEmpty ? viewModel.byCategroySync(items: items) : pieData, title: "Categroy", form: ChartForm.extraLarge)
                     .onAppear{
                         Task {
-                            self.pieData = await viewModel.byCategoryValue(items: items)
+                            self.pieData = await viewModel.byCategoryValue(items: items, viewContext: viewContext)
                         }
                     }// legend is optional
             }.toolbar {

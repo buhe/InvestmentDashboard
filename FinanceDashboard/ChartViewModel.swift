@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import CoreData
 
 class ChartViewModel: ObservableObject {
     @Published var model: Model = Model.shared
@@ -61,7 +62,7 @@ class ChartViewModel: ObservableObject {
                 
             }
     }
-    func byCategoryValue(items: FetchedResults<Item>) async -> [Double] {
+    func byCategoryValue(items: FetchedResults<Item>, viewContext: NSManagedObjectContext) async -> [Double] {
         return await self.byCategory(items: items)
             .asyncMap{
                 k,v in
@@ -72,7 +73,7 @@ class ChartViewModel: ObservableObject {
                         total = total + i.value
                     } else {
                         print("chart categroy transfer currency")
-                        let new = await CurrencySDK.transfer(origion: (i.value, i.unit), to: model.unit)
+                        let new = await CurrencySDK.transfer(origion: (i.value, i.unit), to: model.unit, viewContext: viewContext)
                         total = total + new.0
                     }
                     
@@ -118,7 +119,7 @@ class ChartViewModel: ObservableObject {
         return result.sorted(by: {a,b in (a.key.compare(b.key)).rawValue < 0})
     }
     
-    func byDateValue(items: FetchedResults<Item>) async -> [Double] {
+    func byDateValue(items: FetchedResults<Item>, viewContext: NSManagedObjectContext) async -> [Double] {
         let dates = await self.byDate(items: items).asyncMap {
             k,v in
             var total: Double = 0
@@ -128,7 +129,7 @@ class ChartViewModel: ObservableObject {
                     total = total + i.value
                 } else {
                     print("chart date transfer currency")
-                    let new = await CurrencySDK.transfer(origion: (i.value, i.unit), to: model.unit)
+                    let new = await CurrencySDK.transfer(origion: (i.value, i.unit), to: model.unit, viewContext: viewContext)
                     total = total + new.0
                 }
                 

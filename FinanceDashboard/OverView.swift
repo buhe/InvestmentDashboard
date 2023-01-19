@@ -30,13 +30,13 @@ struct OverView: View {
                     .navigationTitle(viewModel.model.unit.rawValue + ": " + String(format: "%.f", total))
                     .onAppear{
                         Task{
-                            self.total = await viewModel.total(items: items)
+                            self.total = await viewModel.total(items: items, viewContext: viewContext)
                         }
                     }
                     .onChange(of: try! JSONEncoder().encode(viewModel.byChangeMonitor(items: items))){
                         i in
                         Task{
-                            self.total = await viewModel.total(items: items)
+                            self.total = await viewModel.total(items: items, viewContext: viewContext)
                         }
                     }
 //                switch tabIndex {

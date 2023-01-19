@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import CoreData
 
 class OverViewModel: ObservableObject {
     @Published var model: Model = Model.shared
@@ -50,7 +51,7 @@ class OverViewModel: ObservableObject {
 //        return result.map{k,v in Overviews(id: k, key: k, overviews: v)}
 //    }
     
-    func total(items: FetchedResults<Item>) async -> Double {
+    func total(items: FetchedResults<Item>, viewContext: NSManagedObjectContext) async -> Double {
 //        let n = await CurrencySDK.transfer(origion: (1, Unit.USD), to: .CNY)
 //        print("v: \(n.0), c: \(n.1)")
         var total: Double = 0
@@ -64,7 +65,7 @@ class OverViewModel: ObservableObject {
                     total = total + i.value
                 } else {
                     print("transfer currency+")
-                    let new = await CurrencySDK.transfer(origion: (i.value, Unit(rawValue: i.unit ?? "") ?? .UnKnow), to: model.unit)
+                    let new = await CurrencySDK.transfer(origion: (i.value, Unit(rawValue: i.unit ?? "") ?? .UnKnow), to: model.unit, viewContext: viewContext)
                     total = total + new.0
                 }
             }
@@ -75,7 +76,7 @@ class OverViewModel: ObservableObject {
                     total = total - map[i.name!]!.value
                 } else {
                     print("transfer currency-")
-                    let new = await CurrencySDK.transfer(origion: (map[i.name!]!.value, Unit(rawValue: map[i.name!]!.unit!)!),to: model.unit)
+                    let new = await CurrencySDK.transfer(origion: (map[i.name!]!.value, Unit(rawValue: map[i.name!]!.unit!)!),to: model.unit, viewContext: viewContext)
                     total = total - new.0
                 }
                 
@@ -84,7 +85,7 @@ class OverViewModel: ObservableObject {
                     total = total + i.value
                 } else {
                     print("transfer currency+")
-                    let new = await CurrencySDK.transfer(origion: (i.value, Unit(rawValue: i.unit!)!), to: model.unit)
+                    let new = await CurrencySDK.transfer(origion: (i.value, Unit(rawValue: i.unit!)!), to: model.unit, viewContext: viewContext)
                     total = total + new.0
                 }
                 

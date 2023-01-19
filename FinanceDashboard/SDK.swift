@@ -8,11 +8,13 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import CoreData
+
 
 struct CurrencySDK {
     static var cache: [String: [String: JSON]] = [:]
     static let URL = "https://v6.exchangerate-api.com/v6/3792021ffe761922812372fe/latest/"
-    static func transfer(origion: (Double, Unit), to: Unit ) async -> (Double ,Unit) {
+    static func transfer(origion: (Double, Unit), to: Unit, viewContext: NSManagedObjectContext ) async -> (Double ,Unit) {
         let mouth = itemFormatter.string(from: Date.now)
         let base = origion.1.rawValue
         var currency: Double = 1
@@ -32,7 +34,12 @@ struct CurrencySDK {
                     currency = json["conversion_rates"][to.rawValue].doubleValue
                     
                     checkCache()
-                    saveToDB()
+                    
+                    let c = Cache(context: viewContext)
+                    c.mouth = mouth
+                    c.base = base
+                    c.json = reps
+                    saveToDB(viewContext: viewContext)
                 }
             }
         }
@@ -59,11 +66,30 @@ struct CurrencySDK {
         return result
     }
     
-    static func saveToDB() {
-        
+    static func saveToDB(viewContext: NSManagedObjectContext) {
+        do {
+            try viewContext.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
     }
     
     static func checkCache() {
+        
+    }
+    
+    static func loadCache(viewContext: NSManagedObjectContext) {
+        let caches = try! viewContext.fetch(NSFetchRequest(entityName: "Cache")) as! [Cache]
+        
+        for c in caches {
+            if cache[c.mouth!] == nil {
+                cache[c.mouth!] = [:]
+            }
+            cache[c.mouth!]![c.base!] = JSON(parseJSON: c.json!)
+        }
         
     }
 }

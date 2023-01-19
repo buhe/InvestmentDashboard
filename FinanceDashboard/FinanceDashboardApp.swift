@@ -12,7 +12,8 @@ struct FinanceDashboardApp: App {
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {
-        WindowGroup {
+        CurrencySDK.loadCache(viewContext: persistenceController.container.viewContext)
+        return WindowGroup {
             ContentView(overViewModel: OverViewModel(), chartViewModel: ChartViewModel())
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
