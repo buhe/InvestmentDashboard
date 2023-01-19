@@ -12,6 +12,8 @@ struct SettingView: View {
     let model: Model
     @AppStorage(wrappedValue: false, "faceID") var showFaceID: Bool
     
+    @Environment(\.managedObjectContext) private var viewContext
+    
     var body: some View {
         NavigationStack {
             Form{
@@ -28,7 +30,8 @@ struct SettingView: View {
                         
                     }.buttonStyle(PlainButtonStyle())
                     NavigationLink {
-                        EmptyView()
+                        ExportView()
+                            .environment(\.managedObjectContext, viewContext)
                     } label: {
                         Text("Export")
                     }

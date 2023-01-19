@@ -51,6 +51,7 @@ struct OverView: View {
                     .toolbar {
                         NavigationLink {
                             SettingView(model: viewModel.model)
+                                .environment(\.managedObjectContext, viewContext)
                         } label: {
                             Image(systemName: "gear")
                         }

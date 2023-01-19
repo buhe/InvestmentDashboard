@@ -16,6 +16,8 @@
 		3F25F1D7296192AA00F4DA02 /* FinanceDashboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F25F1D6296192AA00F4DA02 /* FinanceDashboardTests.swift */; };
 		3F25F1E1296192AA00F4DA02 /* FinanceDashboardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F25F1E0296192AA00F4DA02 /* FinanceDashboardUITests.swift */; };
 		3F25F1E3296192AA00F4DA02 /* FinanceDashboardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F25F1E2296192AA00F4DA02 /* FinanceDashboardUITestsLaunchTests.swift */; };
+		3F7421552979557D00A419A0 /* CodableCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7421542979557D00A419A0 /* CodableCSV */; };
+		3F7421572979584500A419A0 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7421562979584500A419A0 /* ExportView.swift */; };
 		3F8EE1B1297161BA0013C74E /* OverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8EE1B0297161BA0013C74E /* OverView.swift */; };
 		3F8EE1B52971620D0013C74E /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8EE1B42971620D0013C74E /* ChartView.swift */; };
 		3F8EE1BA297294670013C74E /* Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8EE1B9297294670013C74E /* Ex.swift */; };
@@ -69,6 +71,7 @@
 		3F25F1DC296192AA00F4DA02 /* FinanceDashboardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinanceDashboardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F25F1E0296192AA00F4DA02 /* FinanceDashboardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceDashboardUITests.swift; sourceTree = "<group>"; };
 		3F25F1E2296192AA00F4DA02 /* FinanceDashboardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceDashboardUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3F7421562979584500A419A0 /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
 		3F8EE1B0297161BA0013C74E /* OverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverView.swift; sourceTree = "<group>"; };
 		3F8EE1B42971620D0013C74E /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		3F8EE1B82972863A0013C74E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -97,6 +100,7 @@
 				3FEB41D529780B7000A5118D /* Alamofire in Frameworks */,
 				3FCDDA4F2975703200DB2BB5 /* StoreKit.framework in Frameworks */,
 				3FEB41DA2978EB3E00A5118D /* SwiftyJSON in Frameworks */,
+				3F7421552979557D00A419A0 /* CodableCSV in Frameworks */,
 				3F8EE1CB2973E3F70013C74E /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,6 +169,7 @@
 				3FCDDA502976401100DB2BB5 /* IAP.swift */,
 				3FEB41CF2976854F00A5118D /* CurrencyView.swift */,
 				3FEB41D12977A7F700A5118D /* SDK.swift */,
+				3F7421562979584500A419A0 /* ExportView.swift */,
 			);
 			path = FinanceDashboard;
 			sourceTree = "<group>";
@@ -223,6 +228,7 @@
 				3FEB41CD2976571600A5118D /* SwiftUICharts */,
 				3FEB41D429780B7000A5118D /* Alamofire */,
 				3FEB41D92978EB3E00A5118D /* SwiftyJSON */,
+				3F7421542979557D00A419A0 /* CodableCSV */,
 			);
 			productName = FinanceDashboard;
 			productReference = 3F25F1BC296192A900F4DA02 /* FinanceDashboard.app */;
@@ -301,6 +307,7 @@
 				3FEB41CC2976571600A5118D /* XCRemoteSwiftPackageReference "ChartView" */,
 				3FEB41D329780B7000A5118D /* XCRemoteSwiftPackageReference "Alamofire" */,
 				3FEB41D82978EB3E00A5118D /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				3F7421532979557D00A419A0 /* XCRemoteSwiftPackageReference "CodableCSV" */,
 			);
 			productRefGroup = 3F25F1BD296192A900F4DA02 /* Products */;
 			projectDirPath = "";
@@ -352,6 +359,7 @@
 				3FCDDA512976401100DB2BB5 /* IAP.swift in Sources */,
 				3F25F1C2296192A900F4DA02 /* Persistence.swift in Sources */,
 				3FEB41D02976854F00A5118D /* CurrencyView.swift in Sources */,
+				3F7421572979584500A419A0 /* ExportView.swift in Sources */,
 				3F8EE1BC2972A47F0013C74E /* SettingView.swift in Sources */,
 				3F8EE1D6297422610013C74E /* CustemView.swift in Sources */,
 				3F8EE1C42973A4B40013C74E /* Model.swift in Sources */,
@@ -722,6 +730,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3F7421532979557D00A419A0 /* XCRemoteSwiftPackageReference "CodableCSV" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dehesa/CodableCSV";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.7;
+			};
+		};
 		3F8EE1C92973E3F70013C74E /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
@@ -757,6 +773,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3F7421542979557D00A419A0 /* CodableCSV */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F7421532979557D00A419A0 /* XCRemoteSwiftPackageReference "CodableCSV" */;
+			productName = CodableCSV;
+		};
 		3F8EE1CA2973E3F70013C74E /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3F8EE1C92973E3F70013C74E /* XCRemoteSwiftPackageReference "SwiftUIX" */;
