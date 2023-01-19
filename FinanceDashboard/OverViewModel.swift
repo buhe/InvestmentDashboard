@@ -51,7 +51,8 @@ class OverViewModel: ObservableObject {
 //    }
     
     func total(items: FetchedResults<Item>) async -> Double {
-        await CurrencySDK.transfer(origion: (0, Unit.USD))
+        let n = await CurrencySDK.transfer(origion: (1, Unit.USD), to: .CNY)
+        print("v: \(n.0), c: \(n.1)")
         var total: Double = 0
         var map: [String: Item] = [:]
         
@@ -63,7 +64,7 @@ class OverViewModel: ObservableObject {
                     total = total + i.value
                 } else {
                     print("transfer currency+")
-                    let new = await CurrencySDK.transfer(origion: (i.value, Unit(rawValue: i.unit!)!))
+                    let new = await CurrencySDK.transfer(origion: (i.value, Unit(rawValue: i.unit!)!), to: model.unit)
                     total = total + new.0
                 }
             }
@@ -74,7 +75,7 @@ class OverViewModel: ObservableObject {
                     total = total - map[i.name!]!.value
                 } else {
                     print("transfer currency-")
-                    let new = await CurrencySDK.transfer(origion: (map[i.name!]!.value, Unit(rawValue: map[i.name!]!.unit!)!))
+                    let new = await CurrencySDK.transfer(origion: (map[i.name!]!.value, Unit(rawValue: map[i.name!]!.unit!)!),to: model.unit)
                     total = total - new.0
                 }
                 
@@ -83,7 +84,7 @@ class OverViewModel: ObservableObject {
                     total = total + i.value
                 } else {
                     print("transfer currency+")
-                    let new = await CurrencySDK.transfer(origion: (i.value, Unit(rawValue: i.unit!)!))
+                    let new = await CurrencySDK.transfer(origion: (i.value, Unit(rawValue: i.unit!)!), to: model.unit)
                     total = total + new.0
                 }
                 

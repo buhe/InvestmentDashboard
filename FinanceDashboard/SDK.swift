@@ -7,20 +7,36 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 struct CurrencySDK {
     static let URL = "https://v6.exchangerate-api.com/v6/3792021ffe761922812372fe/latest/"
-    static func transfer(origion: (Double, Unit) ) async -> (Double ,Unit) {
+    static func transfer(origion: (Double, Unit), to: Unit ) async -> (Double ,Unit) {
         // cache by per unit and mouthly
-        let reps = try? await AF.request("\(URL)\(origion.1.rawValue)").serializingDecodable(CurrencyResponce.self).value
-        print(reps ?? "fail")
-        var result: (Double, Unit) = (0, .UnKnow)
-        switch origion.1 {
-        case .USD:
-            result.1 = .CNY
-            result.0 = origion.0 * 7
-        default: break
+        var currency: Double = 1
+        let reps = try? await AF.request("\(URL)\(origion.1.rawValue)").serializingString().value
+        if let reps = reps {
+            let json = try? JSON(data: Data(reps.utf8))
+            if let json = json {
+                currency = json["conversion_rates"][to.rawValue].doubleValue
+            }
         }
+//        print(reps)
+        
+//        for (key,subJson):(String, JSON) in json! {
+//           // Do something you want
+//            print("key \(key)")
+//        }
+//        print("----\(json!["conversion_rates"]["CNY"])")
+        
+        var result: (Double, Unit) = (0, to)
+        result.0 = origion.0 * currency
+//        switch origion.1 {
+//        case .USD:
+//            result.1 = .CNY
+//            result.0 = origion.0 * 7
+//        default: break
+//        }
         return result
     }
 }

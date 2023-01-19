@@ -35,6 +35,7 @@
 		3FEB41D02976854F00A5118D /* CurrencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEB41CF2976854F00A5118D /* CurrencyView.swift */; };
 		3FEB41D22977A7F700A5118D /* SDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEB41D12977A7F700A5118D /* SDK.swift */; };
 		3FEB41D529780B7000A5118D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 3FEB41D429780B7000A5118D /* Alamofire */; };
+		3FEB41DA2978EB3E00A5118D /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 3FEB41D92978EB3E00A5118D /* SwiftyJSON */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 				3FEB41CE2976571600A5118D /* SwiftUICharts in Frameworks */,
 				3FEB41D529780B7000A5118D /* Alamofire in Frameworks */,
 				3FCDDA4F2975703200DB2BB5 /* StoreKit.framework in Frameworks */,
+				3FEB41DA2978EB3E00A5118D /* SwiftyJSON in Frameworks */,
 				3F8EE1CB2973E3F70013C74E /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,6 +222,7 @@
 				3F8EE1CA2973E3F70013C74E /* SwiftUIX */,
 				3FEB41CD2976571600A5118D /* SwiftUICharts */,
 				3FEB41D429780B7000A5118D /* Alamofire */,
+				3FEB41D92978EB3E00A5118D /* SwiftyJSON */,
 			);
 			productName = FinanceDashboard;
 			productReference = 3F25F1BC296192A900F4DA02 /* FinanceDashboard.app */;
@@ -297,6 +300,7 @@
 				3F8EE1C92973E3F70013C74E /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 				3FEB41CC2976571600A5118D /* XCRemoteSwiftPackageReference "ChartView" */,
 				3FEB41D329780B7000A5118D /* XCRemoteSwiftPackageReference "Alamofire" */,
+				3FEB41D82978EB3E00A5118D /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 			);
 			productRefGroup = 3F25F1BD296192A900F4DA02 /* Products */;
 			projectDirPath = "";
@@ -742,6 +746,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		3FEB41D82978EB3E00A5118D /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -759,6 +771,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3FEB41D329780B7000A5118D /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		3FEB41D92978EB3E00A5118D /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3FEB41D82978EB3E00A5118D /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
 		};
 /* End XCSwiftPackageProductDependency section */
 
