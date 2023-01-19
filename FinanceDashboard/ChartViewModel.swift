@@ -105,12 +105,7 @@ class ChartViewModel: ObservableObject {
     }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM"
-//    formatter.timeStyle = .none
-    return formatter
-}()
+
 
 struct Chart {
     let name: String

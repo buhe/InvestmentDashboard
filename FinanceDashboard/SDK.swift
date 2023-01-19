@@ -10,18 +10,33 @@ import Alamofire
 import SwiftyJSON
 
 struct CurrencySDK {
+    static var cache: [String: [String: JSON]] = [:]
     static let URL = "https://v6.exchangerate-api.com/v6/3792021ffe761922812372fe/latest/"
     static func transfer(origion: (Double, Unit), to: Unit ) async -> (Double ,Unit) {
-        // cache by per unit and mouthly
+        let mouth = itemFormatter.string(from: Date.now)
+        let base = origion.1.rawValue
         var currency: Double = 1
-//        print("\(URL)\(origion.1.rawValue)")
-        let reps = try? await AF.request("\(URL)\(origion.1.rawValue)").serializingString().value
-        if let reps = reps {
-            let json = try? JSON(data: Data(reps.utf8))
-            if let json = json {
-                currency = json["conversion_rates"][to.rawValue].doubleValue
+        if cache[mouth]?[base] != nil {
+            currency = cache[mouth]![base]!["conversion_rates"][to.rawValue].doubleValue
+            
+        } else {
+            let reps = try? await AF.request("\(URL)\(origion.1.rawValue)").serializingString().value
+            print("call api.")
+            if let reps = reps {
+                let json = try? JSON(data: Data(reps.utf8))
+                if cache[mouth] == nil {
+                    cache[mouth] = [:]
+                }
+                cache[mouth]![base] = json
+                if let json = json {
+                    currency = json["conversion_rates"][to.rawValue].doubleValue
+                }
             }
         }
+        // cache by per unit and mouthly
+        
+//        print("\(URL)\(origion.1.rawValue)")
+      
 //        print(reps)
         
 //        for (key,subJson):(String, JSON) in json! {
