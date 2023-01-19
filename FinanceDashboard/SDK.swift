@@ -33,7 +33,7 @@ struct CurrencySDK {
                 if let json = json {
                     currency = json["conversion_rates"][to.rawValue].doubleValue
                     
-                    checkCache()
+                    checkCache(viewContext: viewContext, currentMouth: mouth)
                     
                     let c = Cache(context: viewContext)
                     c.mouth = mouth
@@ -77,14 +77,29 @@ struct CurrencySDK {
         }
     }
     
-    static func checkCache() {
-        
+    static func checkCache(viewContext: NSManagedObjectContext, currentMouth: String) {
+        let caches = try! viewContext.fetch(NSFetchRequest(entityName: "Cache")) as! [Cache]
+        for c in caches {
+            if c.mouth! != currentMouth {
+                print("Found invailded cache \(c.mouth!)")
+                do {
+                    viewContext.delete(c)
+                    try viewContext.save()
+                } catch {
+                    // Replace this implementation with code to handle the error appropriately.
+                    // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                    let nsError = error as NSError
+                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                }
+            }
+        }
     }
     
     static func loadCache(viewContext: NSManagedObjectContext) {
         let caches = try! viewContext.fetch(NSFetchRequest(entityName: "Cache")) as! [Cache]
         
         for c in caches {
+            print("Load cache from db \(c.mouth!) \(c.base!)")
             if cache[c.mouth!] == nil {
                 cache[c.mouth!] = [:]
             }
