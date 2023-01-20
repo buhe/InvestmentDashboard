@@ -11,6 +11,7 @@ struct CardView: View {
     
     let item: Overviews
     @State var selected: Overview?
+    @State var trend: String?
     
     var body: some View {
         ZStack {
@@ -24,49 +25,59 @@ struct CardView: View {
                 Spacer()
                 ForEach(item.overviews) {
                     overview in
-                    ZStack {
-                        Rectangle().fill(.white)
-                        HStack {
-                            switch overview.categroy {
-                            case .Cash:
-                                Image(systemName: "dollarsign.circle")
-                                  
-                            case .Bond:
-                                Image(systemName: "b.circle")
-                                   
-                            case .Debt:
-                                Image(systemName: "creditcard")
-                                    
-                            case .Estate:
-                                Image(systemName: "house")
-                               
-                            case .Fund:
-                                Image(systemName: "dial.high")
-                                  
-                            case .Futures:
-                                Image(systemName:  "carrot")
-                                
-                            case .Option:
-                                Image(systemName: "envelope")
-                            case .Stock:
-                                Image(systemName:  "waveform.path.ecg.rectangle")
-                            case .Savings:
-                                Image(systemName:  "banknote")
-                                
-                                
-                            default:
-                                Image(systemName: "dollarsign.circle")
-                            }
-                                
+                    HStack {
+                        switch overview.categroy {
+                        case .Cash:
+                            Image(systemName: "dollarsign.circle")
+                            
+                        case .Bond:
+                            Image(systemName: "b.circle")
+                            
+                        case .Debt:
+                            Image(systemName: "creditcard")
+                            
+                        case .Estate:
+                            Image(systemName: "house")
+                            
+                        case .Fund:
+                            Image(systemName: "dial.high")
+                            
+                        case .Futures:
+                            Image(systemName:  "carrot")
+                            
+                        case .Option:
+                            Image(systemName: "envelope")
+                        case .Stock:
+                            Image(systemName:  "waveform.path.ecg.rectangle")
+                        case .Savings:
+                            Image(systemName:  "banknote")
+                            
+                            
+                        default:
+                            Image(systemName: "dollarsign.circle")
+                        }
+                        Group{
                             Text(overview.name)
-                            TrendChart(data: trendByName(name: overview.name))
-                                
-                            Spacer()
-                            Text("\(overview.value)")
-//                                .padding(.trailing)
+                            Text("\(doubleFormat(value:overview.value))")
+                            
                             Text("\(overview.unit.rawValue)")
-                                
-                        }.foregroundColor(.black)
+                                .padding(.trailing)
+                            //                                .padding(.trailing)
+                           
+                        }
+                        .onTapGesture {
+                            print("click \(overview.name)")
+                            self.selected = overview
+                        }
+                        
+                        Spacer()
+                        TrendChart(data: trendByName(name: overview.name))
+                            .onTapGesture {
+                                trend = overview.name
+                            }.frame(maxWidth: 150)
+                        
+                        
+                        
                     }
                     .sheet(item: $selected) {
                         overview in
@@ -74,9 +85,9 @@ struct CardView: View {
                             selected = nil
                         }
                     }
-                    .onTapGesture {
-                        print("click \(overview.name)")
-                        self.selected = overview
+                    .sheet(item: $trend){
+                        name in
+                        TrendView(name: name, viewContext: viewContext, viewModel: TrendViewModel())
                     }
                     .padding(.top)
                 }

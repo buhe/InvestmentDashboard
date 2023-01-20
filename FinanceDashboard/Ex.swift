@@ -54,3 +54,10 @@ let itemFormatter: DateFormatter = {
 //    formatter.timeStyle = .none
     return formatter
 }()
+
+extension String: Identifiable {
+    public var id: String {
+        self
+    }
+    
+}

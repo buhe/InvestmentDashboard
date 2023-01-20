@@ -42,7 +42,8 @@ struct TrendChart: View {
   var body: some View {
       TrendPath(data: data)
           .stroke(.blue, lineWidth: 2)
-          .padding()
+          .padding(.vertical)
+//          .padding()
 //    ZStack {
 //      TrendChartGrid(categories: data.count, divisions: 10)
 //        .stroke(gridColor, lineWidth: 0.5)
