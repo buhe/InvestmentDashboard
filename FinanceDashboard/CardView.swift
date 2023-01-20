@@ -27,59 +27,51 @@ struct CardView: View {
                     overview in
                     HStack {
                         Group{
-                        switch overview.categroy {
-                        case .Cash:
-                            Image(systemName: "dollarsign.circle")
-                            
-                        case .Bond:
-                            Image(systemName: "b.circle")
-                            
-                        case .Debt:
-                            Image(systemName: "creditcard")
-                            
-                        case .Estate:
-                            Image(systemName: "house")
-                            
-                        case .Fund:
-                            Image(systemName: "dial.high")
-                            
-                        case .Futures:
-                            Image(systemName:  "carrot")
-                            
-                        case .Option:
-                            Image(systemName: "envelope")
-                        case .Stock:
-                            Image(systemName:  "waveform.path.ecg.rectangle")
-                        case .Savings:
-                            Image(systemName:  "banknote")
-                            
-                            
-                        default:
-                            Image(systemName: "dollarsign.circle")
-                        }
-       
+                            switch overview.categroy {
+                            case .Cash:
+                                Image(systemName: "dollarsign.circle")
+                                
+                            case .Bond:
+                                Image(systemName: "b.circle")
+                                
+                            case .Debt:
+                                Image(systemName: "creditcard")
+                                
+                            case .Estate:
+                                Image(systemName: "house")
+                                
+                            case .Fund:
+                                Image(systemName: "dial.high")
+                                
+                            case .Futures:
+                                Image(systemName:  "carrot")
+                                
+                            case .Option:
+                                Image(systemName: "envelope")
+                            case .Stock:
+                                Image(systemName:  "waveform.path.ecg.rectangle")
+                            case .Savings:
+                                Image(systemName:  "banknote")
+                                
+                                
+                            default:
+                                Image(systemName: "dollarsign.circle")
+                            }
                             Text(overview.name)
                             Text("\(doubleFormat(value:overview.value))")
-                            
                             Text("\(overview.unit.rawValue)")
                                 .padding(.trailing)
-                            //                                .padding(.trailing)
-                           
                         }
                         .foregroundColor(colorScheme == .light ? .white : .black)
                         .onTapGesture {
                             print("click \(overview.name)")
                             self.selected = overview
                         }
-                        
                         Spacer()
                         TrendChart(data: trendByName(name: overview.name))
                             .onTapGesture {
                                 trend = overview.name
-                            }.frame(maxWidth: 150)
-                        
-                        
-                        
+                            }.frame(maxWidth: 150)  
                     }
                     .sheet(item: $selected) {
                         overview in
