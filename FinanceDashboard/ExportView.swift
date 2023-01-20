@@ -17,42 +17,23 @@ struct ExportView: View {
     @State private var showingExporter = false
     @State var fileData: Data?
     var body: some View {
-        List {
-            Group{
-                Button{
-                    
-                    
-                    let data = CSV().export(items: items)
-                    fileData = data
-                    showingExporter = true
-                    
-                }label: {
-                    Text("Export CSV")
-                }
+      
                 
-                Button{
-                    let data = Pdf().export(items: items)
-                    fileData = data
-                    showingExporter = true
-                }label: {
-                    Text("Export Pdf")
-                }
-            }
-            .fileExporter(isPresented: $showingExporter, document: PdfFile(data: fileData), contentType: .pdf) { result in
-                switch result {
-                case .success(let url):
-                    print("Saved to \(url)")
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-            .fileExporter(isPresented: $showingExporter, document: CsvFile(data: fileData), contentType: .csv) { result in
-                switch result {
-                case .success(let url):
-                    print("Saved to \(url)")
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
+        Button{
+            let data = Pdf().export(items: items)
+            fileData = data
+            showingExporter = true
+        }label: {
+            Text("Export Pdf")
+        }
+        .buttonStyle(PlainButtonStyle())
+        
+        .fileExporter(isPresented: $showingExporter, document: PdfFile(data: fileData), contentType: .pdf) { result in
+            switch result {
+            case .success(let url):
+                print("Saved to \(url)")
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
         

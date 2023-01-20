@@ -29,12 +29,10 @@ struct SettingView: View {
                         Text("Feedback")
                         
                     }.buttonStyle(PlainButtonStyle())
-                    NavigationLink {
-                        ExportView()
-                            .environment(\.managedObjectContext, viewContext)
-                    } label: {
-                        Text("Export")
-                    }
+                   
+                    ExportView()
+                        .environment(\.managedObjectContext, viewContext)
+                    
                     NavigationLink {
                         CurrencyView(model: model)
                     } label: {
