@@ -34,6 +34,7 @@ struct Pdf: Exportor {
         document.add(.contentCenter, text: "Create PDF documents easily.")
 
         let generator = PDFGenerator(document: document)
+        let data = try! generator.generateData()
         let url  = try? generator.generateURL(filename: "Example.pdf")
         print(url!)
     }
