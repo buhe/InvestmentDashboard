@@ -22,7 +22,9 @@ struct ExportView: View {
                 Button{
                     
                     
-                    CSV().export(items: items)
+                    let data = CSV().export(items: items)
+                    fileData = data
+                    showingExporter = true
                     
                 }label: {
                     Text("Export CSV")
@@ -37,6 +39,14 @@ struct ExportView: View {
                 }
             }
             .fileExporter(isPresented: $showingExporter, document: PdfFile(data: fileData), contentType: .pdf) { result in
+                switch result {
+                case .success(let url):
+                    print("Saved to \(url)")
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            .fileExporter(isPresented: $showingExporter, document: CsvFile(data: fileData), contentType: .csv) { result in
                 switch result {
                 case .success(let url):
                     print("Saved to \(url)")
@@ -73,8 +83,36 @@ struct PdfFile: FileDocument {
     }
 }
 
+struct CsvFile: FileDocument {
+    // tell the system we support only plain text
+    static var readableContentTypes = [UTType.csv]
+
+    // by default our document is empty
+    var data: Data?
+    
+    init(data: Data?) {
+        self.data = data
+    }
+ 
+    // this initializer loads data that has been saved previously
+    init(configuration: ReadConfiguration) throws {
+        if let data = configuration.file.regularFileContents {
+            self.data = data
+        }
+    }
+
+    // this will be called when the system wants to write our data to disk
+    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+        return FileWrapper(regularFileWithContents: data!)
+    }
+}
+
 struct ExportView_Previews: PreviewProvider {
     static var previews: some View {
         ExportView()
     }
+}
+
+extension UTType {
+    static let csv = UTType(importedAs: "dev.buhe.csv")
 }
