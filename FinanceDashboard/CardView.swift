@@ -6,7 +6,7 @@ import SwiftUI
 import CoreData
 
 struct CardView: View {
-    @Environment(\.colorScheme) private var colorScheme
+//    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.managedObjectContext) private var viewContext
     
     let item: Overviews
@@ -62,7 +62,7 @@ struct CardView: View {
                             Text("\(overview.unit.rawValue)")
                                 .padding(.trailing)
                         }
-                        .foregroundColor(colorScheme == .light ? .white : .black)
+                        .foregroundColor(.black)
                         .onTapGesture {
                             print("click \(overview.name)")
                             self.selected = overview
@@ -71,7 +71,7 @@ struct CardView: View {
                         TrendChart(data: trendByName(name: overview.name))
                             .onTapGesture {
                                 trend = overview.name
-                            }.frame(maxWidth: 150)  
+                            }.frame(maxWidth: 150)
                     }
                     .sheet(item: $selected) {
                         overview in
