@@ -6,7 +6,7 @@ import SwiftUI
 import CoreData
 
 struct CardView: View {
-//    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.managedObjectContext) private var viewContext
     
     let item: Overviews
@@ -26,6 +26,7 @@ struct CardView: View {
                 ForEach(item.overviews) {
                     overview in
                     HStack {
+                        Group{
                         switch overview.categroy {
                         case .Cash:
                             Image(systemName: "dollarsign.circle")
@@ -56,7 +57,7 @@ struct CardView: View {
                         default:
                             Image(systemName: "dollarsign.circle")
                         }
-                        Group{
+       
                             Text(overview.name)
                             Text("\(doubleFormat(value:overview.value))")
                             
@@ -65,6 +66,7 @@ struct CardView: View {
                             //                                .padding(.trailing)
                            
                         }
+                        .foregroundColor(colorScheme == .light ? .white : .black)
                         .onTapGesture {
                             print("click \(overview.name)")
                             self.selected = overview
