@@ -15,7 +15,7 @@ struct ExportView: View {
             animation: .default)
         private var items: FetchedResults<Item>
     @State private var showingExporter = false
-    @State var fileData: String?
+    @State var fileData: Data?
     var body: some View {
         List {
             Group{
@@ -23,19 +23,20 @@ struct ExportView: View {
                     
                     
                     CSV().export(items: items)
-                    fileData = "test"
-                    showingExporter = true
+                    
                 }label: {
                     Text("Export CSV")
                 }
                 
                 Button{
-                    Pdf().export(items: items)
+                    let data = Pdf().export(items: items)
+                    fileData = data
+                    showingExporter = true
                 }label: {
                     Text("Export Pdf")
                 }
             }
-            .fileExporter(isPresented: $showingExporter, document: TextFile(initialText: fileData ?? ""), contentType: .plainText) { result in
+            .fileExporter(isPresented: $showingExporter, document: PdfFile(data: fileData), contentType: .pdf) { result in
                 switch result {
                 case .success(let url):
                     print("Saved to \(url)")
@@ -48,29 +49,27 @@ struct ExportView: View {
     }
 }
 
-struct TextFile: FileDocument {
+struct PdfFile: FileDocument {
     // tell the system we support only plain text
-    static var readableContentTypes = [UTType.plainText]
+    static var readableContentTypes = [UTType.pdf]
 
     // by default our document is empty
-    var text = ""
-
-    // a simple initializer that creates new, empty documents
-    init(initialText: String = "") {
-        text = initialText
+    var data: Data?
+    
+    init(data: Data?) {
+        self.data = data
     }
-
+ 
     // this initializer loads data that has been saved previously
     init(configuration: ReadConfiguration) throws {
         if let data = configuration.file.regularFileContents {
-            text = String(decoding: data, as: UTF8.self)
+            self.data = data
         }
     }
 
     // this will be called when the system wants to write our data to disk
     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-        let data = Data(text.utf8)
-        return FileWrapper(regularFileWithContents: data)
+        return FileWrapper(regularFileWithContents: data!)
     }
 }
 

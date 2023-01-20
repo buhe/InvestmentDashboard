@@ -11,32 +11,34 @@ import CodableCSV
 import TPPDF
 
 protocol Exportor {
-    func export(items: FetchedResults<Item>)
+    func export(items: FetchedResults<Item>) -> Data
 }
 
 struct CSV: Exportor {
-    func export(items: FetchedResults<Item>) {
+    func export(items: FetchedResults<Item>) -> Data {
         let datas = items.map{i in
             // todo remove dup by same mouthly
             return ExportData(name: i.name!, categroy: i.categroy!, value: i.value, time: "", unit: i.unit!)}
         let encoder = CSVEncoder { $0.headers = ["name", "categroy", "value", "time", "unit"] }
         let newData = try? encoder.encode(datas)
         print(String(data: newData!, encoding: .utf8)!)
+        return newData!
     }
     
     
 }
 
 struct Pdf: Exportor {
-    func export(items: FetchedResults<Item>) {
+    func export(items: FetchedResults<Item>) -> Data {
         let document = PDFDocument(format: .a4)
       
         document.add(.contentCenter, text: "Create PDF documents easily.")
 
         let generator = PDFGenerator(document: document)
         let data = try! generator.generateData()
-        let url  = try? generator.generateURL(filename: "Example.pdf")
-        print(url!)
+//        let url  = try? generator.generateURL(filename: "Example.pdf")
+//        print(url!)
+        return data
     }
     
     
