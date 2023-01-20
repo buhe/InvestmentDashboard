@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import SwiftUICharts
 
 struct TrendView: View {
 //    @EnvironmentObject var name: StringWrapper
@@ -29,10 +30,26 @@ struct TrendView: View {
     }
     
     var body: some View {
+        Text("Chart")
+            .font(.custom("Avenir", size: 16))
+            .padding(.vertical, 10)
+            .border(width: 1, edges: [.bottom], color: .systemGray)
+        LineChartView(data: viewModel.byTrendValue(items: items), title: "Mouth Trend", form: ChartForm.extraLarge, rateValue: 0)
+        Text("Datas")
+            .font(.custom("Avenir", size: 16))
+            .padding(.vertical, 10)
+            .border(width: 1, edges: [.bottom], color: .systemGray)
         List {
             ForEach(viewModel.byTrend(items: items)) {
                 i in
-                Text(i.name)
+                HStack {
+                    Text(i.name)
+                    Spacer()
+                    Text(itemFormatter.string(from:i.updateDate))
+                    Text(doubleFormat(value: i.value))
+                    Text(i.unit)
+                }
+                
             }
         }
     }

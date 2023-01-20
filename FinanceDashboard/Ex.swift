@@ -44,8 +44,8 @@ extension Sequence {
       }
 }
 
-class StringWrapper: ObservableObject {
-    var name: String = ""
+func doubleFormat(value: Double) -> String {
+    String(format: "%.f", value)
 }
 
 let itemFormatter: DateFormatter = {

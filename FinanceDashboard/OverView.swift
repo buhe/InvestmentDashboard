@@ -27,7 +27,7 @@ struct OverView: View {
 //                SearchBar(text: $search).padding(.horizontal)
                     
                 OverviewTabBar(tabIndex: $tabIndex).padding(.horizontal, 26)
-                    .navigationTitle(viewModel.model.unit.rawValue + ": " + String(format: "%.f", total))
+                    .navigationTitle(viewModel.model.unit.rawValue + ": " + doubleFormat(value: total))
                     .onAppear{
                         Task{
                             self.total = await viewModel.total(items: items, viewContext: viewContext)
