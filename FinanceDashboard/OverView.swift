@@ -44,6 +44,7 @@ struct OverView: View {
                     List {
                         ForEach(viewModel.byCategory(items: items)) { overviews in
                             CardView(item: overviews)
+                                .environment(\.managedObjectContext, viewContext)
                         }
                         .listRowSeparator(.hidden)
                     }

@@ -3,9 +3,11 @@ See LICENSE folder for this sample’s licensing information.
 */
 
 import SwiftUI
+import CoreData
 
 struct CardView: View {
 //    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.managedObjectContext) private var viewContext
     
     let item: Overviews
     @State var selected: Overview?
@@ -57,6 +59,7 @@ struct CardView: View {
                             }
                                 
                             Text(overview.name)
+                            TrendChart(data: trendByName(name: overview.name))
                                 
                             Spacer()
                             Text("\(overview.value)")
@@ -84,6 +87,14 @@ struct CardView: View {
             
             
         }
+    }
+    
+    func trendByName(name: String) -> [Double] {
+//        print(viewContext)
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Item")
+        request.predicate = NSPredicate(format: "name == %@", name)
+        let items = try! viewContext.fetch(request) as! Array<Item>
+        return items.map{$0.value}
     }
 }
 
