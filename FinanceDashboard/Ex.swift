@@ -44,6 +44,10 @@ extension Sequence {
       }
 }
 
+class StringWrapper: ObservableObject {
+    var name: String = ""
+}
+
 let itemFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM"

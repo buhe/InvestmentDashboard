@@ -17,6 +17,7 @@ struct EditItem: View {
     @State private var value = ""
     @State private var selectCategroy: ICategroy = .Cash
     @State var currency: Unit
+    @State var showTrend = false
     
     
      let close: () -> Void
@@ -123,6 +124,12 @@ struct EditItem: View {
             }
             .toolbar{
                 if edit() {
+                    Button{
+                        showTrend = true
+                    }label: {
+                        Image(systemName: "chart.line.uptrend.xyaxis")
+                    }
+                    
                     Button(action: deleteItems) {
                         Image(systemName: "trash")
                     }
@@ -138,6 +145,10 @@ struct EditItem: View {
                     currency = overview!.unit
                 }
 //                value = overview.
+            }.sheet(isPresented: $showTrend){
+                TrendView(name: overview!.name, viewContext: viewContext, viewModel: TrendViewModel())
+//                    .environment(\.managedObjectContext, viewContext)
+//                    .environment(\.n, overview!.name)
             }
             
         }
