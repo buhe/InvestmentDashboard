@@ -9,20 +9,27 @@ import SwiftUI
 
 struct CurrencyView: View {
     var model: Model
-    @State var currency = Unit.USD
+    @State private var selection: String?
+    
+//    init(model: Model) {
+//        self.model = model
+//        self.selection = model.unit.rawValue
+//    }
     var body: some View {
-        NavigationStack {
-            Picker("Currency", selection: $currency){
-                ForEach(Unit.allCases, id: \.self){
-                    Text($0.rawValue)
+        NavigationView {
+            VStack {
+                List(Unit.allCases.map{$0.rawValue}, id: \.self, selection: $selection) { c in
+                    switch Unit(rawValue: c)! {
+                    case .UnKnow: EmptyView()
+                    default: Text(c)
+                    }
                 }
-                
-            }.onChange(of: currency){
+//                Text("\(selection ?? "..")")
+            }.onChange(of: selection ?? ""){
                 c in
-                model.unit = c
-            }.onAppear{
-                currency = model.unit
+                model.unit = Unit(rawValue: c)!
             }
+            .navigationTitle("Currencies")
         }
     }
 }
