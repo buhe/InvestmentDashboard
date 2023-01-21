@@ -43,27 +43,28 @@ class ChartViewModel: ObservableObject {
 //            }
 //    }
     func byCategroySync(items: FetchedResults<Item>) -> [Double] {
-        return self.byCategory(items: items)
-            .map{
-                k,v in
-                var total: Double = 0
-                v.forEach{
-                    i in
-//                    if i.unit == model.unit {
-                        total = total + i.value
-//                    } else {
-//                        print("chart categroy transfer currency")
-//                        let new = await CurrencySDK.transfer(origion: (i.value, i.unit), to: model.unit)
-//                        total = total + new.0
-//                    }
-                    
-                }
-                return total
-                
-            }
+//        return self.byCategory(items: items)
+//            .map{
+//                k,v in
+//                var total: Double = 0
+//                v.forEach{
+//                    i in
+////                    if i.unit == model.unit {
+//                        total = total + i.value
+////                    } else {
+////                        print("chart categroy transfer currency")
+////                        let new = await CurrencySDK.transfer(origion: (i.value, i.unit), to: model.unit)
+////                        total = total + new.0
+////                    }
+//
+//                }
+//                return total
+//
+//            }
+        [0,0,0,0,0,0,0,0,0]
     }
     func byCategoryValue(items: FetchedResults<Item>, viewContext: NSManagedObjectContext) async -> [Double] {
-        return await self.byCategory(items: items)
+        var datas = await self.byCategory(items: items)
             .asyncMap{
                 k,v in
                 var total: Double = 0
@@ -81,6 +82,14 @@ class ChartViewModel: ObservableObject {
                 return total
                 
             }
+        
+        if datas.count < 10 {
+            for _ in 0..<(9 - datas.count) {
+                // workaround pie chart categroy bug.
+                datas.append(0)
+            }
+        }
+        return datas
     }
     func byDate(items: FetchedResults<Item>) async -> Array<(key: String, value: Array<Chart>)> {
         // todo when name same and mouth same remove dup, updateDate newer win
