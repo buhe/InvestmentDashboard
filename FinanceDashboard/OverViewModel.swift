@@ -36,7 +36,7 @@ class OverViewModel: ObservableObject {
             }
             
         }
-        return result.map{k,v in Overviews(id: k, key: k, overviews: v)}
+        return result.sorted(by: {a,b in (a.key.compare(b.key)).rawValue < 0}).map{k,v in Overviews(id: k, key: k, overviews: v)}
     }
     
 //    func byDate(items: FetchedResults<Item>) -> [Overviews] {
