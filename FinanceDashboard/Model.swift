@@ -43,5 +43,10 @@ enum Unit: String, CaseIterable {
     case EUR
     case GBP
     case JPY
+    case TWD
+    case ARS
+    case HKD
+    case SGD
+    case CHF
     case UnKnow
 }

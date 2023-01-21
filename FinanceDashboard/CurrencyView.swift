@@ -16,7 +16,7 @@ struct CurrencyView: View {
 //        self.selection = model.unit.rawValue
 //    }
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List(Unit.allCases.map{$0.rawValue}, id: \.self, selection: $selection) { c in
                 switch Unit(rawValue: c)! {
                     case .UnKnow: EmptyView()
