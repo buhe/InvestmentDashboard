@@ -10,10 +10,14 @@ import Combine
 
 struct SettingView: View {
     let model: Model
-    @AppStorage(wrappedValue: false, "faceID") var showFaceID: Bool
+    @State var showFaceID: Bool
     
     @Environment(\.managedObjectContext) private var viewContext
-    
+    init(model: Model) {
+        self.model = model
+        self.showFaceID = model.faceIdEnable
+        
+    }
     var body: some View {
         NavigationStack {
             Form{
@@ -44,6 +48,7 @@ struct SettingView: View {
                     Toggle("Face ID", isOn: $showFaceID).onReceive(Just(showFaceID)) {
                         value in
                         print("receive: \(value)")
+                        model.faceIdEnable = showFaceID
                     }
 //                    }
                     HStack{
@@ -64,8 +69,8 @@ struct SettingView: View {
     }
 }
 
-struct SettingView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingView(model: Model())
-    }
-}
+//struct SettingView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SettingView(model: Model())
+//    }
+//}

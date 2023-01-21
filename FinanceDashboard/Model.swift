@@ -31,6 +31,7 @@ enum ICategroy: String, CaseIterable, Identifiable {
 
 struct Model {
     @AppStorage(wrappedValue: Unit.USD, "unit") var unit: Unit
+    @AppStorage(wrappedValue: false, "face") var faceIdEnable: Bool
     
     static let shared: Model = Model()
 }

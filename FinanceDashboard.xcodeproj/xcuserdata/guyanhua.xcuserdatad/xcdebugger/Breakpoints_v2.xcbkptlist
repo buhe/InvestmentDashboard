@@ -366,8 +366,8 @@
             filePath = "FinanceDashboard/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "itemSelected"
             landmarkType = "24">
          </BreakpointContent>
