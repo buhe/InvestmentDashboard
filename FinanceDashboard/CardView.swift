@@ -68,10 +68,15 @@ struct CardView: View {
                             self.selected = overview
                         }
                         Spacer()
-                        TrendChart(data: trendByName(name: overview.name))
-                            .onTapGesture {
-                                trend = overview.name
-                            }.frame(maxWidth: 150)
+                        ZStack {
+                            Rectangle()
+                                .fill(.white)
+                            TrendChart(data: trendByName(name: overview.name))
+                                .frame(maxWidth: 150)
+                        }
+                        .onTapGesture {
+                            trend = overview.name
+                        }
                     }
                     .sheet(item: $selected) {
                         overview in
