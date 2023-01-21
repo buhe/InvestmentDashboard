@@ -109,7 +109,10 @@ struct EditItem: View {
                                         .keyboardType(.numberPad)
                                     Picker("Currency", selection: $currency){
                                         ForEach(Unit.allCases, id: \.self){
-                                            Text($0.rawValue)
+                                            switch $0 {
+                                            case .UnKnow: EmptyView()
+                                            default: Text($0.rawValue)
+                                            }
                                         }
                                         
                                     }
