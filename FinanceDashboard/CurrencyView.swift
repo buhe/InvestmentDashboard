@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CurrencyView: View {
     var model: Model
-    @State private var selection: String?
+    @State private var selection: String?  //selection must be optional
     
 //    init(model: Model) {
 //        self.model = model
