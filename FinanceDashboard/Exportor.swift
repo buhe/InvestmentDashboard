@@ -36,11 +36,13 @@ struct Pdf: Exportor {
         
         let datas = items.map{i in
             // todo remove dup by same mouthly
-            return ExportData(name: i.name!, categroy: i.categroy!, value: i.value, time: "", unit: i.unit!)}
+            return ExportData(name: i.name!, categroy: i.categroy!, value: i.value, time: itemFormatter.string(from: i.updatedDate!), unit: i.unit!)}
         let table = PDFTable(rows: datas.count + 1, columns: 5)
+        let header = table[row: 0]
+        header.content = ["Name","Categroy","Value","Updated Time","Unit"]
         datas.enumerated().forEach{
             index,data in
-            let row = table[row: index]
+            let row = table[row: index + 1]
             row.content = [data.name,data.categroy,doubleFormat(value: data.value),data.time,data.unit]
         }
         document.add(.contentCenter, table: table)
