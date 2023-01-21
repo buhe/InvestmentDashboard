@@ -6,7 +6,7 @@ import SwiftUI
 import CoreData
 
 struct CardView: View {
-//    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.managedObjectContext) private var viewContext
     
     let item: Overviews
@@ -16,12 +16,12 @@ struct CardView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 25, style: .continuous)
-                .fill(.white)
+                .fill(colorScheme == .light ? .white : .gray)
                 .shadow(radius: 10)
             VStack(alignment: .leading) {
                 Text(item.key)
                     .font(.caption)
-                    .foregroundColor(.gray)
+                    .foregroundColor(colorScheme == .light ? .gray : .black)
                 Spacer()
                 ForEach(item.overviews) {
                     overview in
@@ -70,7 +70,7 @@ struct CardView: View {
                         Spacer()
                         ZStack {
                             Rectangle()
-                                .fill(.white)
+                                .fill(colorScheme == .light ? .white : .gray)
                             TrendChart(data: trendByName(name: overview.name))
                                 .frame(maxWidth: 150)
                         }
