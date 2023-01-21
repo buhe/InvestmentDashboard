@@ -65,6 +65,8 @@ struct ContentView: View {
                         authenticate()
                     }label: {
                         Image(systemName: "faceid")
+                            .resizable()
+                            .frame(width: 100, height: 100)
                     }
                 }
             }
