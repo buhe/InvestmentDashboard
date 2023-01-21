@@ -8,8 +8,11 @@
 import SwiftUI
 import CoreData
 import Combine
+import LocalAuthentication
 
 struct ContentView: View {
+    @State private var isUnlocked = false
+    
     @Environment(\.managedObjectContext) private var viewContext
 //
 //    @FetchRequest(
@@ -22,40 +25,47 @@ struct ContentView: View {
 
 
         var body: some View {
+            VStack {
+                if isUnlocked {
+                    TabView(selection: $tabData.itemSelected) {
+                        OverView(tabData: tabData, viewModel: overViewModel)
+                            .environment(\.managedObjectContext, viewContext)
+                            .tabItem {
+                                VStack {
+                                    Image(systemName: "note.text")
+                                    Text("Overview")
+                                }
 
-            TabView(selection: $tabData.itemSelected) {
-                OverView(tabData: tabData, viewModel: overViewModel)
-                    .environment(\.managedObjectContext, viewContext)
-                    .tabItem {
-                        VStack {
-                            Image(systemName: "note.text")
-                            Text("Overview")
+                            }.tag(1)
+
+                        Text("Add")
+                            .tabItem {
+                                Image("plus.circle", tintColor: .systemBlue)
+                            }
+                            .tag(2)
+
+                        ChartView(viewModel: chartViewModel)
+                            .environment(\.managedObjectContext, viewContext)
+                            .tabItem {
+                                VStack {
+                                    Image(systemName: "chart.pie")
+                                    Text("Chart")
+                                }
+                        }.tag(3)
+
+                    }.sheet(isPresented: $tabData.isCustomItemSelected) {
+                        EditItem(overview: nil, currency: Model.shared.unit) {
+                            tabData.itemSelected = tabData.previousItem
+                            tabData.isCustomItemSelected = false
                         }
-
-                    }.tag(1)
-
-                Text("Add")
-                    .tabItem {
-                        Image("plus.circle", tintColor: .systemBlue)
+                        .environment(\.managedObjectContext, viewContext)
                     }
-                    .tag(2)
-
-                ChartView(viewModel: chartViewModel)
-                    .environment(\.managedObjectContext, viewContext)
-                    .tabItem {
-                        VStack {
-                            Image(systemName: "chart.pie")
-                            Text("Chart")
-                        }
-                }.tag(3)
-
-            }.sheet(isPresented: $tabData.isCustomItemSelected) {
-                EditItem(overview: nil, currency: Model.shared.unit) {
-                    tabData.itemSelected = tabData.previousItem
-                    tabData.isCustomItemSelected = false
+                } else {
+                    Text("Locked")
                 }
-                .environment(\.managedObjectContext, viewContext)
             }
+            .onAppear(perform: authenticate)
+            
 
 
 
@@ -91,6 +101,29 @@ struct ContentView: View {
 //            }
 //        }
 //    }
+    
+    func authenticate() {
+        let context = LAContext()
+        var error: NSError?
+
+        // check whether biometric authentication is possible
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            // it's possible, so go ahead and use it
+            let reason = "We need to unlock your data."
+
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+                // authentication has now completed
+                if success {
+                    // authenticated successfully
+                    isUnlocked = true
+                } else {
+                    // there was a problem
+                }
+            }
+        } else {
+            // no biometrics
+        }
+    }
 }
 
 final class MainTabBarData: ObservableObject {
