@@ -17,14 +17,11 @@ struct CurrencyView: View {
 //    }
     var body: some View {
         NavigationView {
-            VStack {
-                List(Unit.allCases.map{$0.rawValue}, id: \.self, selection: $selection) { c in
-                    switch Unit(rawValue: c)! {
+            List(Unit.allCases.map{$0.rawValue}, id: \.self, selection: $selection) { c in
+                switch Unit(rawValue: c)! {
                     case .UnKnow: EmptyView()
                     default: Text(c)
-                    }
                 }
-//                Text("\(selection ?? "..")")
             }.onChange(of: selection ?? ""){
                 c in
                 model.unit = Unit(rawValue: c)!

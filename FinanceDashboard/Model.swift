@@ -38,6 +38,10 @@ struct Model {
 
 enum Unit: String, CaseIterable {
     case CNY
+    case AUD
     case USD
+    case EUR
+    case GBP
+    case JPY
     case UnKnow
 }
