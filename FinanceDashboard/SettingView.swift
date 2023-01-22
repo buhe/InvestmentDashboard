@@ -10,14 +10,9 @@ import Combine
 
 struct SettingView: View {
     let model: Model
-    @State private var showFaceID: Bool = true
+    @AppStorage(wrappedValue: false, "face") var faceIdEnable: Bool
     
     @Environment(\.managedObjectContext) private var viewContext
-//    init(model: Model) {
-//        self.model = model
-////        self.showFaceID = model.faceIdEnable
-//        
-//    }
     var body: some View {
         NavigationStack {
             Form{
@@ -42,16 +37,7 @@ struct SettingView: View {
                     } label: {
                         Text("Currency")
                     }
-//                    HStack{
-//                        Text("Face ID")
-//                        Spacer()
-                    Toggle("Face ID", isOn: $showFaceID)
-                        .onChange(of: showFaceID){
-                            v in
-                            print(v)
-                            showFaceID = false
-                        }
-//                    }
+                    Toggle("Face ID", isOn: $faceIdEnable)
                     HStack{
                         Text("Version")
                         Spacer()
