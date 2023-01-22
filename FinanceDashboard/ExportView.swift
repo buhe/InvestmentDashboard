@@ -42,7 +42,10 @@ struct ExportView: View {
             }
         }
         .sheet(isPresented: $showingIAP){
-            ProductList()
+            ProView(title: "Pro", desc: """
+                                    1. Export PDF.
+                                    2. Face ID.
+                                    """)
         }
         
     }

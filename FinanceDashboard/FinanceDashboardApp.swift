@@ -14,6 +14,7 @@ struct FinanceDashboardApp: App {
 
     var body: some Scene {
         SKPaymentQueue.default().add(IAPManager.shared)
+        IAPManager.shared.getProducts()
 
         CurrencySDK.loadCache(viewContext: persistenceController.container.viewContext)
         return WindowGroup {

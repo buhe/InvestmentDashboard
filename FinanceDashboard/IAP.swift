@@ -15,7 +15,7 @@ class IAPManager: NSObject, ObservableObject {
     static let shared = IAPManager()
     @Published var products = [SKProduct]()
     fileprivate var productRequest: SKProductsRequest!
-func getProductID() -> [String] {
+    func getProductID() -> [String] {
         ["dev.buhe.FinanceDashboard.pro"]
     }
     
@@ -90,25 +90,25 @@ extension SKProduct {
 }
 
 
-struct ProductList: View {
-    
-    @ObservedObject var iapManager = IAPManager.shared
-    
-    var body: some View {
-        
-        List(iapManager.products, id: \.productIdentifier) { (product)  in
-            Button(action: {
-                self.iapManager.buy(product: product)
-}) {
-                HStack {
-                    Text(product.productIdentifier)
-                    Spacer()
-                    Text(product.regularPrice ?? "")
-                }
-            }
-        }
-        .onAppear {
-            self.iapManager.getProducts()
-        }
-    }
-}
+//struct ProductList: View {
+//    
+//    @ObservedObject var iapManager = IAPManager.shared
+//    
+//    var body: some View {
+//        
+//        List(iapManager.products, id: \.productIdentifier) { (product)  in
+//            Button(action: {
+//                self.iapManager.buy(product: product)
+//}) {
+//                HStack {
+//                    Text(product.productIdentifier)
+//                    Spacer()
+//                    Text(product.regularPrice ?? "")
+//                }
+//            }
+//        }
+//        .onAppear {
+//            self.iapManager.getProducts()
+//        }
+//    }
+//}
