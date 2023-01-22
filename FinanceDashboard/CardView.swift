@@ -58,26 +58,31 @@ struct CardView: View {
                                 Image(systemName: "dollarsign.circle")
                             }
                             Text(overview.name)
+                            Spacer()
                             Text("\(doubleFormat(value:overview.value))")
                             Text("\(overview.unit.rawValue)")
                                 .padding(.trailing)
                         }
                         .foregroundColor(.black)
-                        .onTapGesture {
-                            print("click \(overview.name)")
-                            self.selected = overview
-                        }
-                        Spacer()
-                        ZStack {
-                            Rectangle()
-                                .fill(colorScheme == .light ? .white : .gray)
-                            TrendChart(data: trendByName(name: overview.name))
-                                .frame(maxWidth: 150)
-                        }
-                        .onTapGesture {
-                            trend = overview.name
-                        }
+//                        .onTapGesture {
+//                            print("click \(overview.name)")
+//                            self.selected = overview
+//                        }
+//                        Spacer()
+//                        ZStack {
+//                            Rectangle()
+//                                .fill(colorScheme == .light ? .white : .gray)
+//                            TrendChart(data: trendByName(name: overview.name))
+//                                .frame(maxWidth: 100, maxHeight: 40)
+//                        }
+//                        .onTapGesture {
+//                            trend = overview.name
+//                        }
                     }
+                    .onTapGesture {
+                       print("click \(overview.name)")
+                       self.selected = overview
+                    }    
                     .sheet(item: $selected) {
                         overview in
                         EditItem(overview: overview, currency: Model.shared.unit) {

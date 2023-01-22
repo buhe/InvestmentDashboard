@@ -10,14 +10,14 @@ import Combine
 
 struct SettingView: View {
     let model: Model
-    @State var showFaceID: Bool
+    @State private var showFaceID: Bool = true
     
     @Environment(\.managedObjectContext) private var viewContext
-    init(model: Model) {
-        self.model = model
-        self.showFaceID = model.faceIdEnable
-        
-    }
+//    init(model: Model) {
+//        self.model = model
+////        self.showFaceID = model.faceIdEnable
+//        
+//    }
     var body: some View {
         NavigationStack {
             Form{
@@ -45,11 +45,12 @@ struct SettingView: View {
 //                    HStack{
 //                        Text("Face ID")
 //                        Spacer()
-                    Toggle("Face ID", isOn: $showFaceID).onReceive(Just(showFaceID)) {
-                        value in
-                        print("receive: \(value)")
-                        model.faceIdEnable = showFaceID
-                    }
+                    Toggle("Face ID", isOn: $showFaceID)
+                        .onChange(of: showFaceID){
+                            v in
+                            print(v)
+                            showFaceID = false
+                        }
 //                    }
                     HStack{
                         Text("Version")
