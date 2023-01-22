@@ -29,7 +29,7 @@ struct ChartView: View {
                     .font(.custom("Avenir", size: 16))
                     .padding(.vertical, 10)
                     .border(width: 1, edges: [.bottom], color: .systemGray)
-                LineChartWrapper(lineData: lineData)
+                LineChartWrapper(title: "Mouth Trend", lineData: lineData)
                     .onAppear{
                         Task{
                             self.lineData = await viewModel.byDateValue(items: items, viewContext: viewContext)

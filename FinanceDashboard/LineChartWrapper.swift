@@ -9,9 +9,10 @@ import SwiftUI
 import SwiftUICharts
 
 struct LineChartWrapper: View {
+    let title: String
     let lineData: [Double]
     var line: some View {
-        var line = LineChartView(data: lineData, title: "Mouth Trend", form: ChartForm.extraLarge, rateValue: 0)
+        var line = LineChartView(data: lineData, title: title, form: ChartForm.extraLarge, rateValue: 0)
         line.darkModeStyle = ChartStyle(backgroundColor: Color.gray, accentColor: Colors.OrangeStart, secondGradientColor: Colors.OrangeEnd, textColor: Color.white, legendTextColor: Color.white, dropShadowColor: .gray)
         return line
     }
