@@ -15,14 +15,19 @@ struct ExportView: View {
             animation: .default)
         private var items: FetchedResults<Item>
     @State private var showingExporter = false
+    @State private var showingIAP = false
     @State var fileData: Data?
     var body: some View {
       
                 
         Button{
-            let data = Pdf().export(items: items)
-            fileData = data
-            showingExporter = true
+            if Model.shared.iap {
+                let data = Pdf().export(items: items)
+                fileData = data
+                showingExporter = true
+            } else {
+                showingIAP = true
+            }
         }label: {
             Text("Export Pdf")
         }
@@ -35,6 +40,9 @@ struct ExportView: View {
             case .failure(let error):
                 print(error.localizedDescription)
             }
+        }
+        .sheet(isPresented: $showingIAP){
+            ProductList()
         }
         
     }
