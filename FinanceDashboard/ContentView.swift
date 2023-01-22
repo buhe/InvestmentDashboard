@@ -129,6 +129,7 @@ struct ContentView: View {
                 }
             } else {
                 // no biometrics
+                isUnlocked = true
             }
         } else {
             isUnlocked = true
