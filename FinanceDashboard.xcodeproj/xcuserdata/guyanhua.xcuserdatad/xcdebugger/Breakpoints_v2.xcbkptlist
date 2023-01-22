@@ -288,7 +288,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "161"
             endingLineNumber = "161"
-            landmarkName = "addItem()"
+            landmarkName = "changeNameOrCategroyOrCurrency(oldItem:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
