@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct ProView: View {
-    let title: String
-    let desc: String
+    let title: String = "Pro"
+    let desc: String = """
+                        📔 Export PDF file to save.
+                        🔑 Use Face ID to protect your asset data.
+                        """
     
 //    @ObservedObject var iapManager = IAPManager.shared
     
@@ -27,11 +30,13 @@ struct ProView: View {
             }label: {
                 Text("Un Lock")
             }
+            .buttonStyle(.borderedProminent)
             .disabled(IAPManager.shared.products.isEmpty)
             Spacer()
         }
+        
         .padding()
-        .frame(minWidth: 400)
+
 //        .onAppear {
 //            self.iapManager.getProducts()
 //        }
@@ -40,10 +45,6 @@ struct ProView: View {
 
 struct ProView_Previews: PreviewProvider {
     static var previews: some View {
-        ProView(title: "title", desc: """
-                                        -1111111111111111111111111111111111111111111111
-                                        - 2222
-                                    """
-        )
+        ProView()
     }
 }
