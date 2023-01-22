@@ -10,6 +10,8 @@ import SwiftUICharts
 
 struct ChartView: View {
     @ObservedObject var viewModel: ChartViewModel
+    @Environment(\.colorScheme) private var colorScheme
+    
     @State var lineData: [Double] = []
     @State var pieData: [Double] = []
     
@@ -27,7 +29,7 @@ struct ChartView: View {
                     .font(.custom("Avenir", size: 16))
                     .padding(.vertical, 10)
                     .border(width: 1, edges: [.bottom], color: .systemGray)
-                LineChartView(data: lineData, title: "Mouth Trend", form: ChartForm.extraLarge, rateValue: 0)
+                LineChartWrapper(lineData: lineData)
                     .onAppear{
                         Task{
                             self.lineData = await viewModel.byDateValue(items: items, viewContext: viewContext)
@@ -38,7 +40,7 @@ struct ChartView: View {
                     .font(.custom("Avenir", size: 16))
                     .padding(.vertical, 10)
                     .border(width: 1, edges: [.bottom], color: .systemGray)
-                PieChartView(data: pieData.isEmpty ? viewModel.byCategroySync(items: items) : pieData, title: "Categroy", form: ChartForm.extraLarge)
+                PieChartView(data: pieData.isEmpty ? viewModel.byCategroySync(items: items) : pieData, title: "Categroy", style: colorScheme == .light ? ChartStyle(backgroundColor: Color.white, accentColor: Colors.OrangeStart, secondGradientColor: Colors.OrangeEnd, textColor: Color.black, legendTextColor: Color.black, dropShadowColor: .gray) : ChartStyle(backgroundColor: Color.gray, accentColor: Colors.OrangeStart, secondGradientColor: Colors.OrangeEnd, textColor: Color.white, legendTextColor: Color.white, dropShadowColor: .gray), form: ChartForm.extraLarge)
                     .onAppear{
                         Task {
                             self.pieData = await viewModel.byCategoryValue(items: items, viewContext: viewContext)
