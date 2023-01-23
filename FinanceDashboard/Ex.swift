@@ -48,6 +48,23 @@ func doubleFormat(value: Double) -> String {
     String(format: "%.f", value)
 }
 
+func currencyToFlag(currency: String) -> String {
+    switch Unit(rawValue: currency)! {
+    case .ARS: return "🇦🇷"
+    case .AUD: return "🇦🇺"
+    case .CHF: return "🇨🇭"
+    case .CNY: return "🇨🇳"
+    case .EUR: return "🇪🇺"
+    case .GBP: return "🇬🇧"
+    case .HKD: return "🇭🇰"
+    case .JPY: return "🇯🇵"
+    case .SGD: return "🇸🇬"
+//    case .TWD: return ""
+    case .USD: return "🇺🇸"
+    case .UnKnow: return ""
+    }
+}
+
 let itemFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM"

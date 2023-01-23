@@ -28,7 +28,7 @@ struct ProView: View {
             Button{
                 IAPManager.shared.buy(product: IAPManager.shared.products.first!)
             }label: {
-                Text("Un Lock")
+                Text("UnLock")
             }
             .buttonStyle(.borderedProminent)
             .disabled(IAPManager.shared.products.isEmpty)

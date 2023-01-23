@@ -9,7 +9,8 @@ import SwiftUI
 
 struct CurrencyView: View {
     var model: Model
-    @State private var selection: String?  //selection must be optional
+    @State private var selection: String?
+    //selection must be optional
     
 //    init(model: Model) {
 //        self.model = model
@@ -20,7 +21,11 @@ struct CurrencyView: View {
             List(Unit.allCases.map{$0.rawValue}, id: \.self, selection: $selection) { c in
                 switch Unit(rawValue: c)! {
                     case .UnKnow: EmptyView()
-                    default: Text(c)
+                    default:
+                    HStack{
+                        Text(currencyToFlag(currency: c))
+                        Text(c)
+                    }
                 }
             }.onChange(of: selection ?? ""){
                 c in
