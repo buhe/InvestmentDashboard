@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 struct ProView: View {
     let title: String = "Pro"
@@ -14,29 +15,34 @@ struct ProView: View {
                         🔑 Use Face ID to protect your asset data.
                         🙇 Support us.
                         """
-    
+    @ObservedObject var viewModel: IAPViewModel = IAPViewModel.shared
 //    @ObservedObject var iapManager = IAPManager.shared
     
     
     var body: some View {
-        VStack(alignment: .leading){
-            Text(title)
-                .font(.title)
-                .padding(.vertical)
-            Text(desc)
-                .padding(.vertical)
-            // !iap.p.isEmpty
-            Button{
-                IAPManager.shared.buy(product: IAPManager.shared.products.first!)
-            }label: {
-                Text("UnLock")
+        if viewModel.loading {
+            ActivityIndicator()
+        } else {
+            VStack(alignment: .leading){
+                Text(title)
+                    .font(.title)
+                    .padding(.vertical)
+                Text(desc)
+                    .padding(.vertical)
+                // !iap.p.isEmpty
+                Button{
+                    IAPViewModel.shared.loading = true
+                    IAPManager.shared.buy(product: IAPManager.shared.products.first!)
+                }label: {
+                    Text("UnLock")
+                }
+                .buttonStyle(.borderedProminent)
+                .disabled(IAPManager.shared.products.isEmpty)
+                Spacer()
             }
-            .buttonStyle(.borderedProminent)
-            .disabled(IAPManager.shared.products.isEmpty)
-            Spacer()
+            
+            .padding()
         }
-        
-        .padding()
 
 //        .onAppear {
 //            self.iapManager.getProducts()

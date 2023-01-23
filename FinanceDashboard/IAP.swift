@@ -58,6 +58,7 @@ extension IAPManager: SKPaymentTransactionObserver {
             case .purchased:
                 //
                 Model.shared.iap = true
+                IAPViewModel.shared.loading = false
               SKPaymentQueue.default().finishTransaction($0)
             case .failed:
                 print($0.error ?? "")
@@ -65,9 +66,11 @@ extension IAPManager: SKPaymentTransactionObserver {
                     // show error
                 }
               SKPaymentQueue.default().finishTransaction($0)
+                IAPViewModel.shared.loading = false
             case .restored:
                 //
                 Model.shared.iap = true
+                IAPViewModel.shared.loading = false
               SKPaymentQueue.default().finishTransaction($0)
             case .purchasing, .deferred:
                 break
@@ -91,11 +94,11 @@ extension SKProduct {
 
 
 //struct ProductList: View {
-//    
+//
 //    @ObservedObject var iapManager = IAPManager.shared
-//    
+//
 //    var body: some View {
-//        
+//
 //        List(iapManager.products, id: \.productIdentifier) { (product)  in
 //            Button(action: {
 //                self.iapManager.buy(product: product)
