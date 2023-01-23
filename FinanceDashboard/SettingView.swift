@@ -62,7 +62,9 @@ struct SettingView: View {
                     }
                 }
                 .sheet(isPresented: $showingIAP){
-                    ProView()
+                    ProView{
+                        showingIAP = false
+                    }
                 }
                 
             }

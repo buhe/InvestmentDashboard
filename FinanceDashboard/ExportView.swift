@@ -42,7 +42,9 @@ struct ExportView: View {
             }
         }
         .sheet(isPresented: $showingIAP){
-            ProView()
+            ProView{
+                showingIAP = false
+            }
         }
         
     }

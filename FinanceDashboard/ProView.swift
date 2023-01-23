@@ -18,6 +18,8 @@ struct ProView: View {
     @ObservedObject var viewModel: IAPViewModel = IAPViewModel.shared
 //    @ObservedObject var iapManager = IAPManager.shared
     
+    let close: () -> Void
+    
     
     var body: some View {
         if viewModel.loading {
@@ -33,6 +35,7 @@ struct ProView: View {
                 Button{
                     IAPViewModel.shared.loading = true
                     IAPManager.shared.buy(product: IAPManager.shared.products.first!)
+                    
                 }label: {
                     Text("UnLock")
                 }
@@ -42,6 +45,11 @@ struct ProView: View {
             }
             
             .padding()
+            .onAppear{
+                if Model.shared.iap {
+                    close()
+                }
+            }
         }
 
 //        .onAppear {
@@ -52,6 +60,6 @@ struct ProView: View {
 
 struct ProView_Previews: PreviewProvider {
     static var previews: some View {
-        ProView()
+        ProView{}
     }
 }
