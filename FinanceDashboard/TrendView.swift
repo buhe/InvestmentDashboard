@@ -31,14 +31,10 @@ struct TrendView: View {
     
     var body: some View {
         NavigationStack{
-            Text("Chart")
-                .font(.custom("Avenir", size: 16))
-                .padding(.vertical, 10)
-                .border(width: 1, edges: [.bottom], color: .systemGray)
+            LineChartWrapper(title: "Trend", lineData: viewModel.byTrendValue(items: items))
                 .toolbar{
                     EditButton()
                 }
-            LineChartWrapper(title: "Trend", lineData: viewModel.byTrendValue(items: items))
             //        LineChartView(data: viewModel.byTrendValue(items: items), title: "Trend", form: ChartForm.extraLarge, rateValue: 0)
             Text("Details")
                 .font(.custom("Avenir", size: 16))
