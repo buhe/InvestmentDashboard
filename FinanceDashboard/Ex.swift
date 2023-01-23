@@ -45,7 +45,7 @@ extension Sequence {
 }
 
 func doubleFormat(value: Double) -> String {
-    String(format: "%.f", value)
+    String(format: "%.2f", value)
 }
 
 func currencyToFlag(currency: String) -> String {
