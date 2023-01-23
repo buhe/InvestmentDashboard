@@ -103,10 +103,18 @@ struct EditItem: View {
                         ToolbarItemGroup(placement: .keyboard) {
                             HStack {
 //                                NavigationStack{
+                                    Button("-/+") {
+                                           if value.hasPrefix("-") {
+                                               value.removeFirst()
+                                           } else {
+                                               value = "-" + value
+                                           }
+                                       }
+//                                       .buttonStyle(.bordered)
                                     TextField("Value:", text: $value)
                                         .disableAutocorrection(true)
                                         .textInputAutocapitalization(.never)
-                                        .keyboardType(.numberPad)
+                                        .keyboardType(.decimalPad)
                                     Picker("Currency", selection: $currency){
                                         ForEach(Unit.allCases, id: \.self){
                                             switch $0 {
