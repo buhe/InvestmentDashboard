@@ -72,6 +72,15 @@ let itemFormatter: DateFormatter = {
     return formatter
 }()
 
+let currencyFormatter: NumberFormatter = {
+    let f = NumberFormatter()
+//    f.decimalSeparator = "."
+//    f.groupingSeparator = "'"
+    f.numberStyle = .currency
+    f.currencySymbol = ""
+    return f
+}()
+
 extension String: Identifiable {
     public var id: String {
         self

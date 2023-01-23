@@ -27,7 +27,7 @@ struct OverView: View {
 //                SearchBar(text: $search).padding(.horizontal)
                     
                 OverviewTabBar(tabIndex: $tabIndex).padding(.horizontal, 26)
-                    .navigationTitle( currencyToFlag(currency: viewModel.model.unit.rawValue) + doubleFormat(value: total))
+                    .navigationTitle( currencyToFlag(currency: viewModel.model.unit.rawValue) + currencyFormatter.string(from: total as NSNumber)!)
                     .onAppear{
                         Task{
                             self.total = await viewModel.total(items: items, viewContext: viewContext)
