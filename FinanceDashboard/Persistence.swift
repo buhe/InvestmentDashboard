@@ -7,7 +7,7 @@
 
 import CoreData
 
-struct PersistenceController {
+class PersistenceController {
     static let shared = PersistenceController()
 
     static var preview: PersistenceController = {
@@ -50,6 +50,7 @@ struct PersistenceController {
                  */
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
+            Model.shared.tryLoadDemo(viewContext: self.container.viewContext)
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
