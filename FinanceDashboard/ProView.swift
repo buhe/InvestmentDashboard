@@ -12,6 +12,7 @@ struct ProView: View {
     let desc: String = """
                         📔 Export PDF file to save.
                         🔑 Use Face ID to protect your asset data.
+                        🙇 Support us.
                         """
     
 //    @ObservedObject var iapManager = IAPManager.shared
