@@ -172,6 +172,8 @@ struct EditItem: View {
     }
     
     private func addItem() {
+        var save = false
+        
         if let v = Double(value) {
             withAnimation {
                 if edit() {
@@ -192,6 +194,7 @@ struct EditItem: View {
                         newItem.value = v
                         newItem.unit = oldItem.unit
                     }
+                    save = true
                     
                 } else {
                     if name.isEmpty {
@@ -215,7 +218,7 @@ struct EditItem: View {
 //                        newItem2.updatedDate = Calendar.current.date(byAdding: .month, value: -i, to: now)!
 //                        newItem2.value = v - Double(i) * 100
 //                    }
-                    
+                    save = true
                 }
                 
             }
@@ -223,15 +226,18 @@ struct EditItem: View {
             // show err
             return
         }
-        do {
-            try viewContext.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        if save {
+            do {
+                try viewContext.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+            close()
         }
-        close()
+        
         
     }
     
