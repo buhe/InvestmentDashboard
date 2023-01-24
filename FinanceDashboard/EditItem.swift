@@ -163,6 +163,9 @@ struct EditItem: View {
 //                    .environment(\.managedObjectContext, viewContext)
 //                    .environment(\.n, overview!.name)
             }
+            .alert(errMsg, isPresented: $showAlert) {
+                Button("OK", role: .cancel) { }
+            }
             
         }
     }
@@ -198,6 +201,8 @@ struct EditItem: View {
                     
                 } else {
                     if name.isEmpty {
+                        showAlert = true
+                        errMsg = "Input name, please"
                         return
                     }
                     let newItem = Item(context: viewContext)
@@ -224,6 +229,8 @@ struct EditItem: View {
             }
         } else {
             // show err
+            showAlert = true
+            errMsg = "Input vaild value, please"
             return
         }
         if save {
