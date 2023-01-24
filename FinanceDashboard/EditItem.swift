@@ -18,6 +18,8 @@ struct EditItem: View {
     @State private var selectCategroy: ICategroy = .Cash
     @State var currency: Unit
     @State var showTrend = false
+    @State var showAlert = false
+    @State var errMsg = ""
     
     
      let close: () -> Void

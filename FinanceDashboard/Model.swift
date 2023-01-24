@@ -40,7 +40,7 @@ struct Model {
         let items = try! viewContext.fetch(NSFetchRequest(entityName: "Item")) as! [Item]
         if first && items.isEmpty {
             let newItem = Item(context: viewContext)
-            newItem.name = "demo1"
+            newItem.name = "base"
             newItem.value = 999
             newItem.unit = Unit.USD.rawValue
             newItem.categroy = ICategroy.Cash.rawValue
@@ -48,28 +48,44 @@ struct Model {
             newItem.updatedDate = Date.now
             
             let newItem1 = Item(context: viewContext)
-            newItem1.name = "demo1"
+            newItem1.name = "base"
             newItem1.value = 9999
             newItem1.unit = Unit.USD.rawValue
             newItem1.categroy = ICategroy.Cash.rawValue
             newItem1.createdDate = Date.now
-            newItem1.updatedDate = Date.now
+            newItem1.updatedDate = Calendar.current.date(byAdding: .month, value: -1, to: Date.now)!
             
             let newItem2 = Item(context: viewContext)
-            newItem2.name = "demo2"
+            newItem2.name = "cd"
             newItem2.value = 9999
             newItem2.unit = Unit.JPY.rawValue
-            newItem2.categroy = ICategroy.Cash.rawValue
+            newItem2.categroy = ICategroy.Savings.rawValue
             newItem2.createdDate = Date.now
             newItem2.updatedDate = Date.now
             
             let newItem4 = Item(context: viewContext)
-            newItem4.name = "demo2"
+            newItem4.name = "cd"
             newItem4.value = 99996
             newItem4.unit = Unit.JPY.rawValue
-            newItem4.categroy = ICategroy.Cash.rawValue
+            newItem4.categroy = ICategroy.Savings.rawValue
             newItem4.createdDate = Date.now
-            newItem4.updatedDate = Date.now
+            newItem4.updatedDate = Calendar.current.date(byAdding: .month, value: -1, to: Date.now)!
+            
+            let newItem5 = Item(context: viewContext)
+            newItem5.name = "Tech inc."
+            newItem5.value = 9999
+            newItem5.unit = Unit.JPY.rawValue
+            newItem5.categroy = ICategroy.Stock.rawValue
+            newItem5.createdDate = Date.now
+            newItem5.updatedDate = Date.now
+            
+            let newItem6 = Item(context: viewContext)
+            newItem6.name = "Tech inc."
+            newItem6.value = 99996
+            newItem6.unit = Unit.JPY.rawValue
+            newItem6.categroy = ICategroy.Stock.rawValue
+            newItem6.createdDate = Date.now
+            newItem6.updatedDate = Calendar.current.date(byAdding: .month, value: -1, to: Date.now)!
             
             do {
                 try viewContext.save()
