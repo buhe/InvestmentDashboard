@@ -9,3 +9,5 @@ Manage all your assets in one app, understand the trend of your assets, understa
 - Export asset details as a file, protecting your data with biometrics.
 
 * All data is stored in icloud without additional login.
+
+![Apple iPhone 11 Pro Max Screenshot 1](https://p.ipic.vip/xs6gus.png)![Apple iPhone 11 Pro Max Screenshot 2](https://p.ipic.vip/ih8orz.png)![Apple iPhone 11 Pro Max Screenshot 3](https://p.ipic.vip/zecz1r.png)![Apple iPhone 11 Pro Max Screenshot 4](https://p.ipic.vip/87wrl6.png)![Apple iPhone 11 Pro Max Screenshot 5](https://p.ipic.vip/738hk1.png)![Apple iPhone 11 Pro Max Screenshot 6](https://p.ipic.vip/erz8v5.png)
