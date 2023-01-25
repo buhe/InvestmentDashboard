@@ -35,6 +35,10 @@ class IAPManager: NSObject, ObservableObject {
                 // show error
             }
     }
+    
+    func restore() {
+            SKPaymentQueue.default().restoreCompletedTransactions()
+        }
 
 }
 extension IAPManager: SKProductsRequestDelegate {

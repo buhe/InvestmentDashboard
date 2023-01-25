@@ -32,15 +32,23 @@ struct ProView: View {
                 Text(desc)
                     .padding(.vertical)
                 // !iap.p.isEmpty
-                Button{
-                    IAPViewModel.shared.loading = true
-                    IAPManager.shared.buy(product: IAPManager.shared.products.first!)
-                    
-                }label: {
-                    Text("UnLock")
+                HStack{
+                    Button{
+                        IAPViewModel.shared.loading = true
+                        IAPManager.shared.buy(product: IAPManager.shared.products.first!)
+                        
+                    }label: {
+                        Text("UnLock")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .disabled(IAPManager.shared.products.isEmpty)
+                    Button{
+                        IAPViewModel.shared.loading = true
+                        IAPManager.shared.restore()
+                    }label: {
+                        Text("Restore")
+                    }
                 }
-                .buttonStyle(.borderedProminent)
-                .disabled(IAPManager.shared.products.isEmpty)
                 Spacer()
             }
             
