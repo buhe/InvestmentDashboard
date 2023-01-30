@@ -42,7 +42,7 @@ struct SettingView: View {
                             value in
                             // true -> fasle
                             if value {
-                                print("receive: \(value)")
+//                                print("receive: \(value)")
                                 if !model.iap {
                                     faceIdEnable.toggle()
                                     showingIAP = true
@@ -50,6 +50,13 @@ struct SettingView: View {
                             }
                             
                         }
+                    Button{
+                       showingIAP = true
+                    } label: {
+                        
+                        Text("Unlock everthing")
+                        
+                    }.buttonStyle(PlainButtonStyle())
                     HStack{
                         Text("Version")
                         Spacer()
