@@ -7,12 +7,15 @@
 
 import SwiftUI
 import Combine
+import StoreKit
 
 struct SettingView: View {
     let model: Model
     @AppStorage(wrappedValue: false, "face") var faceIdEnable: Bool
     @State private var showingIAP = false
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.requestReview) var requestReview
+    
     var body: some View {
         NavigationStack {
             Form{
@@ -28,7 +31,13 @@ struct SettingView: View {
                         Text("Feedback")
                         
                     }.buttonStyle(PlainButtonStyle())
-                   
+                    Button{
+                        requestReview()
+                    } label: {
+                        
+                        Text("Rate")
+                        
+                    }.buttonStyle(PlainButtonStyle())
                     ExportView()
                         .environment(\.managedObjectContext, viewContext)
                     
