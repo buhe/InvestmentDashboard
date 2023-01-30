@@ -92,20 +92,23 @@ struct AnalysisView: View {
                 Spacer()
             }
             .padding()
-            Toggle("Include Estate", isOn: $incldueEstate)
-                .onReceive(Just(incldueEstate)) {
-                    value in
-                    // true -> fasle
-                    if value {
-//                                print("receive: \(value)")
-                        if !overViewModel.model.iap {
-                            incldueEstate.toggle()
-                            showingIAP = true
+            HStack{
+                Image(systemName: "house")
+                Toggle("Include Estate", isOn: $incldueEstate)
+                    .onReceive(Just(incldueEstate)) {
+                        value in
+                        // true -> fasle
+                        if value {
+                            //                                print("receive: \(value)")
+                            if !overViewModel.model.iap {
+                                incldueEstate.toggle()
+                                showingIAP = true
+                            }
                         }
+                        
                     }
-                    
-                }
-                .padding(.horizontal)
+            }
+            .padding(.horizontal)
         }
         .sheet(isPresented: $showingIAP){
             ProView{
