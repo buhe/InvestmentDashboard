@@ -21,6 +21,7 @@ struct OverView: View {
         private var items: FetchedResults<Item>
     
     @State var total: Double = 0
+    @State var overviews: [Overviews] = []
     var body: some View {
         VStack {
             NavigationStack {
@@ -42,11 +43,17 @@ struct OverView: View {
 //                switch tabIndex {
 //                case 0:
                     List {
-                        ForEach(viewModel.byCategory(items: items)) { overviews in
+                        ForEach(overviews) { overviews in
                             CardView(item: overviews)
                                 .environment(\.managedObjectContext, viewContext)
                         }
+                        
                         .listRowSeparator(.hidden)
+                    }
+                    .onAppear{
+                        Task{
+                            self.overviews = await viewModel.byCategory(items: items)
+                        }
                     }
                     .listStyle(PlainListStyle())
 //                    .toolbar {

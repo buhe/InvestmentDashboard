@@ -14,7 +14,7 @@ class OverViewModel: ObservableObject {
     func byChangeMonitor(items: FetchedResults<Item>) -> [OverviewWithoutRaw] {
         items.map{OverviewWithoutRaw(name: $0.name!, categroy:$0.categroy!, unit: $0.unit ?? "", value: $0.value, updateDate: $0.updatedDate!)}
     }
-    func byCategory(items: FetchedResults<Item>) -> [Overviews] {
+    func byCategory(items: FetchedResults<Item>) async -> [Overviews] {
         // todo when name same remove dup, updateDate newer win
         var result: [String: [Overview]] = [:]
         for item in items {
@@ -36,7 +36,13 @@ class OverViewModel: ObservableObject {
             }
             
         }
-        return result.sorted(by: {a,b in (a.key.compare(b.key)).rawValue < 0}).map{k,v in Overviews(id: k, key: k, overviews: v)}
+        return await result.sorted(by: {a,b in (a.key.compare(b.key)).rawValue < 0}).asyncMap{k,v in Overviews(id: k, key: k, total: await totalOver(overs: v), overviews: v)}
+    }
+    
+    func totalOver(overs: [Overview]) async -> Double {
+        var total: Double = 0
+        
+        return total
     }
     
 //    func byDate(items: FetchedResults<Item>) -> [Overviews] {
@@ -134,5 +140,6 @@ struct Overviews: Identifiable {
     var id: String
     
     let key: String
+    let total: Double
     let overviews: [Overview]
 }
