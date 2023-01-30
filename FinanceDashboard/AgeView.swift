@@ -9,9 +9,24 @@ import SwiftUI
 
 struct AgeView: View {
     var model: Model
+    @State var age = ""
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Form {
+            TextField("Age", text: $age) {
+                
+            }
+            .onAppear{
+                age = String(model.age)
+            }
+            .keyboardType(.numberPad)
+            .onChange(of: age){
+                a in
+                if let a = Int(a) {
+                    model.age = a
+                }
+            }
+        }
     }
 }
 
