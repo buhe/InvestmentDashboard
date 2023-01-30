@@ -35,6 +35,7 @@ struct Model {
     @AppStorage(wrappedValue: false, "face") var faceIdEnable: Bool
     @AppStorage(wrappedValue: false, "iap") var iap: Bool
     @AppStorage(wrappedValue: true, "first") var first: Bool
+    @AppStorage(wrappedValue: 25, "age") var age: Int
     
     func tryLoadDemo(viewContext: NSManagedObjectContext) {
         let items = try! viewContext.fetch(NSFetchRequest(entityName: "Item")) as! [Item]

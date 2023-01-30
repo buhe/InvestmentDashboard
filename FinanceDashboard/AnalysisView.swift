@@ -14,7 +14,27 @@ struct AnalysisView: View {
             animation: .default)
         private var items: FetchedResults<Item>
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading){
+            Text(doubleFormat(value: 40))
+                .font(.title)
+            
+            Divider()
+            Text("11")
+                .font(.title2)
+            Text("1234"
+                )
+            Text("22")
+                .font(.title2)
+            Text("111111111111111111111111111111111111111111111111111111111111")
+            Text("Summary")
+                .font(.title2)
+            Text("111111111111111111111111111111111111111111111111111111111111")
+            Spacer()
+        }
+        .padding()
+//        .backgroundFill(.red)
+        
+        
     }
 }
 
