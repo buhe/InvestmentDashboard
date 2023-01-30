@@ -21,6 +21,7 @@ struct ContentView: View {
 //    private var items: FetchedResults<Item>
     @ObservedObject var overViewModel: OverViewModel
     @ObservedObject var chartViewModel: ChartViewModel
+    @ObservedObject var analysisViewModel: AnalysisViewModel
     @ObservedObject private var tabData = MainTabBarData(initialIndex: 1, customItemIndex: 3)
 
 
@@ -37,7 +38,7 @@ struct ContentView: View {
                                 }
 
                             }.tag(1)
-                        AnalysisView()
+                        AnalysisView(analysisViewModel: analysisViewModel, overViewModel: overViewModel)
                             .environment(\.managedObjectContext, viewContext)
                             .tabItem {
                                 VStack {
@@ -197,6 +198,6 @@ final class MainTabBarData: ObservableObject {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(overViewModel: OverViewModel(), chartViewModel: ChartViewModel()).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ContentView(overViewModel: OverViewModel(), chartViewModel: ChartViewModel(), analysisViewModel: AnalysisViewModel()).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

@@ -18,7 +18,7 @@ struct FinanceDashboardApp: App {
 
         CurrencySDK.loadCache(viewContext: persistenceController.container.viewContext)
         return WindowGroup {
-            ContentView(overViewModel: OverViewModel(), chartViewModel: ChartViewModel())
+            ContentView(overViewModel: OverViewModel(), chartViewModel: ChartViewModel(), analysisViewModel: AnalysisViewModel())
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

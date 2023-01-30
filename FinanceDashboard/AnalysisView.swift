@@ -12,11 +12,19 @@ struct AnalysisView: View {
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.createdDate, ascending: true)],
             animation: .default)
-        private var items: FetchedResults<Item>
+    private var items: FetchedResults<Item>
+    @ObservedObject var analysisViewModel: AnalysisViewModel
+    @ObservedObject var overViewModel: OverViewModel
     var body: some View {
         VStack(alignment: .leading){
-            Text(doubleFormat(value: 40))
-                .font(.title)
+            HStack {
+                Text("Age:")
+                Text(String(overViewModel.model.age))
+                Text("Ratio:")
+                Text(doubleFormat(value: 40))
+                    
+            }
+            .font(.title)
             
             Divider()
             Text("11")
@@ -40,6 +48,6 @@ struct AnalysisView: View {
 
 struct AnalysisView_Previews: PreviewProvider {
     static var previews: some View {
-        AnalysisView()
+        AnalysisView(analysisViewModel: AnalysisViewModel(), overViewModel: OverViewModel())
     }
 }
