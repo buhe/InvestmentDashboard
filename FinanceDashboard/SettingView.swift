@@ -74,7 +74,7 @@ struct SettingView: View {
                     HStack{
                         Text("Version")
                         Spacer()
-                        Text("1")
+                        Text(Bundle.main.releaseVersionNumber!)
                     }
                     HStack{
                         Text("License")
