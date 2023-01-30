@@ -26,12 +26,18 @@ class OverViewModel: ObservableObject {
             
             if sameName.isEmpty {
                 // not found
-                result[categroy]!.append(Overview(id: item.name ?? "", name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, unit: Unit(rawValue: item.unit ?? "") ?? .UnKnow, value: item.value,updateDate: item.updatedDate!, raw: item))
+                result[categroy]!.append(Overview(id: item.name ?? "", name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, unit: Unit(rawValue: item.unit ?? "") ?? .UnKnow, trend: .flat, value: item.value,updateDate: item.updatedDate!, raw: item))
             } else {
+                var trend = OVTrend.flat
+                if sameName.first!.value < item.value {
+                    trend = .up
+                } else {
+                    trend = .down
+                }
                 if sameName.first!.updateDate < item.updatedDate! {
                     // when newer value update
                     result[categroy]!.removeAll{$0.name == (item.name ?? "")}
-                    result[categroy]!.append(Overview(id: item.name ?? "", name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, unit: Unit(rawValue: item.unit ?? "") ?? .UnKnow, value: item.value,updateDate: item.updatedDate!, raw: item))
+                    result[categroy]!.append(Overview(id: item.name ?? "", name: item.name ?? "", categroy: ICategroy(rawValue: item.categroy ?? "") ?? .UnKnow, unit: Unit(rawValue: item.unit ?? "") ?? .UnKnow, trend: trend, value: item.value,updateDate: item.updatedDate!, raw: item))
                 }
             }
             
@@ -124,12 +130,19 @@ struct Overview: Identifiable {
     let name: String
     let categroy: ICategroy
     let unit: Unit
+    let trend: OVTrend
     let value: Double
     let updateDate: Date
     let raw: Item
     
     
     
+}
+
+enum OVTrend: String {
+    case flat
+    case up
+    case down
 }
 
 struct OverviewWithoutRaw: Identifiable, Encodable {

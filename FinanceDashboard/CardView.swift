@@ -69,6 +69,7 @@ struct CardView: View {
                                 }
                                 Text(overview.name)
                                 Spacer()
+                                Text("\(overview.trend.rawValue)")
                                 Text("\(doubleFormat(value:overview.value))")
                                 Text("\(overview.unit.rawValue)")
                                     .padding(.trailing)
