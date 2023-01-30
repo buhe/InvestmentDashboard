@@ -14,7 +14,12 @@ class TrendViewModel: ObservableObject {
   
     
     func byTrend(items: Array<Item>) -> [OverviewWithoutRaw] {
-        items.map{OverviewWithoutRaw(name: $0.name!, categroy:$0.categroy!, unit: $0.unit ?? "", value: $0.value, updateDate: $0.updatedDate!)}
+        var i = 0
+        return items.map{
+            i = i + 1
+            return OverviewWithoutRaw(id:i, name: $0.name!, categroy:$0.categroy!, unit: $0.unit ?? "", value: $0.value, updateDate: $0.updatedDate!)
+            
+        }
     }
     
     func byTrendValue(items: Array<Item>) -> [Double] {

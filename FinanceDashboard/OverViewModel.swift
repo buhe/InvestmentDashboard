@@ -12,7 +12,12 @@ import CoreData
 class OverViewModel: ObservableObject {
     @Published var model: Model = Model.shared
     func byChangeMonitor(items: FetchedResults<Item>) -> [OverviewWithoutRaw] {
-        items.map{OverviewWithoutRaw(name: $0.name!, categroy:$0.categroy!, unit: $0.unit ?? "", value: $0.value, updateDate: $0.updatedDate!)}
+        var i = 0
+        return items.map{
+            i = i + 1
+            return OverviewWithoutRaw(id:i, name: $0.name!, categroy:$0.categroy!, unit: $0.unit ?? "", value: $0.value, updateDate: $0.updatedDate!)
+            
+        }
     }
     func byCategory(items: FetchedResults<Item>, viewContext: NSManagedObjectContext) async -> [Overviews] {
         // todo when name same remove dup, updateDate newer win
@@ -146,7 +151,7 @@ enum OVTrend: String {
 }
 
 struct OverviewWithoutRaw: Identifiable, Encodable {
-    var id: UUID = UUID()
+    var id: Int
     let name: String
     let categroy: String
     let unit: String

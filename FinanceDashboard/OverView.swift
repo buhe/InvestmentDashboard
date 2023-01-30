@@ -34,10 +34,12 @@ struct OverView: View {
                             self.total = await viewModel.total(items: items, viewContext: viewContext)
                         }
                     }
-                    .onChange(of: try! JSONEncoder().encode(viewModel.byChangeMonitor(items: items))){
+                    .onChange(of: String(data: try! JSONEncoder().encode(viewModel.byChangeMonitor(items: items)), encoding: .utf8)!){
                         i in
+                        print(i)
                         Task{
                             self.total = await viewModel.total(items: items, viewContext: viewContext)
+                            self.overviews = await viewModel.byCategory(items: items, viewContext: viewContext)
                         }
                     }
 //                switch tabIndex {
