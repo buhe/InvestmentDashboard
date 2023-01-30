@@ -18,6 +18,8 @@ struct AnalysisView: View {
     @ObservedObject var overViewModel: OverViewModel
     
     @State var age = ""
+    @State var desc = ""
+    @State var ratio: Double = 0
     
     @Environment(\.colorScheme) private var colorScheme
     
@@ -39,7 +41,12 @@ struct AnalysisView: View {
                         }
                         .frame(width: 44)
                     Text("Risk:")
-                    Text("\(doubleFormat(value: 40))%")
+                    Text("\(percentFormat(value:ratio))")
+                        .onAppear{
+                            Task{
+                                self.ratio = await analysisViewModel.actualRatio(overviews: overViewModel.byCategory(items: items, viewContext: viewContext))
+                            }
+                        }
                     
                 }
                 .font(.title)
@@ -61,7 +68,12 @@ struct AnalysisView: View {
                 Text("Summary")
                     .font(.title2)
                     .padding(.top)
-                Text("A high-risk investment is one for which there is either a large percentage chance of loss of capital or under-performance—or a relatively high chance of a devastating loss. The first of these is intuitive, if subjective: If you were told there’s a 50/50 chance that your investment will earn your expected return, you may find that quite risky. If you were told that there is a 95% percent chance that the investment will not earn your expected return, almost everybody will agree that that is risky.")
+                Text(self.desc)
+                    .onAppear{
+                        Task{
+                            self.desc = await analysisViewModel.desc(ratio: analysisViewModel.actualRatio(overviews: overViewModel.byCategory(items: items, viewContext: viewContext)))
+                        }
+                    }
                     .lineLimit(20)
                 Spacer()
             }

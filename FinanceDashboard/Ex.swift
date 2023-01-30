@@ -48,6 +48,14 @@ func doubleFormat(value: Double) -> String {
     String(format: "%.2f", value)
 }
 
+func percentFormat(value: Double) -> String {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .percent
+    formatter.minimumIntegerDigits = 1
+    formatter.maximumIntegerDigits = 3
+    formatter.maximumFractionDigits = 2
+    return formatter.string(from: value as NSNumber)!
+}
 func currencyToFlag(currency: String) -> String {
     switch Unit(rawValue: currency)! {
     case .ARS: return "🇦🇷"

@@ -36,7 +36,7 @@ class OverViewModel: ObservableObject {
             }
             
         }
-        return await result.sorted(by: {a,b in (a.key.compare(b.key)).rawValue < 0}).asyncMap{k,v in Overviews(id: k, key: k, total: await totalOver(overs: v, viewContext: viewContext), overviews: v)}
+        return await result.sorted(by: {a,b in (a.key.compare(b.key)).rawValue < 0}).asyncMap{k,v in Overviews(id: k, key: k, total: await totalOver(overs: v, viewContext: viewContext),categroy: ICategroy(rawValue: k) ?? .UnKnow, overviews: v)}
     }
     
     func totalOver(overs: [Overview], viewContext: NSManagedObjectContext) async -> Double {
@@ -149,5 +149,6 @@ struct Overviews: Identifiable {
     
     let key: String
     let total: Double
+    let categroy: ICategroy
     let overviews: [Overview]
 }
