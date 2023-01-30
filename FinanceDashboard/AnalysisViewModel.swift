@@ -42,15 +42,11 @@ class AnalysisViewModel: ObservableObject {
     }
     // 100 - age
     func desc(ratio: Double) -> String {
-        let high = max(100 - model.age, 0)
-        let theoryRatio: Double = Double(high) / 100
-        let red = (ratio - theoryRatio) > 20
-        let yellow = (ratio - theoryRatio) > 0 && (ratio - theoryRatio) <= 20
-//        let green = (ratio - theoryRatio) <= 0
-        if red {
+        let risk = riskAl(ratio: ratio)
+        if risk == .high {
             return "Your high-risk investments are too high for your age (\(model.age)), consider adding some low-risk investments."
         } else {
-            if yellow {
+            if risk == .warning {
                 return "Your high-risk investment ratio is a bit high for your age (\(model.age)), but the excess ratio is less than 20%."
             } else {
                 return "Your high and low risk investments are proportionate to your age (\(model.age))."
@@ -60,19 +56,29 @@ class AnalysisViewModel: ObservableObject {
     }
     
     func risk(ratio: Double) -> Color {
-        let high = max(100 - model.age, 0)
-        let theoryRatio: Double = Double(high) / 100
-        let red = (ratio - theoryRatio) > 20
-        let yellow = (ratio - theoryRatio) > 0 && (ratio - theoryRatio) <= 20
-//        let green = (ratio - theoryRatio) <= 0
-        if red {
+        let risk = riskAl(ratio: ratio)
+        if risk == .high {
             return .red
         } else {
-            if yellow {
+            if risk == .warning {
                 return .yellow
             } else {
                 return .green
             }
         }
     }
+    
+    func riskAl(ratio: Double) -> Risk {
+        let high = max(100 - model.age, 0)
+        let theoryRatio: Double = Double(high) / 100
+        let red = (ratio - theoryRatio) > 0.2
+        let yellow = (ratio - theoryRatio) > 0 && (ratio - theoryRatio) <= 0.2
+        return red ? Risk.high : yellow ? Risk.warning : Risk.low
+    }
+}
+
+enum Risk {
+    case high
+    case warning
+    case low
 }
