@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftUICharts
+import Combine
 
 struct AnalysisView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -21,6 +22,9 @@ struct AnalysisView: View {
     @State var desc = ""
     @State var ratio: Double = 0
     @State var risk = Color.systemGray
+    
+    @AppStorage(wrappedValue: false, "incldueEstate") var incldueEstate: Bool
+    @State private var showingIAP = false
     
     @Environment(\.colorScheme) private var colorScheme
     
@@ -62,6 +66,7 @@ struct AnalysisView: View {
                 .fontWeight(.bold)
                 
                 Divider()
+                
                 Text("Low Risk")
                     .font(.title2)
                 Text("By nature, with low-risk investing, there is less at stake—either in terms of the amount of invested or the significance of the investment to the portfolio. There is also less to gain—either in terms of the potential return or the potential benefit bigger term."
@@ -87,6 +92,25 @@ struct AnalysisView: View {
                 Spacer()
             }
             .padding()
+            Toggle("Include Estate", isOn: $incldueEstate)
+                .onReceive(Just(incldueEstate)) {
+                    value in
+                    // true -> fasle
+                    if value {
+//                                print("receive: \(value)")
+                        if !overViewModel.model.iap {
+                            incldueEstate.toggle()
+                            showingIAP = true
+                        }
+                    }
+                    
+                }
+                .padding(.horizontal)
+        }
+        .sheet(isPresented: $showingIAP){
+            ProView{
+                showingIAP = false
+            }
         }
 //        .backgroundFill(.red)
         
