@@ -46,14 +46,15 @@ struct ChartView: View {
                             self.pieData = await viewModel.byCategoryValue(items: items, viewContext: viewContext)
                         }
                     }// legend is optional
-            }.toolbar {
-                NavigationLink {
-                    SettingView(model: viewModel.model)
-                        .environment(\.managedObjectContext, viewContext)
-                } label: {
-                    Image(systemName: "gear")
-                }
             }
+//            .toolbar {
+//                NavigationLink {
+//                    SettingView(model: viewModel.model)
+//                        .environment(\.managedObjectContext, viewContext)
+//                } label: {
+//                    Image(systemName: "gear")
+//                }
+//            }
             .navigationTitle("Trend")
         }
         

@@ -21,7 +21,7 @@ struct ContentView: View {
 //    private var items: FetchedResults<Item>
     @ObservedObject var overViewModel: OverViewModel
     @ObservedObject var chartViewModel: ChartViewModel
-    @ObservedObject private var tabData = MainTabBarData(initialIndex: 1, customItemIndex: 2)
+    @ObservedObject private var tabData = MainTabBarData(initialIndex: 1, customItemIndex: 3)
 
 
         var body: some View {
@@ -37,12 +37,19 @@ struct ContentView: View {
                                 }
 
                             }.tag(1)
-
+                        AnalysisView()
+                            .environment(\.managedObjectContext, viewContext)
+                            .tabItem {
+                                VStack {
+                                    Image(systemName: "waveform.and.magnifyingglass")
+                                    Text("Analysis")
+                                }
+                        }.tag(2)
                         Text("Add")
                             .tabItem {
                                 Image("plus.circle", tintColor: .systemBlue)
                             }
-                            .tag(2)
+                            .tag(3)
 
                         ChartView(viewModel: chartViewModel)
                             .environment(\.managedObjectContext, viewContext)
@@ -51,8 +58,17 @@ struct ContentView: View {
                                     Image(systemName: "chart.pie")
                                     Text("Chart")
                                 }
-                        }.tag(3)
-
+                        }.tag(4)
+                        
+                        SettingView(model: chartViewModel.model)
+                            .environment(\.managedObjectContext, viewContext)
+                            .tabItem {
+                                VStack {
+                                    Image(systemName: "gear")
+                                    Text("Settings")
+                                }
+                        }.tag(5)
+                        
                     }.sheet(isPresented: $tabData.isCustomItemSelected) {
                         EditItem(overview: nil, currency: Model.shared.unit) {
                             tabData.itemSelected = tabData.previousItem

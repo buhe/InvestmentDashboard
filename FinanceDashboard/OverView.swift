@@ -49,14 +49,14 @@ struct OverView: View {
                         .listRowSeparator(.hidden)
                     }
                     .listStyle(PlainListStyle())
-                    .toolbar {
-                        NavigationLink {
-                            SettingView(model: viewModel.model)
-                                .environment(\.managedObjectContext, viewContext)
-                        } label: {
-                            Image(systemName: "gear")
-                        }
-                    }
+//                    .toolbar {
+//                        NavigationLink {
+//                            SettingView(model: viewModel.model)
+//                                .environment(\.managedObjectContext, viewContext)
+//                        } label: {
+//                            Image(systemName: "gear")
+//                        }
+//                    }
 //                case 1:
 //                    List {
 //                        ForEach(viewModel.byDate(items: items)) { overviews2 in
