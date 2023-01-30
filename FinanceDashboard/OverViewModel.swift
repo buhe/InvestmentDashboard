@@ -14,7 +14,7 @@ class OverViewModel: ObservableObject {
     func byChangeMonitor(items: FetchedResults<Item>) -> [OverviewWithoutRaw] {
         items.map{OverviewWithoutRaw(name: $0.name!, categroy:$0.categroy!, unit: $0.unit ?? "", value: $0.value, updateDate: $0.updatedDate!)}
     }
-    func byCategory(items: FetchedResults<Item>) async -> [Overviews] {
+    func byCategory(items: FetchedResults<Item>, viewContext: NSManagedObjectContext) async -> [Overviews] {
         // todo when name same remove dup, updateDate newer win
         var result: [String: [Overview]] = [:]
         for item in items {
@@ -36,12 +36,20 @@ class OverViewModel: ObservableObject {
             }
             
         }
-        return await result.sorted(by: {a,b in (a.key.compare(b.key)).rawValue < 0}).asyncMap{k,v in Overviews(id: k, key: k, total: await totalOver(overs: v), overviews: v)}
+        return await result.sorted(by: {a,b in (a.key.compare(b.key)).rawValue < 0}).asyncMap{k,v in Overviews(id: k, key: k, total: await totalOver(overs: v, viewContext: viewContext), overviews: v)}
     }
     
-    func totalOver(overs: [Overview]) async -> Double {
+    func totalOver(overs: [Overview], viewContext: NSManagedObjectContext) async -> Double {
         var total: Double = 0
-        
+        await overs.asyncForEach {i in
+            if i.unit == model.unit {
+                total = total + i.value
+            } else {
+                print("transfer currency by categroy \(i.categroy.rawValue)")
+                let new = await CurrencySDK.transfer(origion: (i.value, i.unit), to: model.unit, viewContext: viewContext)
+                total = total + new.0
+            }
+        }
         return total
     }
     

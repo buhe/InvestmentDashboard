@@ -19,9 +19,16 @@ struct CardView: View {
                 .fill(colorScheme == .light ? .white : .gray)
                 .shadow(radius: 10)
             VStack(alignment: .leading) {
-                Text(item.key)
-                    .font(.caption)
-                    .foregroundColor(colorScheme == .light ? .gray : .black)
+                HStack{
+                    Text(item.key)
+                        .font(.caption)
+                        .foregroundColor(colorScheme == .light ? .gray : .black)
+                    Spacer()
+                    Text("\(doubleFormat(value: item.total)) " + Model.shared.unit.rawValue)
+                        .font(.caption)
+                        .foregroundColor(colorScheme == .light ? .gray : .black)
+                }
+                
                 Spacer()
                 ForEach(item.overviews) {
                     overview in

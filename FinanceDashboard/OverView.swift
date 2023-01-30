@@ -52,7 +52,7 @@ struct OverView: View {
                     }
                     .onAppear{
                         Task{
-                            self.overviews = await viewModel.byCategory(items: items)
+                            self.overviews = await viewModel.byCategory(items: items, viewContext: viewContext)
                         }
                     }
                     .listStyle(PlainListStyle())
