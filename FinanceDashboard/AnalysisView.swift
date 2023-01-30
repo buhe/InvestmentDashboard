@@ -20,6 +20,7 @@ struct AnalysisView: View {
     @State var age = ""
     @State var desc = ""
     @State var ratio: Double = 0
+    @State var risk = Color.systemGray
     
     @Environment(\.colorScheme) private var colorScheme
     
@@ -42,9 +43,11 @@ struct AnalysisView: View {
                         .frame(width: 44)
                     Text("Risk:")
                     Text("\(percentFormat(value:ratio))")
+                        .foregroundColor(self.risk)
                         .onAppear{
                             Task{
                                 self.ratio = await analysisViewModel.actualRatio(overviews: overViewModel.byCategory(items: items, viewContext: viewContext))
+                                self.risk = analysisViewModel.risk(ratio: self.ratio)
                             }
                         }
                     
@@ -63,7 +66,7 @@ struct AnalysisView: View {
                     .padding(.top)
                 Text("A high-risk investment is one for which there is either a large percentage chance of loss of capital or under-performance—or a relatively high chance of a devastating loss. The first of these is intuitive, if subjective: If you were told there’s a 50/50 chance that your investment will earn your expected return, you may find that quite risky. If you were told that there is a 95% percent chance that the investment will not earn your expected return, almost everybody will agree that that is risky.")
                     .lineLimit(20)
-                PieChartView(data: [1,2], title: "Risk", style: colorScheme == .light ? ChartStyle(backgroundColor: Color.white, accentColor: Colors.BorderBlue, secondGradientColor: Colors.BorderBlue, textColor: Color.black, legendTextColor: Color.black, dropShadowColor: .gray) : ChartStyle(backgroundColor: Color.gray, accentColor: Colors.BorderBlue, secondGradientColor: Colors.BorderBlue, textColor: Color.white, legendTextColor: Color.white, dropShadowColor: .gray), form: ChartForm.extraLarge)
+                PieChartView(data: [1 - ratio, ratio], title: "Risk", style: colorScheme == .light ? ChartStyle(backgroundColor: Color.white, accentColor: Colors.BorderBlue, secondGradientColor: Colors.BorderBlue, textColor: Color.black, legendTextColor: Color.black, dropShadowColor: .gray) : ChartStyle(backgroundColor: Color.gray, accentColor: Colors.BorderBlue, secondGradientColor: Colors.BorderBlue, textColor: Color.white, legendTextColor: Color.white, dropShadowColor: .gray), form: ChartForm.extraLarge)
                     .padding(.top)
                 Text("Summary")
                     .font(.title2)

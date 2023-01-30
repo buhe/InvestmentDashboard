@@ -58,4 +58,21 @@ class AnalysisViewModel: ObservableObject {
         }
         
     }
+    
+    func risk(ratio: Double) -> Color {
+        let high = max(100 - model.age, 0)
+        let theoryRatio: Double = Double(high) / 100
+        let red = (ratio - theoryRatio) > 20
+        let yellow = (ratio - theoryRatio) > 0 && (ratio - theoryRatio) <= 20
+//        let green = (ratio - theoryRatio) <= 0
+        if red {
+            return .red
+        } else {
+            if yellow {
+                return .yellow
+            } else {
+                return .green
+            }
+        }
+    }
 }
