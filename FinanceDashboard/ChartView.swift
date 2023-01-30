@@ -25,10 +25,10 @@ struct ChartView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Text("Date")
-                    .font(.custom("Avenir", size: 16))
-                    .padding(.vertical, 10)
-                    .border(width: 1, edges: [.bottom], color: .systemGray)
+//                Text("Date")
+//                    .font(.custom("Avenir", size: 16))
+//                    .padding(.vertical, 10)
+//                    .border(width: 1, edges: [.bottom], color: .systemGray)
                 LineChartWrapper(title: "Mouth Trend", lineData: lineData)
                     .onAppear{
                         Task{
@@ -36,25 +36,18 @@ struct ChartView: View {
                         }
                     }
                 // legend is optional
-                Text("Categroy")
-                    .font(.custom("Avenir", size: 16))
-                    .padding(.vertical, 10)
-                    .border(width: 1, edges: [.bottom], color: .systemGray)
+//                Text("Categroy")
+//                    .font(.custom("Avenir", size: 16))
+//                    .padding(.vertical, 10)
+//                    .border(width: 1, edges: [.bottom], color: .systemGray)
                 PieChartView(data: pieData.isEmpty ? viewModel.byCategroySync(items: items) : pieData, title: "Categroy", style: colorScheme == .light ? ChartStyle(backgroundColor: Color.white, accentColor: Colors.OrangeStart, secondGradientColor: Colors.OrangeEnd, textColor: Color.black, legendTextColor: Color.black, dropShadowColor: .gray) : ChartStyle(backgroundColor: Color.gray, accentColor: Colors.OrangeStart, secondGradientColor: Colors.OrangeEnd, textColor: Color.white, legendTextColor: Color.white, dropShadowColor: .gray), form: ChartForm.extraLarge)
                     .onAppear{
                         Task {
                             self.pieData = await viewModel.byCategoryValue(items: items, viewContext: viewContext)
                         }
-                    }// legend is optional
+                    }
+                    .padding()
             }
-//            .toolbar {
-//                NavigationLink {
-//                    SettingView(model: viewModel.model)
-//                        .environment(\.managedObjectContext, viewContext)
-//                } label: {
-//                    Image(systemName: "gear")
-//                }
-//            }
             .navigationTitle("Trend")
         }
         
