@@ -10,16 +10,17 @@ import SwiftUI
 struct AgeView: View {
     var model: Model
     @State var age = ""
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         Form {
-            TextField("Age", text: $age) {
-                
-            }
+            TextField("Age", text: $age, onCommit: {
+                presentationMode.wrappedValue.dismiss()
+            })
             .onAppear{
                 age = String(model.age)
             }
-            .keyboardType(.numberPad)
+            .keyboardType(.numbersAndPunctuation)
             .onChange(of: age){
                 a in
                 if let a = Int(a) {
