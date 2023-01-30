@@ -49,6 +49,12 @@ struct AnalysisView: View {
                                 self.ratio = await analysisViewModel.actualRatio(overviews: overViewModel.byCategory(items: items, viewContext: viewContext))
                                 self.risk = analysisViewModel.risk(ratio: self.ratio)
                             }
+                        }.onChange(of: self.age){
+                            _ in
+                            Task{
+                                self.ratio = await analysisViewModel.actualRatio(overviews: overViewModel.byCategory(items: items, viewContext: viewContext))
+                                self.risk = analysisViewModel.risk(ratio: self.ratio)
+                            }
                         }
                     
                 }
