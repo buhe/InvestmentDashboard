@@ -25,6 +25,9 @@ class AnalysisViewModel: ObservableObject {
                 base = base + o.total
             case .Debt: break
             case .Estate:
+                if model.incldueEstate {
+                    base = base + o.total
+                }
                 break
             case .Fund:
                 base = base + o.total

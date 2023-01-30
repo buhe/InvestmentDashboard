@@ -60,6 +60,13 @@ struct AnalysisView: View {
                                 self.risk = analysisViewModel.risk(ratio: self.ratio)
                             }
                         }
+                        .onChange(of: self.incldueEstate){
+                            _ in
+                            Task{
+                                self.ratio = await analysisViewModel.actualRatio(overviews: overViewModel.byCategory(items: items, viewContext: viewContext))
+                                self.risk = analysisViewModel.risk(ratio: self.ratio)
+                            }
+                        }
                     
                 }
                 .font(.title)
