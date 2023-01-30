@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUICharts
 
 struct AnalysisView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -15,6 +16,9 @@ struct AnalysisView: View {
     private var items: FetchedResults<Item>
     @ObservedObject var analysisViewModel: AnalysisViewModel
     @ObservedObject var overViewModel: OverViewModel
+    
+    @Environment(\.colorScheme) private var colorScheme
+    
     var body: some View {
         VStack(alignment: .leading){
             HStack {
@@ -27,16 +31,20 @@ struct AnalysisView: View {
             .font(.title)
             
             Divider()
-            Text("11")
+            Text("Low Risk")
                 .font(.title2)
-            Text("1234"
+            Text("By nature, with low-risk investing, there is less at stake—either in terms of the amount of invested or the significance of the investment to the portfolio. There is also less to gain—either in terms of the potential return or the potential benefit bigger term."
                 )
-            Text("22")
+            Text("High Risk")
                 .font(.title2)
-            Text("111111111111111111111111111111111111111111111111111111111111")
+                .padding(.top)
+            Text("A high-risk investment is one for which there is either a large percentage chance of loss of capital or under-performance—or a relatively high chance of a devastating loss. The first of these is intuitive, if subjective: If you were told there’s a 50/50 chance that your investment will earn your expected return, you may find that quite risky. If you were told that there is a 95% percent chance that the investment will not earn your expected return, almost everybody will agree that that is risky.")
+            PieChartView(data: [1,2], title: "Rosk", style: colorScheme == .light ? ChartStyle(backgroundColor: Color.white, accentColor: Colors.OrangeStart, secondGradientColor: Colors.OrangeEnd, textColor: Color.black, legendTextColor: Color.black, dropShadowColor: .gray) : ChartStyle(backgroundColor: Color.gray, accentColor: Colors.OrangeStart, secondGradientColor: Colors.OrangeEnd, textColor: Color.white, legendTextColor: Color.white, dropShadowColor: .gray), form: ChartForm.extraLarge)
+                .padding(.top)
             Text("Summary")
                 .font(.title2)
-            Text("111111111111111111111111111111111111111111111111111111111111")
+                .padding(.top)
+            Text("A high-risk investment is one for which there is either a large percentage chance of loss of capital or under-performance—or a relatively high chance of a devastating loss. The first of these is intuitive, if subjective: If you were told there’s a 50/50 chance that your investment will earn your expected return, you may find that quite risky. If you were told that there is a 95% percent chance that the investment will not earn your expected return, almost everybody will agree that that is risky.")
             Spacer()
         }
         .padding()
