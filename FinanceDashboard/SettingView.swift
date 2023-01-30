@@ -37,6 +37,11 @@ struct SettingView: View {
                     } label: {
                         Text("Currency")
                     }
+                    NavigationLink {
+                        AgeView(model: model)
+                    } label: {
+                        Text("Age")
+                    }
                     Toggle("Face ID", isOn: $faceIdEnable)
                         .onReceive(Just(faceIdEnable)) {
                             value in
