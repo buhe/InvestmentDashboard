@@ -17,6 +17,8 @@ struct AnalysisView: View {
     @ObservedObject var analysisViewModel: AnalysisViewModel
     @ObservedObject var overViewModel: OverViewModel
     
+    @State var age = ""
+    
     @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
@@ -24,12 +26,24 @@ struct AnalysisView: View {
             VStack(alignment: .leading){
                 HStack {
                     Text("Age:")
-                    Text(String(overViewModel.model.age))
+                    TextField("Age", text: $age)
+                        .keyboardType(.numbersAndPunctuation)
+                        .onAppear{
+                            age = String(overViewModel.model.age)
+                        }
+                        .onChange(of: age){
+                            a in
+                            if let a = Int(a) {
+                                overViewModel.model.age = a
+                            }
+                        }
+                        .frame(width: 44)
                     Text("Ratio:")
                     Text(doubleFormat(value: 40))
                     
                 }
                 .font(.title)
+                .fontWeight(.bold)
                 
                 Divider()
                 Text("Low Risk")
