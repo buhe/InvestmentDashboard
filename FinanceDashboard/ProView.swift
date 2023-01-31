@@ -22,8 +22,7 @@ struct ProView: View {
             ActivityIndicator()
         } else {
             VStack(alignment: .leading){
-                ProCardView(text: title)
-                    
+                Text(title)
                     .font(.title)
                 ProCardView(text: "📔 Export PDF file to save.")
                     
