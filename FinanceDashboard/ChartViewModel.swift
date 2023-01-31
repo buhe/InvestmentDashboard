@@ -91,7 +91,7 @@ class ChartViewModel: ObservableObject {
         }
         return datas
     }
-    func byDate(items: FetchedResults<Item>) async -> Array<(key: String, value: Array<Chart>)> {
+    func byDate(items: FetchedResults<Item>) -> Array<(key: String, value: Array<Chart>)> {
         // todo when name same and mouth same remove dup, updateDate newer win
         var result: [String: [Chart]] = [:]
         var minTime: Date = Date.now
@@ -126,6 +126,14 @@ class ChartViewModel: ObservableObject {
             
         }
         return result.sorted(by: {a,b in (a.key.compare(b.key)).rawValue < 0})
+    }
+    
+    func byDateLabel(items: FetchedResults<Item>) -> [String] {
+        let labeles = self.byDate(items: items).map {
+            k,v in
+            return k
+        }
+        return labeles
     }
     
     func byDateValue(items: FetchedResults<Item>, viewContext: NSManagedObjectContext) async -> [Double] {

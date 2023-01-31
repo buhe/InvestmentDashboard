@@ -37,7 +37,14 @@ struct ChartView: View {
                                 self.lineData = await viewModel.byDateValue(items: items, viewContext: viewContext)
                             }
                         }
-                
+                HStack{
+                    ForEach(viewModel.byDateLabel(items: items), id: \.self){
+                        time in
+                        Text(time)
+                            .font(.system(size: 6))
+                    }
+                }
+                .padding(.bottom)
                 // legend is optional
 //                Text("Categroy")
 //                    .font(.custom("Avenir", size: 16))
