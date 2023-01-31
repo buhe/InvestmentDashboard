@@ -10,12 +10,7 @@ import SwiftUIX
 
 struct ProView: View {
     let title: String = "Pro"
-    let desc: String = """
-                        📔 Export PDF file to save.
-                        🔑 Use Face ID to protect your asset data.
-                        💼 Include Estate assets.
-                        🙇 Support us.
-                        """
+  
     @ObservedObject var viewModel: IAPViewModel = IAPViewModel.shared
 //    @ObservedObject var iapManager = IAPManager.shared
     
@@ -27,11 +22,17 @@ struct ProView: View {
             ActivityIndicator()
         } else {
             VStack(alignment: .leading){
-                Text(title)
+                ProCardView(text: title)
+                    
                     .font(.title)
-                    .padding(.vertical)
-                Text(desc)
-                    .padding(.vertical)
+                ProCardView(text: "📔 Export PDF file to save.")
+                    
+                ProCardView(text: "🔑 Use Face ID to protect your asset data.")
+                    
+                ProCardView(text: "💼 Include Estate assets.")
+                    
+                ProCardView(text: "🙇 Support us.")
+                    
                 // !iap.p.isEmpty
                 HStack{
                     Button{
@@ -71,4 +72,24 @@ struct ProView_Previews: PreviewProvider {
     static var previews: some View {
         ProView{}
     }
+}
+
+struct ProCardView: View {
+    @Environment(\.colorScheme) private var colorScheme
+
+    @State var text: String
+    
+    var body: some View {
+        ZStack(alignment: .leading) {
+            RoundedRectangle(cornerRadius: 15, style: .continuous)
+                .fill(colorScheme == .light ? .white : .gray)
+                .shadow(radius: 10)
+            Text(text)
+                .padding(.horizontal)
+        }
+        .frame(maxHeight: 50)
+        
+            
+            
+        }
 }
