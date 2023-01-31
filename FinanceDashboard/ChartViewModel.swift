@@ -35,13 +35,13 @@ class ChartViewModel: ObservableObject {
         }
         return result
     }
-//    func byCategoryLabel(items: FetchedResults<Item>) -> [String] {
-//        self.byCategory(items: items)
-//            .map{
-//                k,v in
-//                k
-//            }
-//    }
+    func byCategoryLabel(items: FetchedResults<Item>) -> [String] {
+        self.byCategory(items: items)
+            .map{
+                k,v in
+                k
+            }
+    }
     func byCategroySync(items: FetchedResults<Item>) -> [Double] {
 //        return self.byCategory(items: items)
 //            .map{
