@@ -82,7 +82,7 @@ struct ProCardView: View {
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 15, style: .continuous)
                 .fill(colorScheme == .light ? .white : .gray)
-                .shadow(radius: 10)
+                .shadow(radius: 1)
             Text(text)
                 .padding(.horizontal)
         }

@@ -69,7 +69,7 @@ struct CardView: View {
                                 }
                                 Text(overview.name)
                                 Spacer()
-                                Image(systemName: overview.trend == OVTrend.up ? "arrow.up" : overview.trend == OVTrend.down ? "arrow.down" : "line.3.horizontal")
+                                Image(systemName: overview.trend == OVTrend.up ? "arrow.up" : overview.trend == OVTrend.down ? "arrow.down" : "arrow.right")
                                 Text("\(doubleFormat(value:overview.value))")
                                 Text("\(overview.unit.rawValue)")
                                     .padding(.trailing)

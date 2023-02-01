@@ -95,6 +95,12 @@ struct AnalysisView: View {
                             self.desc = await analysisViewModel.desc(ratio: analysisViewModel.actualRatio(overviews: overViewModel.byCategory(items: items, viewContext: viewContext)))
                         }
                     }
+                    .onChange(of: self.incldueEstate){
+                        _ in
+                        Task{
+                            self.desc = await analysisViewModel.desc(ratio: analysisViewModel.actualRatio(overviews: overViewModel.byCategory(items: items, viewContext: viewContext)))
+                        }
+                    }
                     .lineLimit(20)
                 Spacer()
             }
