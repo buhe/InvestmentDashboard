@@ -12,7 +12,7 @@ import CoreData
 class ChartViewModel: ObservableObject {
     @Published var model: Model = Model.shared
     
-    func byCategory(items: FetchedResults<Item>) -> [String: [Chart]] {
+    func byCategory(items: FetchedResults<Item>) -> Array<(key: String, value: Array<Chart>)> {
         // todo when name same remove dup, updateDate newer win
         var result: [String: [Chart]] = [:]
         for item in items {
@@ -33,7 +33,7 @@ class ChartViewModel: ObservableObject {
                 }
             }
         }
-        return result
+        return result.sorted(by: {a,b in (a.key.compare(b.key)).rawValue < 0})
     }
     func byCategoryLabel(items: FetchedResults<Item>) -> [String] {
         self.byCategory(items: items)
@@ -90,6 +90,14 @@ class ChartViewModel: ObservableObject {
             }
         }
         return datas
+    }
+    func byCategoryPercent(items: FetchedResults<Item>, viewContext: NSManagedObjectContext, overViewModel: OverViewModel) async -> [Double] {
+        let total = await overViewModel.total(items: items, viewContext: viewContext)
+        return await self.byCategoryValue(items: items, viewContext: viewContext)
+            .map{
+                c in
+                c / total
+            }
     }
     func byDate(items: FetchedResults<Item>) -> Array<(key: String, value: Array<Chart>)> {
         // todo when name same and mouth same remove dup, updateDate newer win

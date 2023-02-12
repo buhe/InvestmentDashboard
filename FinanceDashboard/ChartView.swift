@@ -10,10 +10,12 @@ import SwiftUICharts
 
 struct ChartView: View {
     @ObservedObject var viewModel: ChartViewModel
+    let overViewModel: OverViewModel
     @Environment(\.colorScheme) private var colorScheme
     
     @State var lineData: [Double] = []
     @State var pieData: [Double] = []
+    @State var persents: [Double] = []
     
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -69,7 +71,12 @@ struct ChartView: View {
                             }
                             .frame(minWidth: rect.size.width / 3, minHeight: rect.size.height / 4)
                             GridRow {
-                                CategroyLabel(labels: viewModel.byCategoryLabel(items: items))
+                                CategroyLabel(labels: viewModel.byCategoryLabel(items: items), persent: persents)
+                                    .onAppear{
+                                        Task {
+                                            await self.persents = viewModel.byCategoryPercent(items: items, viewContext: viewContext, overViewModel: overViewModel)
+                                        }
+                                    }
                             }
                             .frame(minWidth: rect.size.width / 3, minHeight: rect.size.height / 2)
                             GridRow {
@@ -94,14 +101,27 @@ struct ChartView: View {
     }
 }
 
-struct ChartView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChartView(viewModel: ChartViewModel())
-    }
-}
+//struct ChartView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ChartView(viewModel: ChartViewModel())
+//    }
+//}
 
 struct CategroyLabel: View {
-    let labels: [String]
+    var labels: [String] = []
+//    let persent: [Double]
+    init(labels: [String], persent: [Double]) {
+//        self.persent = persent
+        // label = label concat persent
+        if persent.isEmpty {
+            self.labels = labels
+        } else {
+            for i in labels.indices {
+                self.labels.append("\(labels[i]) \(percentFormat(value: persent[i]))")
+            }
+        }
+//        self.labels = labels
+    }
     var body: some View {
         if labels.count > 5 {
             VStack{

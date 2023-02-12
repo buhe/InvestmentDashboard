@@ -249,8 +249,8 @@
             filePath = "FinanceDashboard/ChartViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "byDate(items:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -265,8 +265,8 @@
             filePath = "FinanceDashboard/ChartViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "byDate(items:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -281,8 +281,8 @@
             filePath = "FinanceDashboard/ChartViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "byDate(items:)"
             landmarkType = "7">
          </BreakpointContent>

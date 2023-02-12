@@ -52,7 +52,7 @@ struct ContentView: View {
                             }
                             .tag(3)
 
-                        ChartView(viewModel: chartViewModel)
+                        ChartView(viewModel: chartViewModel, overViewModel: overViewModel)
                             .environment(\.managedObjectContext, viewContext)
                             .tabItem {
                                 VStack {
