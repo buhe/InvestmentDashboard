@@ -22,7 +22,7 @@ struct SettingView: View {
                 Section(){
                     Button{
                         #if os(iOS)
-                        if let url = URL(string: "https://github.com/buhe/InvestmentDashboard/issues") {
+                        if let url = URL(string: "https://github.com/buhe/InvestmentDashboard/blob/main/Support.md") {
                             UIApplication.shared.open(url)
                         }
                         #endif
